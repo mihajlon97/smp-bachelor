@@ -6,10 +6,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	modules,
-	plugins: [
-		createPersistedState(),
-		createSharedMutations()
-	],
+	// plugins: [
+	// 	createPersistedState(),
+	// 	createSharedMutations()
+	// ],
 	strict: process.env.NODE_ENV !== 'production',
 	state: {
 		error: {},
@@ -23,17 +23,33 @@ export default new Vuex.Store({
 		presentations: state => state.presentations
 	},
 	actions: {
-		async fetchPresentations({state, commit}) {
-			const testFolder = 'C:/presentations/';
+		async fetchPresentations({state, commit}, excel = false) {
 			const fs = require('fs');
+			let presentations = [];
 
-			fs.readdirSync(testFolder).forEach(file => {
-				console.log("File: " + file);
-				const XLSX = require('xlsx');
-				const workbook = XLSX.readFile(testFolder + file);
-				const sheet_name_list = workbook.SheetNames;
-				console.log(XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]))
-			});
+			// Excel storage
+			if (excel) {
+				const storageDir = 'C:/presentations/';
+				fs.readdirSync(storageDir).forEach(file => {
+					const XLSX = require('xlsx');
+					const workbook = XLSX.readFile(storageDir + file);
+					const sheet_name_list = workbook.SheetNames;
+					const parsed_sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+
+					if (parsed_sheet.length > 0 ){
+						parsed_sheet[0].config = JSON.parse(parsed_sheet[0].config);
+						presentations.push(parsed_sheet[0])
+					}
+				});
+				// Json storage
+			} else {
+				const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
+				let rawStorage = fs.readFileSync(storageDir + 'storage.json');
+				presentations = JSON.parse(rawStorage);
+			}
+
+			console.log(presentations);
+			commit('setPresentations', presentations)
 		},
 	},
 	mutations: {

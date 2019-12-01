@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<router-link to="create" style="color: red;"> PLAY </router-link>
+		{{presentations}}
 		<div v-for="presentation in presentations" :key="presentation.id" :id="'presentation' + presentation.id">
 			{{presentation.name}}
 			<button @click="openFullscreen(presentation.id)"> Play </button>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
@@ -20,7 +21,6 @@ export default {
 	},
     data () {
 		return {
-			presentations: [],
 			swiperOption: {
 				speed: 2000,
 				slidesPerView: 1,
@@ -48,7 +48,7 @@ export default {
 		}
     },
     computed: {
-      // ...mapState(['presentations'])
+      ...mapGetters(['presentations'])
     },
 	methods: {
 	  updateSwiper() {
