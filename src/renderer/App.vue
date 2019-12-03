@@ -18,6 +18,9 @@ export default {
 	},
 	mounted() {
 		this.fetchPresentations()
+	  this.$electron.app.on('browser-window-created',function(e,window) {
+		  window.removeMenu();
+	  });
 	}
 }
 </script>

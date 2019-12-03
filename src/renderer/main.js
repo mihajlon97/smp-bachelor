@@ -4,6 +4,9 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 import store from './store'
+import GlobalMixin from './mixins/global.mixin'
+
+Vue.mixin(GlobalMixin);
 Vue.use(require('vue-moment'));
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

@@ -15,7 +15,31 @@
           "position": {}
         },
         "image-2": {
-          "path": "C:\\presentations\\images\\China85-B15-01-003.jpg",
+          "path": "C:\\presentations\\images\\China85-B15-01-004.jpg",
+          "rotation": -15,
+          "crop": {
+            "x1": 15,
+            "y1": 15,
+            "x2": 30,
+            "y2": 30
+          },
+          "position": {}
+        }
+      },
+      {
+        "image-1": {
+          "path": "C:\\presentations\\images\\China85-B15-01-004.jpg",
+          "rotation": -15,
+          "crop": {
+            "x1": 15,
+            "y1": 15,
+            "x2": 30,
+            "y2": 30
+          },
+          "position": {}
+        },
+        "image-2": {
+          "path": "C:\\presentations\\images\\China85-B15-02-004.jpg",
           "rotation": -15,
           "crop": {
             "x1": 15,
