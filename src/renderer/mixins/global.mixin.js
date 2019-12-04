@@ -22,26 +22,6 @@ export default {
 		get_blob(path) {
 			return URL.createObjectURL(new Blob([require('fs').readFileSync(path)], {type: 'image/jpeg'}));
 		},
-		// function to encode file data to base64 encoded string
-		base64_encode(file) {
-			return new Promise(function (resolve, reject) {
-				const fs = require('fs');
-				// read binary data
-				fs.readFile(file, function (err, data) {
-					if (err) reject(err);
-					// convert binary data to base64 encoded string
-					resolve(Buffer(data).toString('base64'))
-				});
-			})
-		},
-		// function to create file from base64 encoded string
-		base64_decode(base64str, file) {
-			// create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
-			var bitmap = new Buffer(base64str, 'base64');
-			// write buffer to file
-			fs.writeFileSync(file, bitmap);
-			console.log('******** File created from base64 encoded string ********');
-		},
 		/** Function which checks if provided object is empty  */
 		isEmpty(obj) {
 			for (let prop in obj) {
@@ -51,5 +31,11 @@ export default {
 			}
 			return JSON.stringify(obj) === JSON.stringify({});
 		},
+		uuidv4() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
 	}
 };

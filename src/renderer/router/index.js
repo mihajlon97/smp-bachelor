@@ -16,11 +16,6 @@ export default new Router({
 		  component: () => import('../Pages/Create.vue')
 	  },
     {
-      path: '/',
-      name: 'landing-page',
-      component: require('@/components/LandingPage').default
-    },
-    {
       path: '*',
       redirect: '/'
     }

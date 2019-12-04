@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-	<router-link to="/" tag="h1"> Smart Image Presenter </router-link>
     <router-view> </router-view>
   </div>
 </template>
@@ -18,13 +17,12 @@ export default {
 	},
 	mounted() {
 		this.fetchPresentations()
-	  this.$electron.app.on('browser-window-created',function(e,window) {
-		  window.removeMenu();
-	  });
 	}
 }
 </script>
 
 <style>
-  /* CSS */
+  body {
+	  margin: 0!important;
+  }
 </style>

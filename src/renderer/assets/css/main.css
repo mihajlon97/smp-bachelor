@@ -1,0 +1,66 @@
+.is-half {
+    max-width: 50%;
+}
+.is-full {
+    max-width: 100%;
+}
+body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.swiper-container, .swiper-wrapper, .swiper-slide {
+    background-color: #000000;
+}
+
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button-play {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+
+.button-play:hover {
+    background-color: #e5e5e5;
+    color: white;
+}
+
+.black {
+    color: black!important;
+}
+
+.round-btn {
+    border-radius: 25px;
+    padding: 16px 20px;
+}
+
+.page {
+    background-color: #dddddd;
+    height: 100vh!important;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.image-create {
+    margin: 0!important;
+    max-width: 50%;
+    float: left;
+}
+
+.image-placeholder {
+    border-radius: 20px;
+}

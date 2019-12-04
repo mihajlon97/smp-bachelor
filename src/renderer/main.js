@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import GlobalMixin from './mixins/global.mixin'
 
+import './assets/css/main.css';
+
 Vue.mixin(GlobalMixin);
 Vue.use(require('vue-moment'));
 
