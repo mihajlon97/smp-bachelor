@@ -59,6 +59,7 @@ body {
     margin: 0!important;
     max-width: 50%;
     float: left;
+    max-height: 90vh;
 }
 
 .image-placeholder {

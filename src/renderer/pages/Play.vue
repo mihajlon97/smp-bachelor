@@ -20,13 +20,14 @@
 				</button>
 
 				<div style="position: absolute; z-index: -200; width: 100%!important; max-width: 100%!important;">
-					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0 && presentation.loaded" ref="mySwiper" :options="swiperOption">
+					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0" ref="mySwiper" :options="swiperOption">
 						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="width: 100%!important;">
 							<img v-if="slide['image1']"
 							     style="display:block; margin: auto; float: left; object-fit: contain!important;"
 							     :src="get_blob(slide['image1'].path)"
 							     :class="{'is-half': slide['image2'], 'is-full': !slide['image2']}"
 							>
+
 							<img v-if="slide['image2']"
 							     style="display:block; margin: auto; float: right; object-fit: contain!important;"
 							     :src="get_blob(slide['image2'].path)"
@@ -82,36 +83,36 @@ export default {
 		  this.$forceUpdate();
 	  },
 	  loadPresentation(data) {
-		  let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
-		  if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
-		  this.slides = presentation.slides;
-	      presentation.loaded = true;
-
-	      this.presentations.forEach(elem => {
-	      	if (elem.id === data.id) {
-	      		elem = presentation
-	        } else elem.loaded = false;
-	      });
-
+	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
+	    if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
+	    this.slides = presentation.slides;
 	    setTimeout(() => {
-	    	this.openFullscreen(data);
+	      this.openFullScreen(data);
 	    }, 1000);
 	  },
 	  deletePresentation(presentation) {
-		  const fs = require('fs');
-		  const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
-		  let rawStorage = fs.readFileSync(storageDir + 'storage.json');
-		  let presentations = JSON.parse(rawStorage);
+	      this.$swal({
+	        title: "Are you sure?",
+	        text:"Presentation will be permanently removed.",
+	        icon: "warning",
+	        showCancelButton: true,
+	      }).then((value) => {
+	        if (value) {
+	          const fs = require('fs');
+	          const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
+	          let rawStorage = fs.readFileSync(storageDir + 'storage.json');
+	          let presentations = JSON.parse(rawStorage);
 
-		  for(let i = presentations.length - 1; i--;){
-			  if (presentations[i].id === presentation.id)
-			  	presentations.splice(i, 1);
-		  }
-
-		  fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
-		  this.fetchPresentations();
+	          for(let i = presentations.length - 1; i--;){
+	            if (presentations[i].id === presentation.id)
+	              presentations.splice(i, 1);
+	          }
+	          fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
+	          this.fetchPresentations();
+	        }
+	      });
 	  },
-	  openFullscreen(presentation) {
+	  openFullScreen(presentation) {
 		let elem = document.getElementById('presentation-' + presentation.id);
 		if (elem) {
 		  if (elem.requestFullscreen) {
@@ -122,23 +123,6 @@ export default {
 			  elem.webkitRequestFullscreen();
 		  } else if (elem.msRequestFullscreen) { /* IE/Edge */
 			  elem.msRequestFullscreen();
-		  }
-		}
-
-		if (document.addEventListener) {
-		  document.addEventListener('fullscreenchange', () => exitHandler(presentation), false);
-		  document.addEventListener('mozfullscreenchange', () => exitHandler(presentation), false);
-		  document.addEventListener('MSFullscreenChange', () => exitHandler(presentation), false);
-		  document.addEventListener('webkitfullscreenchange', () => exitHandler(presentation), false);
-		}
-
-		function exitHandler(presentation) {
-		  if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
-		    if (document.webkitIsFullScreen === false) {
-		    	presentation.loaded = false
-		        console.log('LOEADED ', presentation.loaded)
-		    }
-		    console.log('EXIT', document.webkitIsFullScreen, document.mozFullScreen, document.msFullscreenElement)
 		  }
 		}
 	  }

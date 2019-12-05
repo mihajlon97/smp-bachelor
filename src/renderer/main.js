@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import GlobalMixin from './mixins/global.mixin'
+import VueSwal from 'vue-swal'
 
+Vue.use(VueSwal)
 import './assets/css/main.css';
 
 Vue.mixin(GlobalMixin);

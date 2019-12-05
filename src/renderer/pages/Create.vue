@@ -9,14 +9,16 @@
 		</div>
 
 		<div style="margin-top: 0px;">
-			<div style="height: 100vh; background-color: #b7b7b7; padding: 45px;">
-				<img v-if="image1" class="image-create" style="" :src="get_blob(image1.path)">
-				<div v-else class="image-create image-placeholder" style="text-align: center;">
-					<img @click="create(1)" style="width: 97%;" src="../assets/image.jpg">
-				</div>
-				<img v-if="image2" class="image-create" style="" :src="get_blob(image2.path)">
-				<div v-else class="image-create image-placeholder" style="text-align: center;">
-					<img @click="create(2)" style="width: 97%;" src="../assets/image.jpg">
+			<div style="text-align: center; background-color: #b7b7b7;">
+				<div style="height: 100vh; padding: 45px; text-align: center; display: inline-block;">
+					<img v-if="image1" class="image-create" style="" :src="get_blob(image1.path)">
+					<div v-else class="image-create image-placeholder" style="text-align: center;">
+						<img @click="create(1)" style="width: 97%;" src="../assets/image.jpg">
+					</div>
+					<img v-if="image2" class="image-create" style="" :src="get_blob(image2.path)">
+					<div v-else class="image-create image-placeholder" style="text-align: center;">
+						<img @click="create(2)" style="width: 97%;" src="../assets/image.jpg">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -70,6 +72,7 @@
 
 		    fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
 		    this.fetchPresentations();
+		    this.$swal("Good job!", "Your presentation is ready!", "success")
 		    this.$router.push('/');
 		},
 		create (photoNumber) {
