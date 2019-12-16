@@ -1,6 +1,6 @@
 <template>
-	<div class="page">
-		<div style="width: 50%; margin: 0 auto; text-align: center;">
+	<div class="play page" style="overflow-y: scroll!important;">
+		<div style="width: 100%; margin: 0 auto; text-align: center;">
 			<router-link to="/">
 				<img src="../assets/256x256.png" alt="Smart Image Presenter">
 			</router-link>
@@ -19,20 +19,38 @@
 					✖
 				</button>
 
-				<div style="position: absolute; z-index: -200; width: 100%!important; max-width: 100%!important;">
-					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0" ref="mySwiper" :options="swiperOption">
-						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="width: 100%!important;">
-							<img v-if="slide['image1']"
+				<div style="width: 100%!important; max-width: 100%!important;">
+					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0" ref="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
+
+							<croppa v-model="something1"
+									:placeholder="''"
+							        auto-sizing
+							        :disabled="true"
+							>
+								<img slot="initial" :src="get_blob(croppas[presentation.id][i]['image1'].file.path)" />
+							</croppa>
+
+							<croppa v-model="something2"
+							        :placeholder="''"
+							        auto-sizing
+							        :disabled="true"
+							>
+								<img slot="initial" :src="get_blob(croppas[presentation.id][i]['image2'].file.path)" />
+							</croppa>
+							<!--
+							<img v-if="slide['image1'] && false"
 							     style="display:block; margin: auto; float: left; object-fit: contain!important;"
-							     :src="get_blob(slide['image1'].path)"
+							     :src="get_blob(slide['image1'].file.path)"
 							     :class="{'is-half': slide['image2'], 'is-full': !slide['image2']}"
 							>
 
-							<img v-if="slide['image2']"
+							<img v-if="slide['image2'] && false"
 							     style="display:block; margin: auto; float: right; object-fit: contain!important;"
-							     :src="get_blob(slide['image2'].path)"
+							     :src="get_blob(slide['image2'].file.path)"
 							     :class="{'is-half': slide['image1'], 'is-full': !slide['image1']}"
 							>
+							-->
 						</swiper-slide>
 					</swiper>
 				</div>
@@ -45,6 +63,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
 	name: "Play",
 	components: {
@@ -54,6 +73,9 @@ export default {
     data () {
 		return {
 		    imgPlay: '',
+			something1: {},
+			something2: {},
+			croppas: {},
 			slides: [],
 			played: false,
 		    loaded: false,
@@ -96,6 +118,7 @@ export default {
 	        text:"Presentation will be permanently removed.",
 	        icon: "warning",
 	        showCancelButton: true,
+	        cancelButtonText: 'Cancel',
 	      }).then((value) => {
 	        if (value) {
 	          const fs = require('fs');
@@ -103,9 +126,10 @@ export default {
 	          let rawStorage = fs.readFileSync(storageDir + 'storage.json');
 	          let presentations = JSON.parse(rawStorage);
 
-	          for(let i = presentations.length - 1; i--;){
-	            if (presentations[i].id === presentation.id)
+	          for(let i = presentations.length - 1; i === 0; i--){
+	            if (presentations[i].id === presentation.id){
 	              presentations.splice(i, 1);
+	            }
 	          }
 	          fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
 	          this.fetchPresentations();
@@ -114,6 +138,10 @@ export default {
 	  },
 	  openFullScreen(presentation) {
 		let elem = document.getElementById('presentation-' + presentation.id);
+		this.slides.forEach((slide, i) => {
+		  this.something1.applyMetadata(this.croppas[presentation.id][i]['image1'].meta);
+		  this.something2.applyMetadata(this.croppas[presentation.id][i]['image2'].meta);
+		});
 		if (elem) {
 		  if (elem.requestFullscreen) {
 			  elem.requestFullscreen();
@@ -125,8 +153,18 @@ export default {
 			  elem.msRequestFullscreen();
 		  }
 		}
+	  },
+	  initialize() {
+	  	let presentations = Array.concat(this.presentations, []);
+	    presentations.forEach(presentation => {
+		  this.croppas[presentation.id] = presentation.slides;
+		});
+	    console.log(this.presentations);
 	  }
-	}
+	},
+    mounted(){
+		this.initialize()
+    }
 }
 </script>
 

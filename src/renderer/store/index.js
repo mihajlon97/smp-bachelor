@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { createPersistedState, createSharedMutations } from 'vuex-electron'
 import modules from './modules'
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,7 +11,7 @@ export default new Vuex.Store({
 	// 	createPersistedState(),
 	// 	createSharedMutations()
 	// ],
-	strict: process.env.NODE_ENV !== 'production',
+	strict: false,
 	state: {
 		error: {},
 		loading: false,
@@ -47,8 +48,6 @@ export default new Vuex.Store({
 				let rawStorage = fs.readFileSync(storageDir + 'storage.json');
 				presentations = JSON.parse(rawStorage);
 			}
-
-			console.log(presentations);
 			commit('setPresentations', presentations)
 		},
 	},

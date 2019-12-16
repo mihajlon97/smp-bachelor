@@ -65,3 +65,19 @@ body {
 .image-placeholder {
     border-radius: 20px;
 }
+
+.create .croppa-containerr   {
+    margin: 0!important;
+    float: left;
+    max-height: 90vh;
+    width: 45vw;
+    height: 80%;
+}
+
+.play .croppa-containerr   {
+    margin: 0!important;
+    float: left;
+    max-height: 90vh;
+    width: 45vw;
+    height: 80%;
+}

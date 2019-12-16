@@ -6,8 +6,12 @@ import router from './router'
 import store from './store'
 import GlobalMixin from './mixins/global.mixin'
 import VueSwal from 'vue-swal'
-
 Vue.use(VueSwal)
+
+import Croppa from 'vue-croppa';
+Vue.use(Croppa);
+import 'vue-croppa/dist/vue-croppa.css';
+
 import './assets/css/main.css';
 
 Vue.mixin(GlobalMixin);
