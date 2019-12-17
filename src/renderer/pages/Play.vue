@@ -9,48 +9,23 @@
 				Create new presentation
 			</router-link>
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
-				<span style="font-size: 25px; font-weight: bold;">{{presentation.name}}</span>
-				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)"
-				        class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">
-					▶
-				</button>
-				<button @click="deletePresentation(presentation)"
-				        class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">
-					✖
-				</button>
+				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
+				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
+				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 
 				<div style="width: 100%!important; max-width: 100%!important;">
 					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0" ref="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 
-							<croppa v-model="something1"
-									:placeholder="''"
-							        auto-sizing
-							        :disabled="true"
-							>
-								<img slot="initial" :src="get_blob(croppas[presentation.id][i]['image1'].file.path)" />
-							</croppa>
+							<Editor :path1="croppas[presentation.id][i]['image1'].file.path"
+									:path2="croppas[presentation.id][i]['image2'].file.path"
 
-							<croppa v-model="something2"
-							        :placeholder="''"
-							        auto-sizing
+							        :meta1="croppas[presentation.id][i]['image1'].meta"
+							        :meta2="croppas[presentation.id][i]['image2'].meta"
 							        :disabled="true"
-							>
-								<img slot="initial" :src="get_blob(croppas[presentation.id][i]['image2'].file.path)" />
-							</croppa>
-							<!--
-							<img v-if="slide['image1'] && false"
-							     style="display:block; margin: auto; float: left; object-fit: contain!important;"
-							     :src="get_blob(slide['image1'].file.path)"
-							     :class="{'is-half': slide['image2'], 'is-full': !slide['image2']}"
-							>
 
-							<img v-if="slide['image2'] && false"
-							     style="display:block; margin: auto; float: right; object-fit: contain!important;"
-							     :src="get_blob(slide['image2'].file.path)"
-							     :class="{'is-half': slide['image1'], 'is-full': !slide['image1']}"
-							>
-							-->
+							        @updateDone="updateDone"
+							/>
 						</swiper-slide>
 					</swiper>
 				</div>
@@ -63,12 +38,14 @@
 import { mapGetters, mapActions } from 'vuex';
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Editor from '../components/Editor';
 
 export default {
 	name: "Play",
 	components: {
 		swiper,
 		swiperSlide,
+	    Editor
 	},
     data () {
 		return {
@@ -76,6 +53,8 @@ export default {
 			something1: {},
 			something2: {},
 			croppas: {},
+		    loadingPercentage: 0,
+			loading: [],
 			slides: [],
 			played: false,
 		    loaded: false,
@@ -125,8 +104,7 @@ export default {
 	          const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
 	          let rawStorage = fs.readFileSync(storageDir + 'storage.json');
 	          let presentations = JSON.parse(rawStorage);
-
-	          for(let i = presentations.length - 1; i === 0; i--){
+	          for(let i = presentations.length - 1; i > -1; i--){
 	            if (presentations[i].id === presentation.id){
 	              presentations.splice(i, 1);
 	            }
@@ -139,8 +117,8 @@ export default {
 	  openFullScreen(presentation) {
 		let elem = document.getElementById('presentation-' + presentation.id);
 		this.slides.forEach((slide, i) => {
-		  this.something1.applyMetadata(this.croppas[presentation.id][i]['image1'].meta);
-		  this.something2.applyMetadata(this.croppas[presentation.id][i]['image2'].meta);
+		  // this.something1.applyMetadata(this.croppas[presentation.id][i]['image1'].meta);
+		  // this.something2.applyMetadata(this.croppas[presentation.id][i]['image2'].meta);
 		});
 		if (elem) {
 		  if (elem.requestFullscreen) {
@@ -160,6 +138,12 @@ export default {
 		  this.croppas[presentation.id] = presentation.slides;
 		});
 	    console.log(this.presentations);
+	  },
+	  updateDone() {
+	    this.loading.push(1);
+		console.log('Loaded: ' + this.loading.length, 'Total:' + this.slides.length * 2);
+		this.loadingPercentage = (this.loading.length / (this.slides.length * 2)) * 100;
+		console.log('Percentage: ' + this.loadingPercentage);
 	  }
 	},
     mounted(){

@@ -81,3 +81,18 @@ body {
     width: 45vw;
     height: 80%;
 }
+
+.play .croppa-container   {
+    margin: 0!important;
+    float: left;
+    width: 50%!important;
+    height: 100%;
+}
+
+.create .croppa-container   {
+    margin: 0!important;
+    float: left;
+    width: calc(50% - 50px);
+    height: calc(100% - 100px);
+}
+
