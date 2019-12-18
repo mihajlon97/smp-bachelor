@@ -8,20 +8,24 @@
 			<router-link to="create" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
 				Create new presentation
 			</router-link>
+
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
-
-				<div style="width: 100%!important; max-width: 100%!important;">
-					<swiper :id="'presentation-' + presentation.id" v-if="slides.length > 0" ref="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+				<!--  position: absolute; z-index: -200; -->
+				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
+					<swiper :id="'presentation-' + presentation.id" ref="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+						<div v-show="loadingStarted && false" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
+							<div class="loader" style="top: 40%;"></div>
+						</div>
 						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 
-							<Editor :path1="croppas[presentation.id][i]['image1'].file.path"
-									:path2="croppas[presentation.id][i]['image2'].file.path"
+							<Editor :path1="slide['image1'].file.path"
+									:path2="slide['image2'].file.path"
 
-							        :meta1="croppas[presentation.id][i]['image1'].meta"
-							        :meta2="croppas[presentation.id][i]['image2'].meta"
+							        :meta1="slide['image1'].meta"
+							        :meta2="slide['image2'].meta"
 							        :disabled="true"
 
 							        @updateDone="updateDone"
@@ -39,10 +43,13 @@ import { mapGetters, mapActions } from 'vuex';
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Editor from '../components/Editor';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
 	name: "Play",
 	components: {
+	    Loading,
 		swiper,
 		swiperSlide,
 	    Editor
@@ -57,6 +64,8 @@ export default {
 			loading: [],
 			slides: [],
 			played: false,
+		    loadingStarted: false,
+		    loadingInterval: null,
 		    loaded: false,
 			swiperOption: {
 				speed: 500,
@@ -74,7 +83,10 @@ export default {
 		}
     },
     computed: {
-      ...mapGetters(['presentations'])
+      ...mapGetters(['presentations']),
+      isLoading() {
+        return this.loadingPercentage > 0 && this.loadingPercentage < 100
+      }
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),
@@ -86,9 +98,14 @@ export default {
 	  loadPresentation(data) {
 	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
 	    if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
+	    // this.loadingStarted = true;
 	    this.slides = presentation.slides;
-	    setTimeout(() => {
-	      this.openFullScreen(data);
+	    this.openFullScreen(data);
+	    this.loadingInterval = setInterval(() => {
+	    	if(this.loadingPercentage >= 100) {
+		        this.loadingStarted = false
+		        clearInterval(this.loadingInterval)
+		    }
 	    }, 1000);
 	  },
 	  deletePresentation(presentation) {
@@ -116,10 +133,6 @@ export default {
 	  },
 	  openFullScreen(presentation) {
 		let elem = document.getElementById('presentation-' + presentation.id);
-		this.slides.forEach((slide, i) => {
-		  // this.something1.applyMetadata(this.croppas[presentation.id][i]['image1'].meta);
-		  // this.something2.applyMetadata(this.croppas[presentation.id][i]['image2'].meta);
-		});
 		if (elem) {
 		  if (elem.requestFullscreen) {
 			  elem.requestFullscreen();
@@ -137,7 +150,7 @@ export default {
 	    presentations.forEach(presentation => {
 		  this.croppas[presentation.id] = presentation.slides;
 		});
-	    console.log(this.presentations);
+	    console.log(this.croppas);
 	  },
 	  updateDone() {
 	    this.loading.push(1);

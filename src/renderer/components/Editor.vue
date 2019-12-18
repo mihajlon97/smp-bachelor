@@ -1,9 +1,9 @@
 <template>
 	<div style="margin-top: 0;">
 		<div style="text-align: center; background-color: #b7b7b7;">
-			<div :style="'width: 100%; max-width: 100%; height: 100vh; text-align: center; display: inline-block; ' + (!disabled ? 'padding: 50px;' : 'padding: 0px;')">
+			<div :style="'width: 100%; max-width: 100%; height: 100vh; text-align: center; display: inline-block; ' + (!disabled ? 'padding: 0px;' : 'padding: 0px;')">
 				<croppa v-model="myCroppa1"
-				        :initial-image="get_blob(path1)"
+				        :initial-image="path1 ? get_blob(path1) : false"
 				        auto-sizing
 				        :canvas-color="'black'"
 				        :placeholder-font-size="22"
@@ -24,12 +24,14 @@
 				        :remove-button-color="'red'"
 				        :remove-button-size="0"
 				        @updateDone="$emit('updateDone')"
+				        initial-size="contain"
+				        :metadata="meta1"
 				>
 					<img slot="placeholder" src="../../../static/image.jpg" />
 				</croppa>
 
 				<croppa v-model="myCroppa2"
-				        :initial-image="get_blob(path2)"
+				        :initial-image="path2 ? get_blob(path2) : false"
 				        auto-sizing
 				        :canvas-color="'black'"
 				        :placeholder-font-size="22"
@@ -50,6 +52,8 @@
 				        :remove-button-color="'red'"
 				        :remove-button-size="0"
 				        @updateDone="$emit('updateDone')"
+				        initial-size="contain"
+				        :metadata="meta2"
 				>
 					<img slot="placeholder" src="../../../static/image.jpg" />
 				</croppa>
@@ -140,8 +144,7 @@ export default {
     mounted () {
 		setTimeout(() => {
 			if (this.meta1) {
-				let res = this.myCroppa1.applyMetadata(this.meta1);
-				console.log(res);
+				this.myCroppa1.applyMetadata(this.meta1);
 			}
 			if (this.meta2) {
 				this.myCroppa2.applyMetadata(this.meta2);

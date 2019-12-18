@@ -5,7 +5,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import GlobalMixin from './mixins/global.mixin'
-import VueSwal from 'vue-swal'
+
+import 'v8-compile-cache';
+
+import VueSwal from 'vue-swal';
 Vue.use(VueSwal)
 
 import Croppa from 'vue-croppa';

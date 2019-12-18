@@ -1,21 +1,15 @@
 <template>
 	<div class="create page" style="padding-top: 0;">
-		<div style="position: absolute; left:65px; top: 5px;">
+		<div style="position: absolute; left:65px; top: 5px; z-index: 400;">
 			<button @click="$refs.editor.nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
-		<div style="position: absolute; right:65px; top: 5px;">
-			<button @click="$refs.editor.save()"    class="button button-play black round-btn"> Save      </button>
+		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
+			<button @click="save"    class="button button-play black round-btn"> Save      </button>
 			<button @click="$refs.editor.cancel()"  class="button button-play black round-btn"> Cancel    </button>
 		</div>
 		<div style="position: absolute; right: 65px; bottom: 5px;">
 		</div>
-		<Editor ref="editor"
-		        :path1="presentations[0].slides[0]['image1'].file.path"
-		        :path2="presentations[0].slides[0]['image2'].file.path"
-		        :meta1="presentations[0].slides[0]['image1'].meta"
-		        :meta2="presentations[0].slides[0]['image2'].meta"
-		        :disabled="false"
-		/>
+		<Editor ref="editor" :disabled="false"/>
 	</div>
 </template>
 
@@ -33,8 +27,9 @@
 		},
 		methods: {
 		  ...mapActions(['fetchPresentations']),
-		  leleLeba() {
-		  	console.log('leleLeba')
+		  save() {
+		    this.$refs.editor.save();
+		    this.fetchPresentations();
 		  }
 		}
 	}
