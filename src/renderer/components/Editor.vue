@@ -6,6 +6,7 @@
 				        :initial-image="path1 ? get_blob(path1) : false"
 				        auto-sizing
 				        :canvas-color="'black'"
+				        :placeholder="''"
 				        :placeholder-font-size="22"
 				        :placeholder-color="'black'"
 				        :accept="'image/*'"
@@ -23,7 +24,6 @@
 				        :show-remove-button="!disabled"
 				        :remove-button-color="'red'"
 				        :remove-button-size="0"
-				        @updateDone="$emit('updateDone')"
 				        initial-size="contain"
 				        :metadata="meta1"
 				>
@@ -34,6 +34,7 @@
 				        :initial-image="path2 ? get_blob(path2) : false"
 				        auto-sizing
 				        :canvas-color="'black'"
+				        :placeholder="''"
 				        :placeholder-font-size="22"
 				        :placeholder-color="'default'"
 				        :accept="'image/*'"
@@ -51,7 +52,6 @@
 				        :show-remove-button="!disabled"
 				        :remove-button-color="'red'"
 				        :remove-button-size="0"
-				        @updateDone="$emit('updateDone')"
 				        initial-size="contain"
 				        :metadata="meta2"
 				>
@@ -144,10 +144,10 @@ export default {
     mounted () {
 		setTimeout(() => {
 			if (this.meta1) {
-				this.myCroppa1.applyMetadata(this.meta1);
+				// this.myCroppa1.applyMetadata(this.meta1);
 			}
 			if (this.meta2) {
-				this.myCroppa2.applyMetadata(this.meta2);
+				// this.myCroppa2.applyMetadata(this.meta2);
 			}
 		}, 3000);
     }

@@ -16,10 +16,10 @@
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
 					<swiper :id="'presentation-' + presentation.id" ref="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
-						<div v-show="loadingStarted && false" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
+						<div :class="{'hide': !loadingStarted}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
 							<div class="loader" style="top: 40%;"></div>
 						</div>
-						<swiper-slide v-for="(slide, i) in slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
+						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 
 							<Editor :path1="slide['image1'].file.path"
 									:path2="slide['image2'].file.path"
@@ -27,8 +27,6 @@
 							        :meta1="slide['image1'].meta"
 							        :meta2="slide['image2'].meta"
 							        :disabled="true"
-
-							        @updateDone="updateDone"
 							/>
 						</swiper-slide>
 					</swiper>
@@ -60,12 +58,10 @@ export default {
 			something1: {},
 			something2: {},
 			croppas: {},
-		    loadingPercentage: 0,
 			loading: [],
 			slides: [],
 			played: false,
 		    loadingStarted: false,
-		    loadingInterval: null,
 		    loaded: false,
 			swiperOption: {
 				speed: 500,
@@ -83,30 +79,18 @@ export default {
 		}
     },
     computed: {
-      ...mapGetters(['presentations']),
-      isLoading() {
-        return this.loadingPercentage > 0 && this.loadingPercentage < 100
-      }
+      ...mapGetters(['presentations'])
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),
-	  updateSwiper() {
-		  if (this.$refs.mySwiper.swiper)
-			  this.$refs.mySwiper.swiper.update();
-		  this.$forceUpdate();
-	  },
 	  loadPresentation(data) {
 	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
 	    if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
-	    // this.loadingStarted = true;
-	    this.slides = presentation.slides;
 	    this.openFullScreen(data);
-	    this.loadingInterval = setInterval(() => {
-	    	if(this.loadingPercentage >= 100) {
-		        this.loadingStarted = false
-		        clearInterval(this.loadingInterval)
-		    }
-	    }, 1000);
+	    this.loadingStarted = true;
+	    setTimeout(() => {
+	      this.loadingStarted = false
+	    }, 5000);
 	  },
 	  deletePresentation(presentation) {
 	      this.$swal({
@@ -150,13 +134,6 @@ export default {
 	    presentations.forEach(presentation => {
 		  this.croppas[presentation.id] = presentation.slides;
 		});
-	    console.log(this.croppas);
-	  },
-	  updateDone() {
-	    this.loading.push(1);
-		console.log('Loaded: ' + this.loading.length, 'Total:' + this.slides.length * 2);
-		this.loadingPercentage = (this.loading.length / (this.slides.length * 2)) * 100;
-		console.log('Percentage: ' + this.loadingPercentage);
 	  }
 	},
     mounted(){
@@ -166,4 +143,7 @@ export default {
 </script>
 
 <style>
+	.hide {
+		display: none;
+	}
 </style>
