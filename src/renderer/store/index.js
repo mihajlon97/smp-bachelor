@@ -44,8 +44,7 @@ export default new Vuex.Store({
 				});
 				// Json storage
 			} else {
-				const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
-				let rawStorage = fs.readFileSync(storageDir + 'storage.json');
+				let rawStorage = fs.readFileSync(__dirname + '\\..\\storage\\storage.json');
 				presentations = JSON.parse(rawStorage);
 			}
 			commit('setPresentations', presentations)

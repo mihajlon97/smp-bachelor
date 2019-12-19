@@ -1,5 +1,8 @@
 <template>
 	<div class="play page" style="overflow-y: scroll!important;">
+		<div :class="{'hide': !loadingStarted}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
+			<div class="loader" style="top: 30%;"></div>
+		</div>
 		<div style="width: 100%; margin: 0 auto; text-align: center;">
 			<router-link to="/">
 				<img src="../assets/256x256.png" alt="Smart Image Presenter">
@@ -20,8 +23,8 @@
 							<div class="loader" style="top: 40%;"></div>
 						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
-
-							<Editor :path1="slide['image1'].file.path"
+							<Editor v-if="init[presentation.id] ||true"
+									:path1="slide['image1'].file.path"
 									:path2="slide['image2'].file.path"
 
 							        :meta1="slide['image1'].meta"
@@ -54,6 +57,7 @@ export default {
 	},
     data () {
 		return {
+		    init: {},
 		    imgPlay: '',
 			something1: {},
 			something2: {},
@@ -61,7 +65,7 @@ export default {
 			loading: [],
 			slides: [],
 			played: false,
-		    loadingStarted: false,
+		    loadingStarted: true,
 		    loaded: false,
 			swiperOption: {
 				speed: 500,
@@ -86,31 +90,34 @@ export default {
 	  loadPresentation(data) {
 	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
 	    if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
-	    this.openFullScreen(data);
 	    this.loadingStarted = true;
+	    this.init[data.id] = true;
+	    setTimeout(() => {
+	      this.openFullScreen(data);
+	    }, 500);
 	    setTimeout(() => {
 	      this.loadingStarted = false
-	    }, 5000);
+	    }, 2000);
 	  },
 	  deletePresentation(presentation) {
 	      this.$swal({
 	        title: "Are you sure?",
 	        text:"Presentation will be permanently removed.",
 	        icon: "warning",
-	        showCancelButton: true,
-	        cancelButtonText: 'Cancel',
+	        buttons: true,
+	        dangerMode: true,
 	      }).then((value) => {
 	        if (value) {
 	          const fs = require('fs');
-	          const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
-	          let rawStorage = fs.readFileSync(storageDir + 'storage.json');
+	          const storageDir = __dirname + '\\..\\storage\\storage.json';
+	          let rawStorage = fs.readFileSync(storageDir);
 	          let presentations = JSON.parse(rawStorage);
 	          for(let i = presentations.length - 1; i > -1; i--){
 	            if (presentations[i].id === presentation.id){
 	              presentations.splice(i, 1);
 	            }
 	          }
-	          fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
+	          fs.writeFileSync(storageDir, JSON.stringify(presentations));
 	          this.fetchPresentations();
 	        }
 	      });
@@ -137,7 +144,10 @@ export default {
 	  }
 	},
     mounted(){
-		this.initialize()
+		this.initialize();
+	    setTimeout(() => {
+		    this.loadingStarted = false
+	    }, 1000);
     }
 }
 </script>

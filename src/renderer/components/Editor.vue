@@ -3,7 +3,7 @@
 		<div style="text-align: center; background-color: #b7b7b7;">
 			<div :style="'width: 100%; max-width: 100%; height: 100vh; text-align: center; display: inline-block; ' + (!disabled ? 'padding: 0px;' : 'padding: 0px;')">
 				<croppa v-model="myCroppa1"
-				        :initial-image="path1 ? get_blob(path1) : false"
+				        :initial-image="path1 ? get_blob(path1) : ''"
 				        auto-sizing
 				        :canvas-color="'black'"
 				        :placeholder="''"
@@ -31,7 +31,7 @@
 				</croppa>
 
 				<croppa v-model="myCroppa2"
-				        :initial-image="path2 ? get_blob(path2) : false"
+				        :initial-image="path2 ? get_blob(path2) : ''"
 				        auto-sizing
 				        :canvas-color="'black'"
 				        :placeholder="''"
@@ -87,11 +87,11 @@ export default {
 		},
 		path1: {
 			type: String,
-			required: true
+			required: false
 		},
 		path2: {
 			type: String,
-			required: true
+			required: false
 		},
 	    disabled: {
 	      type: Boolean,
@@ -115,9 +115,9 @@ export default {
 		},
 		async save () {
 			const fs = require('fs');
-			// Write to storage :D
-			const storageDir = 'C:\\Users\\miki9\\Desktop\\Notebook\\Bachelor Informatik\\Semester 6\\Bachelor\\sip-bachelor\\src\\renderer\\storage\\';
-			let rawStorage = fs.readFileSync(storageDir + 'storage.json');
+			// Write to storage
+			const storageDir = __dirname + '\\..\\storage\\storage.json';
+			let rawStorage = fs.readFileSync(storageDir);
 			let presentations = JSON.parse(rawStorage);
 
 			if (this.myCroppa1.hasImage() || this.myCroppa2.hasImage()) {
@@ -136,7 +136,7 @@ export default {
 				slides: this.slides
 			});
 
-			fs.writeFileSync(storageDir + 'storage.json', JSON.stringify(presentations));
+			fs.writeFileSync(storageDir, JSON.stringify(presentations));
 			this.$swal("Good job!", "Your presentation is ready!", "success")
 			this.$router.push('/');
 		}
