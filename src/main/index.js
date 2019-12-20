@@ -24,12 +24,18 @@ function createWindow () {
   })
 
 	mainWindow.setMenuBarVisibility(false)
-
+	mainWindow.maximize()
 	mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {
     mainWindow = null
-  })
+  });
+
+	mainWindow.webContents.on("devtools-opened", () => {
+		mainWindow.webContents.closeDevTools();
+	});
+
+
 }
 
 app.on('ready', createWindow)
