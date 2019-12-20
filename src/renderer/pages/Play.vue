@@ -1,8 +1,5 @@
 <template>
 	<div class="play page" style="overflow-y: scroll!important;">
-		<div :class="{'hide': !loadingStarted}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
-			<div class="loader" style="top: 30%;"></div>
-		</div>
 		<div style="width: 100%; margin: 0 auto; text-align: center;">
 			<router-link to="/">
 				<img src="../assets/256x256.png" alt="Smart Image Presenter">
@@ -11,10 +8,10 @@
 			<router-link to="create" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
 				Create new presentation
 			</router-link>
-
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
-				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
+				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
+				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
@@ -23,7 +20,7 @@
 							<div class="loader" style="top: 40%;"></div>
 						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
-							<Editor v-if="init[presentation.id] ||true"
+							<Editor v-if="init[presentation.id]"
 									:path1="slide['image1'].file.path"
 									:path2="slide['image2'].file.path"
 
@@ -65,7 +62,7 @@ export default {
 			loading: [],
 			slides: [],
 			played: false,
-		    loadingStarted: true,
+		    loadingStarted: false,
 		    loaded: false,
 			swiperOption: {
 				speed: 500,
@@ -87,14 +84,21 @@ export default {
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),
+	  playPresentation(data) {
+	    this.openFullScreen(data);
+	  },
 	  loadPresentation(data) {
 	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
 	    if (!presentation) return console.error('NO PRESENTATION WITH THIS ID');
+
+	    this.presentations.forEach(presentation => {
+	    	if (presentation.id === data.id) {
+	    		presentation.loaded = true;
+		    }
+	    });
+
 	    this.loadingStarted = true;
 	    this.init[data.id] = true;
-	    setTimeout(() => {
-	      this.openFullScreen(data);
-	    }, 500);
 	    setTimeout(() => {
 	      this.loadingStarted = false
 	    }, 2000);

@@ -15,21 +15,25 @@
 
 <script>
 	import Editor from '../components/Editor';
-	import { mapState, mapActions } from 'vuex';
+	import { mapGetters, mapActions } from 'vuex';
 	export default {
 		name: "Create",
 		components: { Editor },
 		async mounted() {
 			await this.fetchPresentations();
 		},
-		computed: {
-		  ...mapState(['presentations'])
-		},
 		methods: {
 		  ...mapActions(['fetchPresentations']),
 		  save() {
-		    this.$refs.editor.save();
-		    this.fetchPresentations();
+			this.$swal("Name your presentation", {
+			  content: "input",
+			  buttons: ["Save"],
+			}).then((name) => {
+				if (name && name.length > 0) {
+					this.$refs.editor.save(name);
+					this.fetchPresentations();
+				}
+			});
 		  }
 		}
 	}

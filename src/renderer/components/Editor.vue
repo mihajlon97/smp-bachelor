@@ -6,13 +6,12 @@
 				        :initial-image="path1 ? get_blob(path1) : ''"
 				        auto-sizing
 				        :canvas-color="'black'"
-				        :placeholder="''"
 				        :placeholder-font-size="22"
-				        :placeholder-color="'black'"
+				        :placeholder-color="'white'"
 				        :accept="'image/*'"
 				        :file-size-limit="0"
 				        :quality="2"
-				        :zoom-speed="2"
+				        :zoom-speed="1"
 				        :disabled="disabled"
 				        :disable-drag-and-drop="false"
 				        :disable-click-to-choose="false"
@@ -27,20 +26,18 @@
 				        initial-size="contain"
 				        :metadata="meta1"
 				>
-					<img slot="placeholder" src="../../../static/image.jpg" />
 				</croppa>
 
 				<croppa v-model="myCroppa2"
 				        :initial-image="path2 ? get_blob(path2) : ''"
 				        auto-sizing
 				        :canvas-color="'black'"
-				        :placeholder="''"
 				        :placeholder-font-size="22"
-				        :placeholder-color="'default'"
+				        :placeholder-color="'white'"
 				        :accept="'image/*'"
 				        :file-size-limit="0"
 				        :quality="2"
-				        :zoom-speed="2"
+				        :zoom-speed="1"
 				        :disabled="disabled"
 				        :disable-drag-and-drop="false"
 				        :disable-click-to-choose="false"
@@ -55,7 +52,6 @@
 				        initial-size="contain"
 				        :metadata="meta2"
 				>
-					<img slot="placeholder" src="../../../static/image.jpg" />
 				</croppa>
 			</div>
 		</div>
@@ -113,7 +109,7 @@ export default {
 		cancel () {
 			this.$router.push('/');
 		},
-		async save () {
+		async save (name) {
 			const fs = require('fs');
 			// Write to storage
 			const storageDir = __dirname + '\\..\\storage\\storage.json';
@@ -132,7 +128,7 @@ export default {
 
 			presentations.push({
 				id: this.uuidv4(),
-				name: 'Presentation ' + (presentations.length  + 1),
+				name: name,
 				slides: this.slides
 			});
 
@@ -140,17 +136,7 @@ export default {
 			this.$swal("Good job!", "Your presentation is ready!", "success")
 			this.$router.push('/');
 		}
-	},
-    mounted () {
-		setTimeout(() => {
-			if (this.meta1) {
-				// this.myCroppa1.applyMetadata(this.meta1);
-			}
-			if (this.meta2) {
-				// this.myCroppa2.applyMetadata(this.meta2);
-			}
-		}, 3000);
-    }
+	}
 }
 </script>
 
