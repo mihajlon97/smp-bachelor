@@ -11,9 +11,9 @@ import 'v8-compile-cache';
 import VueSwal from 'vue-swal';
 Vue.use(VueSwal)
 
-import Croppa from 'vue-croppa';
+import Croppa from 'vue-croppa2';
 Vue.use(Croppa);
-import 'vue-croppa/dist/vue-croppa.css';
+import 'vue-croppa2/dist/vue-croppa.css';
 
 import './assets/css/main.css';
 
