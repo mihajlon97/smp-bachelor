@@ -1,16 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { createPersistedState, createSharedMutations } from 'vuex-electron'
-import modules from './modules'
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-	modules,
-	// plugins: [
-	// 	createPersistedState(),
-	// 	createSharedMutations()
-	// ],
 	strict: false,
 	state: {
 		error: {},
@@ -44,7 +36,7 @@ export default new Vuex.Store({
 				});
 				// Json storage
 			} else {
-				let rawStorage = fs.readFileSync(__dirname + '\\..\\storage\\storage.json');
+				let rawStorage = fs.readFileSync(require('path').join(__dirname, '\\..\\storage\\storage.json'));
 				presentations = JSON.parse(rawStorage);
 			}
 			commit('setPresentations', presentations)

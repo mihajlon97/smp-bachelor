@@ -112,7 +112,7 @@ export default {
 		async save (name) {
 			const fs = require('fs');
 			// Write to storage
-			const storageDir = __dirname + '\\..\\storage\\storage.json';
+			const storageDir =  require('path').join(__dirname, '\\..\\storage\\storage.json');
 			let rawStorage = fs.readFileSync(storageDir);
 			let presentations = JSON.parse(rawStorage);
 

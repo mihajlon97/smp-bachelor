@@ -113,7 +113,7 @@ export default {
 	      }).then((value) => {
 	        if (value) {
 	          const fs = require('fs');
-	          const storageDir = __dirname + '\\..\\storage\\storage.json';
+	          const storageDir = require('path').join(__dirname, '\\..\\storage\\storage.json');
 	          let rawStorage = fs.readFileSync(storageDir);
 	          let presentations = JSON.parse(rawStorage);
 	          for(let i = presentations.length - 1; i > -1; i--){
