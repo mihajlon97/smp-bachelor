@@ -68,6 +68,7 @@ export default {
 			image1: null,
 			image2: null,
 			slides: [],
+		    activeSlide: 0,
 		}
     },
 	props: {
@@ -96,6 +97,8 @@ export default {
 	    }
 	},
 	methods: {
+	  previousSlide () {
+		},
 		nextSlide () {
 			let o1 = this.myCroppa1.getChosenFile();
 			let o2 = this.myCroppa2.getChosenFile();

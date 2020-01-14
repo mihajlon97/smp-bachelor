@@ -28,8 +28,6 @@ export default new Vuex.Store({
 					const sheet_name_list = workbook.SheetNames;
 					const _presentations = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
-					console.log(_presentations);
-
 					if (_presentations.length > 0){
 						_presentations.forEach(presentation => {
 
@@ -37,9 +35,6 @@ export default new Vuex.Store({
 							const sheet_name_list = workbook.SheetNames;
 							const sheet = workbook.Sheets[sheet_name_list[0]];
 							const slides = XLSX.utils.sheet_to_json(sheet);
-							const sheet_updated = XLSX.utils.json_to_sheet(slides);
-
-							console.log(presentation.name, slides);
 
 							// General presentation information
 							presentations.push({
@@ -95,7 +90,6 @@ export default new Vuex.Store({
 			state.loading = loading
 		},
 		setPresentations(state, data) {
-			console.log(data);
 			state.presentations = data;
 		}
 	}
