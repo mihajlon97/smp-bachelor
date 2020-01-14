@@ -21,8 +21,8 @@
 						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 							<Editor v-if="init[presentation.id]"
-									:path1="slide['image1'].file.path"
-									:path2="slide['image2'].file.path"
+									:path1="slide['image1'].path"
+									:path2="slide['image2'].path"
 
 							        :meta1="slide['image1'].meta"
 							        :meta2="slide['image2'].meta"
@@ -112,17 +112,47 @@ export default {
 	        dangerMode: true,
 	      }).then((value) => {
 	        if (value) {
-	          const fs = require('fs');
-	          const storageDir = require('path').join(__dirname, '\\..\\storage\\storage.json');
-	          let rawStorage = fs.readFileSync(storageDir);
-	          let presentations = JSON.parse(rawStorage);
-	          for(let i = presentations.length - 1; i > -1; i--){
-	            if (presentations[i].id === presentation.id){
-	              presentations.splice(i, 1);
-	            }
+
+              try {
+	              const excel = false;
+	              if(excel) {
+		              const storageDir = require('path').join(__dirname, '\\..\\storage\\storage.json');
+		              const fs = require('fs');
+		              let rawStorage = fs.readFileSync(storageDir);
+		              let presentations = JSON.parse(rawStorage);
+		              for(let i = presentations.length - 1; i > -1; i--){
+			              if (presentations[i].id === presentation.id){
+				              presentations.splice(i, 1);
+			              }
+		              }
+		              fs.writeFileSync(storageDir, JSON.stringify(presentations));
+	              } else {
+		              const XLSX = require('xlsx');
+		              const storageDir = require('path').join(__dirname, '\\..\\storage\\presentations.xlsx');
+		              const workbook = XLSX.readFile(require('path').join(storageDir));
+		              const sheet_name_list = workbook.SheetNames;
+		              const sheet = workbook.Sheets[sheet_name_list[0]];
+		              const presentations = XLSX.utils.sheet_to_json(sheet);
+		              for(let i = presentations.length - 1; i > -1; i--){
+			              if (presentations[i].id === presentation.id){
+				              require('fs').unlinkSync(presentations[i].file)
+				              presentations.splice(i, 1);
+			              }
+		              }
+		              const sheet_updated = XLSX.utils.json_to_sheet(presentations);
+		              workbook.Sheets[sheet_name_list[0]] = sheet_updated;
+		              XLSX.writeFile(workbook, storageDir);
+	              }
+
+	              // Re-fetch presentations
+	              this.fetchPresentations();
+	          } catch (e) {
+	              this.$swal({
+		              title: "Error",
+		              text: "Presentation was not removed due to error.",
+		              icon: "warning",
+	              });
 	          }
-	          fs.writeFileSync(storageDir, JSON.stringify(presentations));
-	          this.fetchPresentations();
 	        }
 	      });
 	  },
