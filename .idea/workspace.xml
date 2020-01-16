@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/components/Editor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Editor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/pages/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/pages/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/Play.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/store/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -65,8 +61,8 @@
           <entry key="ejs" value="21" />
           <entry key="js" value="2286" />
           <entry key="json" value="641" />
-          <entry key="txt" value="477" />
-          <entry key="vue" value="12484" />
+          <entry key="txt" value="523" />
+          <entry key="vue" value="12838" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -75,8 +71,8 @@
           <entry key="EJS" value="21" />
           <entry key="JSON" value="641" />
           <entry key="JavaScript" value="2286" />
-          <entry key="PLAIN_TEXT" value="477" />
-          <entry key="Vue.js" value="12484" />
+          <entry key="PLAIN_TEXT" value="523" />
+          <entry key="Vue.js" value="12838" />
         </counts>
       </usages-collector>
     </session>
@@ -158,8 +154,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/Editor.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="246" column="51" lean-forward="true" selection-start-line="246" selection-start-column="51" selection-end-line="246" selection-end-column="51" />
+            <state relative-caret-position="104">
+              <caret line="216" column="31" lean-forward="true" selection-start-line="216" selection-start-column="31" selection-end-line="216" selection-end-column="31" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -193,8 +189,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sheet</find>
-      <find>storage.json</find>
       <find>writeFile</find>
       <find>slides[0]</find>
       <find>catch (e)</find>
@@ -223,6 +217,8 @@
       <find>meta2</find>
       <find>path2</find>
       <find>activeSlide</find>
+      <find>slides</find>
+      <find>ACTIVE</find>
     </findStrings>
     <replaceStrings>
       <replace>openFullScreen</replace>
@@ -416,7 +412,7 @@
       <workItem from="1576537860787" duration="584000" />
       <workItem from="1576771658783" duration="24174000" />
       <workItem from="1578700794661" duration="36093000" />
-      <workItem from="1579169864104" duration="12325000" />
+      <workItem from="1579169864104" duration="20963000" />
     </task>
     <task id="LOCAL-00001" summary=" - storage example">
       <created>1575237844625</created>
@@ -523,11 +519,18 @@
       <option name="project" value="LOCAL" />
       <updated>1579042521834</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary=" - previous slide &#10; - moving through the slides">
+      <created>1579186365890</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1579186365891</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="219950000" />
+    <option name="totallyTimeSpent" value="228588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -574,7 +577,8 @@
     <MESSAGE value=" - photos" />
     <MESSAGE value=" - changing storage from json to excel file" />
     <MESSAGE value=" - active slide number" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - active slide number" />
+    <MESSAGE value=" - previous slide &#10; - moving through the slides" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - previous slide &#10; - moving through the slides" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -754,8 +758,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Editor.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="246" column="51" lean-forward="true" selection-start-line="246" selection-start-column="51" selection-end-line="246" selection-end-column="51" />
+        <state relative-caret-position="104">
+          <caret line="216" column="31" lean-forward="true" selection-start-line="216" selection-start-column="31" selection-end-line="216" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />

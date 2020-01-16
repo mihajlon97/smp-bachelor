@@ -127,13 +127,24 @@ export default {
 			    orientation: 1
 		    };
 
-		    if(this.activeSlide === this.slides.length) {
-			    let o1 = this.myCroppa1.getChosenFile();
-			    let o2 = this.myCroppa2.getChosenFile();
-			    const meta1 = this.myCroppa1.getMetadata();
-			    const meta2 = this.myCroppa2.getMetadata();
-			    if (o1 || o2) this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
-            }
+		    let o1 = this.myCroppa1.getChosenFile();
+		    let o2 = this.myCroppa2.getChosenFile();
+		    const meta1 = this.myCroppa1.getMetadata();
+		    const meta2 = this.myCroppa2.getMetadata();
+
+	        if(this.activeSlide === this.slides.length && (o1 || o2)) {
+	        	// Save new slide
+		        this.slides.push([
+			        o1.path, meta1.startX, meta1.startY, meta1.scale,
+			        o2.path, meta2.startX, meta2.startY, meta2.scale
+		        ]);
+	        } else if(this.slides[this.activeSlide]) {
+	        	// Modify current slide if exist
+	            this.slides[this.activeSlide] = [
+	                this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
+	                this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+	            ];
+	        }
 
 	        return this.refresh();
 	    },
@@ -144,8 +155,10 @@ export default {
 			return true;
 		},
 		nextSlide () {
-			console.log("ACTIVE " + this.activeSlide);
-			console.log("SLIDES: " + this.slides.length);
+			let o1 = this.myCroppa1.getChosenFile();
+			let o2 = this.myCroppa2.getChosenFile();
+			const meta1 = this.myCroppa1.getMetadata();
+			const meta2 = this.myCroppa2.getMetadata();
 
 			// If next slide exist
 			if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
@@ -167,22 +180,25 @@ export default {
 					orientation: 1
 				};
 
+				this.slides[this.activeSlide] = [
+					this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
+					this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+				];
 			// If next slide is empty
 			} else {
-				let o1 = this.myCroppa1.getChosenFile();
-				let o2 = this.myCroppa2.getChosenFile();
-				const meta1 = this.myCroppa1.getMetadata();
-				const meta2 = this.myCroppa2.getMetadata();
-
 				// Prevent going on next slide if no images are picked and active slide is the last one
 			    if (!o1 && !o2 && this.activeSlide === this.slides.length && this.slides.length > 0) return false;
 
 			    // If one of images picked, insert slide at the end
-			    if (o1 || o2) this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
-
-			    // Empty next slide
+			    if (o1 || o2) {
+			      this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+			    } // Empty next slide
 			    else {
-					// Slide 1
+				    this.slides[this.activeSlide] = [
+					    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
+					    this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+				    ];
+			        // Slide 1
 					this.path1 = this.path1_prop;
 					this.meta1 = this.meta1_prop;
 
@@ -267,5 +283,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
