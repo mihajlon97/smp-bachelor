@@ -21,11 +21,11 @@
 						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 							<Editor v-if="init[presentation.id]"
-									:path1="slide['image1'].path"
-									:path2="slide['image2'].path"
+									:path1_prop="slide['image1'].path"
+									:path2_prop="slide['image2'].path"
 
-							        :meta1="slide['image1'].meta"
-							        :meta2="slide['image2'].meta"
+							        :meta1_prop="slide['image1'].meta"
+							        :meta2_prop="slide['image2'].meta"
 							        :disabled="true"
 							/>
 						</swiper-slide>

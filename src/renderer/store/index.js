@@ -7,7 +7,8 @@ export default new Vuex.Store({
 	state: {
 		error: {},
 		loading: false,
-		presentations: []
+		presentations: [],
+		activeSlide: 0
 	},
 	getters: {
 		route: state => state.route,
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 	},
 	actions: {
 		async fetchPresentations({state, commit}, excel = true) {
+			state.activeSlide = 0;
 			try {
 				const fs = require('fs');
 				let presentations = [];

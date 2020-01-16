@@ -59,62 +59,139 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
 	name: "Editor",
     data() {
 		return {
 			myCroppa1: {},
 			myCroppa2: {},
-			image1: null,
-			image2: null,
+		    path1: this.path1_prop,
+		    path2: this.path2_prop,
+		    meta1: this.meta1_prop,
+		    meta2: this.meta2_prop,
 			slides: [],
-		    activeSlide: 0,
 		}
     },
 	props: {
-		meta1: {
+		meta1_prop: {
 			type: Object,
 			required: false,
 		    default: null
 		},
-		meta2: {
+		meta2_prop: {
 			type: Object,
 			required: false,
 		    default: null
 		},
-		path1: {
+		path1_prop: {
 			type: String,
 			required: false
 		},
-		path2: {
+		path2_prop: {
 			type: String,
 			required: false
 		},
 	    disabled: {
-	      type: Boolean,
-	      default: false,
-	      required: true
-	    }
+	        type: Boolean,
+	        default: false,
+	        required: true
+	    },
+	},
+	computed: {
+	  ...mapState(['activeSlide'])
 	},
 	methods: {
-	  previousSlide () {
-		},
-		nextSlide () {
-			let o1 = this.myCroppa1.getChosenFile();
-			let o2 = this.myCroppa2.getChosenFile();
-		    const meta1 = this.myCroppa1.getMetadata();
-			const meta2 = this.myCroppa2.getMetadata();
+	    previousSlide () {
+	        console.log("ACTIVE " + this.activeSlide);
+	        console.log("SLIDES: " + this.slides.length);
 
-			/*
-		    this.slides.push({
-				image1: { file: { path: o1.path }, meta: {...this.myCroppa1.getMetadata() }},
-				image2: { file: { path: o2.path }, meta: {...this.myCroppa2.getMetadata() }},
-			});
-			*/
+	        // If no slides prevent going back
+	        if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
-		    this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+	        // Slide 1
+	        this.path1 = this.slides[this.activeSlide - 1][0];
+	        this.meta1 = {
+	        	startX: this.slides[this.activeSlide - 1][1],
+	            startY: this.slides[this.activeSlide - 1][2],
+	            scale:  this.slides[this.activeSlide - 1][3],
+	            orientation: 1
+	        };
+
+	        // Slide 2
+		    this.path2 = this.slides[this.activeSlide - 1][4];
+		    this.meta2 = {
+			    startX: this.slides[this.activeSlide - 1][5],
+			    startY: this.slides[this.activeSlide - 1][6],
+			    scale:  this.slides[this.activeSlide - 1][7],
+			    orientation: 1
+		    };
+
+		    if(this.activeSlide === this.slides.length) {
+			    let o1 = this.myCroppa1.getChosenFile();
+			    let o2 = this.myCroppa2.getChosenFile();
+			    const meta1 = this.myCroppa1.getMetadata();
+			    const meta2 = this.myCroppa2.getMetadata();
+			    if (o1 || o2) this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+            }
+
+	        return this.refresh();
+	    },
+		refresh () {
 			this.myCroppa1.refresh();
 			this.myCroppa2.refresh();
+			this.$emit('updateTotalSlides', this.slides.length);
+			return true;
+		},
+		nextSlide () {
+			console.log("ACTIVE " + this.activeSlide);
+			console.log("SLIDES: " + this.slides.length);
+
+			// If next slide exist
+			if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
+				// Slide 1
+				this.path1 = this.slides[this.activeSlide + 1][0];
+				this.meta1 = {
+					startX: this.slides[this.activeSlide + 1][1],
+					startY: this.slides[this.activeSlide + 1][2],
+					scale:  this.slides[this.activeSlide + 1][3],
+					orientation: 1
+				};
+
+				// Slide 2
+				this.path2 = this.slides[this.activeSlide + 1][4];
+				this.meta2 = {
+					startX: this.slides[this.activeSlide + 1][5],
+					startY: this.slides[this.activeSlide + 1][6],
+					scale:  this.slides[this.activeSlide + 1][7],
+					orientation: 1
+				};
+
+			// If next slide is empty
+			} else {
+				let o1 = this.myCroppa1.getChosenFile();
+				let o2 = this.myCroppa2.getChosenFile();
+				const meta1 = this.myCroppa1.getMetadata();
+				const meta2 = this.myCroppa2.getMetadata();
+
+				// Prevent going on next slide if no images are picked and active slide is the last one
+			    if (!o1 && !o2 && this.activeSlide === this.slides.length && this.slides.length > 0) return false;
+
+			    // If one of images picked, insert slide at the end
+			    if (o1 || o2) this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+
+			    // Empty next slide
+			    else {
+					// Slide 1
+					this.path1 = this.path1_prop;
+					this.meta1 = this.meta1_prop;
+
+					// Slide 2
+					this.path2 = this.path2_prop;
+					this.meta2 = this.meta2_prop;
+				}
+			}
+		    return this.refresh();
 		},
 		cancel () {
 			this.$router.push('/');
@@ -163,23 +240,24 @@ export default {
 				    const meta2 = this.myCroppa2.getMetadata();
 
 			        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
-			        this.slides.unshift(['path_1', 'startX_1', 'startY_1',	'scale_1',	'path_2',	'startX_2',	'startY_2',	'scale_2']);
-
-				    const book = XLSX.utils.book_new();
-				    const sheet1 = XLSX.utils.aoa_to_sheet(this.slides);
-				    XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
-
-				    presentations.push({
-					    id: presentationId,
-					    name: name,
-					    file: presentationDir
-				    });
-
-				    const sheet_updated = XLSX.utils.json_to_sheet(presentations);
-				    workbook.Sheets[sheet_name_list[0]] = sheet_updated;
-				    XLSX.writeFile(workbook, storageDir);
-				    XLSX.writeFile(book, presentationDir);
 			    }
+
+		        this.slides.unshift(['path_1', 'startX_1', 'startY_1',	'scale_1',	'path_2',	'startX_2',	'startY_2',	'scale_2']);
+
+			    const book = XLSX.utils.book_new();
+			    const sheet1 = XLSX.utils.aoa_to_sheet(this.slides);
+			    XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
+
+			    presentations.push({
+				    id: presentationId,
+				    name: name,
+				    file: presentationDir
+			    });
+			    XLSX.writeFile(book, presentationDir);
+
+			    const sheet_updated = XLSX.utils.json_to_sheet(presentations);
+			    workbook.Sheets[sheet_name_list[0]] = sheet_updated;
+			    XLSX.writeFile(workbook, storageDir);
 		    }
 			this.$swal("Good job!", "Your presentation is ready!", "success")
 			this.$router.push('/');
