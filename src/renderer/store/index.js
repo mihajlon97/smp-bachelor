@@ -8,7 +8,8 @@ export default new Vuex.Store({
 		error: {},
 		loading: false,
 		presentations: [],
-		activeSlide: 0
+		activeSlide: 0,
+		storageFile: '\\..\\storage\\presentations.xlsx'
 	},
 	getters: {
 		route: state => state.route,
@@ -26,7 +27,7 @@ export default new Vuex.Store({
 				// Excel storage
 				if (excel) {
 					const XLSX = require('xlsx');
-					const workbook = XLSX.readFile(require('path').join(__dirname, '\\..\\storage\\presentations.xlsx'));
+					const workbook = XLSX.readFile(require('path').join(__dirname, state.storageFile));
 					const sheet_name_list = workbook.SheetNames;
 					const _presentations = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 

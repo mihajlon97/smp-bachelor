@@ -255,7 +255,9 @@ export default {
 				    const meta1 = this.myCroppa1.getMetadata();
 				    const meta2 = this.myCroppa2.getMetadata();
 
-			        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+				    if (o1 || o2) {
+				        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+				    }
 			    }
 
 		        this.slides.unshift(['path_1', 'startX_1', 'startY_1',	'scale_1',	'path_2',	'startX_2',	'startY_2',	'scale_2']);
@@ -275,8 +277,10 @@ export default {
 			    workbook.Sheets[sheet_name_list[0]] = sheet_updated;
 			    XLSX.writeFile(workbook, storageDir);
 		    }
-			this.$swal("Good job!", "Your presentation is ready!", "success")
-			this.$router.push('/');
+		    this.$router.push('/');
+		    this.$swal("Good job!", "Your presentation is ready!", "success").then(() => {
+				location.reload();
+			});
 		}
 	}
 }

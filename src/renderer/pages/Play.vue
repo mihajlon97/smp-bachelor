@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Editor from '../components/Editor';
@@ -80,6 +80,10 @@ export default {
 		}
     },
     computed: {
+		dir(){
+			return __dirname
+		},
+      ...mapState(['storageFile']),
       ...mapGetters(['presentations'])
     },
 	methods: {
