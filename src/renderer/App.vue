@@ -17,12 +17,9 @@
 	},
 	mounted() {
 		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
-		console.log(path);
 		const fs = require('fs');
 
-		if (fs.existsSync(path)) {
-			console.log('EXIST');
-		} else {
+		if (!fs.existsSync(path)) {
 			const XLSX = require('xlsx');
 			const book = XLSX.utils.book_new();
 			const sheet1 = XLSX.utils.aoa_to_sheet([['id', 'name', 'file']]);

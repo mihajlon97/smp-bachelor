@@ -103,9 +103,6 @@ export default {
 	},
 	methods: {
 	    previousSlide () {
-	        console.log("ACTIVE " + this.activeSlide);
-	        console.log("SLIDES: " + this.slides.length);
-
 	        // If no slides prevent going back
 	        if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
