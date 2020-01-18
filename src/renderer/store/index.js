@@ -9,7 +9,7 @@ export default new Vuex.Store({
 		loading: false,
 		presentations: [],
 		activeSlide: 0,
-		storageFile: '\\..\\storage\\presentations.xlsx'
+		storageFile: '\\presentations.xlsx'
 	},
 	getters: {
 		route: state => state.route,
@@ -18,16 +18,12 @@ export default new Vuex.Store({
 		presentations: state => state.presentations
 	},
 	actions: {
-		async fetchPresentations({state, commit}, excel = true) {
+		async fetchPresentations({state, commit}) {
 			state.activeSlide = 0;
 			try {
-				const fs = require('fs');
-				let presentations = [];
-
-				// Excel storage
-				if (excel) {
+					let presentations = [];
 					const XLSX = require('xlsx');
-					const workbook = XLSX.readFile(require('path').join(__dirname, state.storageFile));
+					const workbook = XLSX.readFile(require('path').join(require('electron').remote.app.getPath('userData'), state.storageFile));
 					const sheet_name_list = workbook.SheetNames;
 					const _presentations = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
@@ -72,11 +68,6 @@ export default new Vuex.Store({
 							});
 						});
 					}
-					// Json storage
-				} else {
-					let rawStorage = fs.readFileSync(require('path').join(__dirname, '\\..\\storage\\storage.json'));
-					presentations = JSON.parse(rawStorage);
-				}
 				commit('setPresentations', presentations)
 			} catch (e) {
 				console.log(e);

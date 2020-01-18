@@ -1,10 +1,18 @@
-# sip-bachelor
+# Smart Image Presenter
+## Cross-platform Desktop Application written in Electron
+### Bachelor Thesis | Mihajlo Nikodijević
+### University of Vienna | WS2019
 
-> Smart Image Presenter - Bachelor
 
 #### Build Setup
 
 ``` bash
+# clone repository
+git clone https://github.com/mihajlon97/sip-bachelor.git smart-image-presenter
+
+# move to directory
+cd smart-image-presenter
+
 # install dependencies
 npm install
 

@@ -1,8 +1,5 @@
 export default {
 	methods: {
-		storageDir () {
-			return require('path').join(__dirname, '\\storage\\storage.json');
-		},
 		setCookie(name, value, days) {
 			let expires = "";
 			if (days) {

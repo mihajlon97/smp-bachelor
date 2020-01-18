@@ -17,7 +17,7 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "sip-bachelor",
+    "productName": "Smart Image Presenter",
     "appId": "com.sip-bachelor.mihajlon97",
     "directories": {
       "output": "build"
@@ -41,13 +41,13 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "src/renderer/assets/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "src/renderer/assets/icons/icon.ico"
     },
     "linux": {
-      "icon": "build/icons"
+      "icon": "src/renderer/assets/icons"
     }
   },
   "dependencies": {

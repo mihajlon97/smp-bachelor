@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import Editor from '../components/Editor';
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+	import {mapActions, mapGetters, mapState} from 'vuex';
+	import 'swiper/dist/css/swiper.css'
+	import {swiper, swiperSlide} from 'vue-awesome-swiper'
+	import Editor from '../components/Editor';
+	import Loading from 'vue-loading-overlay';
+	import 'vue-loading-overlay/dist/vue-loading.css';
 
-export default {
+	export default {
 	name: "Play",
 	components: {
 	    Loading,
@@ -80,9 +80,6 @@ export default {
 		}
     },
     computed: {
-		dir(){
-			return __dirname
-		},
       ...mapState(['storageFile']),
       ...mapGetters(['presentations'])
     },
@@ -116,37 +113,21 @@ export default {
 	        dangerMode: true,
 	      }).then((value) => {
 	        if (value) {
-
               try {
-	              const excel = false;
-	              if(excel) {
-		              const storageDir = require('path').join(__dirname, '\\..\\storage\\storage.json');
-		              const fs = require('fs');
-		              let rawStorage = fs.readFileSync(storageDir);
-		              let presentations = JSON.parse(rawStorage);
-		              for(let i = presentations.length - 1; i > -1; i--){
-			              if (presentations[i].id === presentation.id){
-				              presentations.splice(i, 1);
-			              }
+	              const XLSX = require('xlsx');
+	              const storageDir = require('path').join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+	              const workbook = XLSX.readFile(require('path').join(storageDir));
+	              const sheet_name_list = workbook.SheetNames;
+	              const sheet = workbook.Sheets[sheet_name_list[0]];
+	              const presentations = XLSX.utils.sheet_to_json(sheet);
+	              for(let i = presentations.length - 1; i > -1; i--){
+		              if (presentations[i].id === presentation.id){
+			              require('fs').unlinkSync(presentations[i].file)
+			              presentations.splice(i, 1);
 		              }
-		              fs.writeFileSync(storageDir, JSON.stringify(presentations));
-	              } else {
-		              const XLSX = require('xlsx');
-		              const storageDir = require('path').join(__dirname, '\\..\\storage\\presentations.xlsx');
-		              const workbook = XLSX.readFile(require('path').join(storageDir));
-		              const sheet_name_list = workbook.SheetNames;
-		              const sheet = workbook.Sheets[sheet_name_list[0]];
-		              const presentations = XLSX.utils.sheet_to_json(sheet);
-		              for(let i = presentations.length - 1; i > -1; i--){
-			              if (presentations[i].id === presentation.id){
-				              require('fs').unlinkSync(presentations[i].file)
-				              presentations.splice(i, 1);
-			              }
-		              }
-		              const sheet_updated = XLSX.utils.json_to_sheet(presentations);
-		              workbook.Sheets[sheet_name_list[0]] = sheet_updated;
-		              XLSX.writeFile(workbook, storageDir);
 	              }
+	              workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
+	              XLSX.writeFile(workbook, storageDir);
 
 	              // Re-fetch presentations
 	              this.fetchPresentations();
