@@ -59,8 +59,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-export default {
+	import {mapState} from 'vuex';
+
+	export default {
 	name: "Editor",
     data() {
 		return {
@@ -101,7 +102,40 @@ export default {
 	computed: {
 	  ...mapState(['activeSlide'])
 	},
+	mounted () {
+	  console.log(this.slides);
+	},
 	methods: {
+		edit (presentation) {
+			console.log('Presentation to edit', presentation);
+
+			presentation.slides.forEach(slide => {
+			    this.slides.push([
+					// Slide 1
+			    	slide.image1.path, slide.image1.meta.startX, slide.image1.meta.startY, slide.image1.meta.scale,
+			        // Slide 2
+			        slide.image2.path, slide.image2.meta.startX, slide.image2.meta.startY, slide.image2.meta.scale
+			    ]);
+			});
+
+			// Slide 1
+			this.path1 = this.slides[this.activeSlide][0];
+			this.meta1 = {
+				startX: this.slides[this.activeSlide][1],
+				startY: this.slides[this.activeSlide][2],
+				scale:  this.slides[this.activeSlide][3],
+				orientation: 1
+			};
+
+			// Slide 2
+			this.path2 = this.slides[this.activeSlide][4];
+			this.meta2 = {
+				startX: this.slides[this.activeSlide][5],
+				startY: this.slides[this.activeSlide][6],
+				scale:  this.slides[this.activeSlide][7],
+				orientation: 1
+			};
+		},
 	    previousSlide () {
 	        // If no slides prevent going back
 	        if (this.slides.length === 0 || this.activeSlide === 0) return false;
@@ -209,9 +243,9 @@ export default {
 		cancel () {
 			this.$router.push('/');
 		},
-		async save (name) {
+		async save (name, edit = false, id = '') {
 			// Write to storage
-		    const presentationId = this.uuidv4();
+		    const presentationId = !edit ? this.uuidv4() : id;
 		    const XLSX = require('xlsx');
 		    const path = require('path');
 		    const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
@@ -221,34 +255,43 @@ export default {
 		    const sheet = workbook.Sheets[sheet_name_list[0]];
 		    const presentations = XLSX.utils.sheet_to_json(sheet);
 
-		    if (this.myCroppa1.hasImage() || this.myCroppa2.hasImage()) {
-			    let o1 = this.myCroppa1.getChosenFile();
-			    let o2 = this.myCroppa2.getChosenFile();
+		    let o1 = this.myCroppa1.getChosenFile();
+		    let o2 = this.myCroppa2.getChosenFile();
 
-			    const meta1 = this.myCroppa1.getMetadata();
-			    const meta2 = this.myCroppa2.getMetadata();
+		    const meta1 = this.myCroppa1.getMetadata();
+		    const meta2 = this.myCroppa2.getMetadata();
 
-			    if (o1 || o2) {
-			        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
-			    }
+		    if (o1 || o2) {
+		        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+		    } else {
+			    this.slides[this.activeSlide] = [
+				    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
+				    this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+			    ];
 		    }
+
 
 	        this.slides.unshift(['path_1', 'startX_1', 'startY_1',	'scale_1',	'path_2',	'startX_2',	'startY_2',	'scale_2']);
 
 		    const book = XLSX.utils.book_new();
 		    const sheet1 = XLSX.utils.aoa_to_sheet(this.slides);
 		    XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
+		    console.log(this.slides);
+		    if (edit === false) {
+			    presentations.push({
+				    id: presentationId,
+				    name: name,
+				    file: presentationDir
+			    });
 
-		    presentations.push({
-			    id: presentationId,
-			    name: name,
-			    file: presentationDir
-		    });
+			    workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
+			    XLSX.writeFile(workbook, storageDir);
+		    } else {
+			    if (!require('fs').existsSync(presentationDir)) {
+				    require('fs').unlinkSync(presentationDir)
+			    }
+		    }
 		    XLSX.writeFile(book, presentationDir);
-
-		    const sheet_updated = XLSX.utils.json_to_sheet(presentations);
-		    workbook.Sheets[sheet_name_list[0]] = sheet_updated;
-		    XLSX.writeFile(workbook, storageDir);
 
 		    this.$router.push('/');
 		    this.$swal("Good job!", "Your presentation is ready!", "success").then(() => {

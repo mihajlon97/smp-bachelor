@@ -5,13 +5,14 @@
 				<img src="../assets/256x256.png" alt="Smart Image Presenter">
 			</router-link>
 			<br>
-			<router-link to="create" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
+			<router-link to="edit" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
 				Create new presentation
 			</router-link>
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
 				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
+				<button @click="editPresentation(presentation)" class="button button-play round-btn">✎</button>
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
@@ -103,6 +104,9 @@
 	    setTimeout(() => {
 	      this.loadingStarted = false
 	    }, 2000);
+	  },
+	  editPresentation(presentation) {
+	  	this.$router.push('/edit?edit=' + presentation.id);
 	  },
 	  deletePresentation(presentation) {
 	      this.$swal({

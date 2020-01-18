@@ -11,9 +11,9 @@ export default new Router({
 		  component: () => import('../Pages/Play.vue')
 	  },
 	  {
-		  path: '/create',
-		  name: 'Create',
-		  component: () => import('../Pages/Create.vue')
+		  path: '/edit',
+		  name: 'Edit',
+		  component: () => import('../pages/Edit.vue')
 	  },
     {
       path: '*',

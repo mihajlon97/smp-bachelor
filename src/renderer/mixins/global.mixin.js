@@ -9,6 +9,9 @@ export default {
 			}
 			document.cookie = name + "=" + (value || "") + expires + "; path=/";
 		},
+		firstLetterUppercase(string) {
+			return string[0].toUpperCase() + string.slice(1);
+		},
 		getCookie(name) {
 			let nameEQ = name + "=";
 			let ca = document.cookie.split(';');
