@@ -28,6 +28,9 @@ body {
     cursor: pointer;
 }
 
+.button-control {
+    font-size: 10px;
+}
 .button-play {
     background-color: white;
     color: black;

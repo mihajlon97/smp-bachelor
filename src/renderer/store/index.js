@@ -52,7 +52,7 @@ export default new Vuex.Store({
 												"startX": slide.startX_1,
 												"startY": slide.startY_1,
 												"scale": slide.scale_1,
-												"orientation": 1
+												"orientation": slide.orientation_1
 											}
 										},
 										"image2":{
@@ -61,7 +61,7 @@ export default new Vuex.Store({
 												"startX": slide.startX_2,
 												"startY": slide.startY_2,
 												"scale": slide.scale_2,
-												"orientation": 1
+												"orientation": slide.orientation_2
 											}
 										}
 									});

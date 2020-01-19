@@ -86,8 +86,19 @@
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),
-	  playPresentation(data) {
-	    this.openFullScreen(data);
+	  playPresentation(presentation) {
+		  let elem = document.getElementById('presentation-' + presentation.id);
+		  if (elem) {
+			  if (elem.requestFullscreen) {
+				  elem.requestFullscreen();
+			  } else if (elem.mozRequestFullScreen) { /* Firefox */
+				  elem.mozRequestFullScreen();
+			  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+				  elem.webkitRequestFullscreen();
+			  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+				  elem.msRequestFullscreen();
+			  }
+		  }
 	  },
 	  loadPresentation(data) {
 	    let presentation = this.presentations.filter(elem => elem.id === data.id)[0];
@@ -103,7 +114,7 @@
 	    this.init[data.id] = true;
 	    setTimeout(() => {
 	      this.loadingStarted = false
-	    }, 2000);
+	    }, 3500);
 	  },
 	  editPresentation(presentation) {
 	  	this.$router.push('/edit?edit=' + presentation.id);
@@ -144,20 +155,6 @@
 	          }
 	        }
 	      });
-	  },
-	  openFullScreen(presentation) {
-		let elem = document.getElementById('presentation-' + presentation.id);
-		if (elem) {
-		  if (elem.requestFullscreen) {
-			  elem.requestFullscreen();
-		  } else if (elem.mozRequestFullScreen) { /* Firefox */
-			  elem.mozRequestFullScreen();
-		  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-			  elem.webkitRequestFullscreen();
-		  } else if (elem.msRequestFullscreen) { /* IE/Edge */
-			  elem.msRequestFullscreen();
-		  }
-		}
 	  },
 	  initialize() {
 	  	let presentations = Array.concat(this.presentations, []);

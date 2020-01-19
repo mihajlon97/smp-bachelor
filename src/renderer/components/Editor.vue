@@ -102,19 +102,26 @@
 	computed: {
 	  ...mapState(['activeSlide'])
 	},
-	mounted () {
-	  console.log(this.slides);
-	},
 	methods: {
+		rotate (croppaNumber) {
+		    console.log(this.myCroppa1.getMetadata());
+		    this['myCroppa' + croppaNumber].rotate()
+		    console.log(this.myCroppa1.getMetadata());
+		},
+		flip (croppaNumber, axis) {
+		    console.log(this.myCroppa1.getMetadata());
+		    console.log('FLIP :' + croppaNumber + " AXIS: " + axis);
+			if (axis === 'x') this['myCroppa' + croppaNumber].flipX();
+			else if (axis === 'y') this['myCroppa' + croppaNumber].flipY();
+			console.log(this.myCroppa1.getMetadata());
+		},
 		edit (presentation) {
-			console.log('Presentation to edit', presentation);
-
 			presentation.slides.forEach(slide => {
 			    this.slides.push([
 					// Slide 1
-			    	slide.image1.path, slide.image1.meta.startX, slide.image1.meta.startY, slide.image1.meta.scale,
+			    	slide.image1.path, slide.image1.meta.startX, slide.image1.meta.startY, slide.image1.meta.scale, slide.image1.meta.orientation,
 			        // Slide 2
-			        slide.image2.path, slide.image2.meta.startX, slide.image2.meta.startY, slide.image2.meta.scale
+			        slide.image2.path, slide.image2.meta.startX, slide.image2.meta.startY, slide.image2.meta.scale, slide.image2.meta.orientation,
 			    ]);
 			});
 
@@ -124,17 +131,19 @@
 				startX: this.slides[this.activeSlide][1],
 				startY: this.slides[this.activeSlide][2],
 				scale:  this.slides[this.activeSlide][3],
-				orientation: 1
+				orientation: this.slides[this.activeSlide][4],
 			};
 
 			// Slide 2
-			this.path2 = this.slides[this.activeSlide][4];
+			this.path2 = this.slides[this.activeSlide][5];
 			this.meta2 = {
-				startX: this.slides[this.activeSlide][5],
-				startY: this.slides[this.activeSlide][6],
-				scale:  this.slides[this.activeSlide][7],
-				orientation: 1
+				startX: this.slides[this.activeSlide][6],
+				startY: this.slides[this.activeSlide][7],
+				scale:  this.slides[this.activeSlide][8],
+				orientation: this.slides[this.activeSlide][9],
 			};
+
+			console.log(this.meta1, this.meta2);
 		},
 	    previousSlide () {
 	        // If no slides prevent going back
@@ -146,16 +155,16 @@
 	        	startX: this.slides[this.activeSlide - 1][1],
 	            startY: this.slides[this.activeSlide - 1][2],
 	            scale:  this.slides[this.activeSlide - 1][3],
-	            orientation: 1
+	            orientation: this.slides[this.activeSlide - 1][4]
 	        };
 
 	        // Slide 2
-		    this.path2 = this.slides[this.activeSlide - 1][4];
+		    this.path2 = this.slides[this.activeSlide - 1][5];
 		    this.meta2 = {
-			    startX: this.slides[this.activeSlide - 1][5],
-			    startY: this.slides[this.activeSlide - 1][6],
-			    scale:  this.slides[this.activeSlide - 1][7],
-			    orientation: 1
+			    startX: this.slides[this.activeSlide - 1][6],
+			    startY: this.slides[this.activeSlide - 1][7],
+			    scale:  this.slides[this.activeSlide - 1][8],
+			    orientation: this.slides[this.activeSlide - 1][9]
 		    };
 
 		    let o1 = this.myCroppa1.getChosenFile();
@@ -166,14 +175,14 @@
 	        if(this.activeSlide === this.slides.length && (o1 || o2)) {
 	        	// Save new slide
 		        this.slides.push([
-			        o1.path, meta1.startX, meta1.startY, meta1.scale,
-			        o2.path, meta2.startX, meta2.startY, meta2.scale
+			        o1.path, meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+			        o2.path, meta2.startX, meta2.startY, meta2.scale, meta2.orientation
 		        ]);
 	        } else if(this.slides[this.activeSlide]) {
 	        	// Modify current slide if exist
 	            this.slides[this.activeSlide] = [
-	                this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
-	                this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+	                this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+	                this.slides[this.activeSlide][5], meta2.startX, meta2.startY, meta2.scale, meta2.orientation
 	            ];
 	        }
 
@@ -199,21 +208,21 @@
 					startX: this.slides[this.activeSlide + 1][1],
 					startY: this.slides[this.activeSlide + 1][2],
 					scale:  this.slides[this.activeSlide + 1][3],
-					orientation: 1
+					orientation: this.slides[this.activeSlide + 1][4]
 				};
 
 				// Slide 2
-				this.path2 = this.slides[this.activeSlide + 1][4];
+				this.path2 = this.slides[this.activeSlide + 1][5];
 				this.meta2 = {
-					startX: this.slides[this.activeSlide + 1][5],
-					startY: this.slides[this.activeSlide + 1][6],
-					scale:  this.slides[this.activeSlide + 1][7],
-					orientation: 1
+					startX: this.slides[this.activeSlide + 1][6],
+					startY: this.slides[this.activeSlide + 1][7],
+					scale:  this.slides[this.activeSlide + 1][8],
+					orientation: this.slides[this.activeSlide + 1][9]
 				};
 
 				this.slides[this.activeSlide] = [
-					this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
-					this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+					this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+					this.slides[this.activeSlide][5], meta2.startX, meta2.startY, meta2.scale, meta2.orientation
 				];
 			// If next slide is empty
 			} else {
@@ -222,12 +231,15 @@
 
 			    // If one of images picked, insert slide at the end
 			    if (o1 || o2) {
-			      this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+			      this.slides.push([
+			      	o1.path, meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+			        o2.path, meta2.startX, meta2.startY, meta2.scale, meta2.orientation
+			      ]);
 			    } // Empty next slide
 			    else {
 				    this.slides[this.activeSlide] = [
-					    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
-					    this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+					    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+					    this.slides[this.activeSlide][5], meta2.startX, meta2.startY, meta2.scale, meta2.orientation
 				    ];
 			        // Slide 1
 					this.path1 = this.path1_prop;
@@ -262,21 +274,28 @@
 		    const meta2 = this.myCroppa2.getMetadata();
 
 		    if (o1 || o2) {
-		        this.slides.push([o1.path, meta1.startX, meta1.startY, meta1.scale, o2.path, meta2.startX, meta2.startY, meta2.scale]);
+		        this.slides.push([
+		        	o1.path, meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+		            o2.path, meta2.startX, meta2.startY, meta2.scale, meta2.orientation
+		        ]);
 		    } else {
 			    this.slides[this.activeSlide] = [
-				    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale,
-				    this.slides[this.activeSlide][4], meta2.startX, meta2.startY, meta2.scale
+				    this.slides[this.activeSlide][0], meta1.startX, meta1.startY, meta1.scale, meta1.orientation,
+				    this.slides[this.activeSlide][5], meta2.startX, meta2.startY, meta2.scale, meta2.orientation
 			    ];
 		    }
 
 
-	        this.slides.unshift(['path_1', 'startX_1', 'startY_1',	'scale_1',	'path_2',	'startX_2',	'startY_2',	'scale_2']);
+	        this.slides.unshift([
+	        	'path_1', 'startX_1', 'startY_1', 'scale_1', 'orientation_1',
+	            'path_2', 'startX_2', 'startY_2', 'scale_2', 'orientation_2'
+	        ]);
 
 		    const book = XLSX.utils.book_new();
 		    const sheet1 = XLSX.utils.aoa_to_sheet(this.slides);
 		    XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
-		    console.log(this.slides);
+
+		    // If create mode
 		    if (edit === false) {
 			    presentations.push({
 				    id: presentationId,
@@ -287,6 +306,7 @@
 			    workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
 			    XLSX.writeFile(workbook, storageDir);
 		    } else {
+		    	// If edit mode - remove last presentation
 			    if (!require('fs').existsSync(presentationDir)) {
 				    require('fs').unlinkSync(presentationDir)
 			    }
