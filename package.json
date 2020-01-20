@@ -54,7 +54,7 @@
     "v8-compile-cache": "^2.1.0",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^3.1.3",
-    "vue-croppa2": "^1.0.2",
+    "vue-croppa2": "^1.0.4",
     "vue-electron": "^1.0.6",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.1.5",

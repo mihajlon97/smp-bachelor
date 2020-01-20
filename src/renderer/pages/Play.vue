@@ -11,8 +11,11 @@
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 				<button v-if="!presentation.loaded" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
-				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">▶</button>
-				<button @click="editPresentation(presentation)" class="button button-play round-btn">✎</button>
+				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">
+					<span v-if="!loadingStarted">▶</span>
+					<span v-else>Loading...</span>
+				</button>
+				<button @click="editPresentation(presentation)" class="button button-play round-btn" style="color: black;">✎</button>
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
@@ -84,6 +87,7 @@
 	methods: {
 	  ...mapActions(['fetchPresentations']),
 	  playPresentation(presentation) {
+	      if(this.loadingStarted === true) return;
 		  let elem = document.getElementById('presentation-' + presentation.id);
 		  if (elem) {
 			  if (elem.requestFullscreen) {

@@ -315,7 +315,7 @@
 
 		    this.$router.push('/');
 		    this.$swal("Good job!", "Your presentation is ready!", "success").then(() => {
-				location.reload();
+				// location.reload();
 			});
 		}
 	}
