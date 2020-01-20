@@ -42,13 +42,10 @@
 	import 'swiper/dist/css/swiper.css'
 	import {swiper, swiperSlide} from 'vue-awesome-swiper'
 	import Editor from '../components/Editor';
-	import Loading from 'vue-loading-overlay';
-	import 'vue-loading-overlay/dist/vue-loading.css';
 
 	export default {
 	name: "Play",
 	components: {
-	    Loading,
 		swiper,
 		swiperSlide,
 	    Editor
