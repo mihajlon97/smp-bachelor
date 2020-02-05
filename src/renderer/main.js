@@ -7,6 +7,9 @@ import GlobalMixin from './mixins/global.mixin'
 
 import 'v8-compile-cache';
 
+import VueDraggable from 'vue-draggable'
+Vue.use(VueDraggable)
+
 import VueSwal from 'vue-swal';
 Vue.use(VueSwal)
 

@@ -13,7 +13,7 @@ export default new Router({
 	  {
 		  path: '/edit',
 		  name: 'Edit',
-		  component: () => import('../pages/Edit.vue')
+		  component: () => import('../pages/EditNew.vue')
 	  },
     {
       path: '*',
