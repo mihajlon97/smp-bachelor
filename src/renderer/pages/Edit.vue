@@ -18,15 +18,15 @@
 
 			<span v-if="false">
 				<div style="margin-left: 20px; float: left;">
-				<button @click="$refs.editor.flip(1, 'x')"  class="button button-play black round-btn button-control"> Flip X </button>
-				<button @click="$refs.editor.flip(1, 'y')"  class="button button-play black round-btn button-control"> Flip Y </button>
-				<button @click="$refs.editor.rotate(1)"     class="button button-play black round-btn button-control"> ⟳ </button>
-			</div>
-			<div style="margin-right: 20px; float: right;">
-				<button @click="$refs.editor.flip(2, 'x')"  class="button button-play black round-btn button-control"> Flip X </button>
-				<button @click="$refs.editor.flip(2, 'y')"  class="button button-play black round-btn button-control"> Flip Y </button>
-				<button @click="$refs.editor.rotate(2)"     class="button button-play black round-btn button-control"> ⟳ </button>
-			</div>
+					<button @click="$refs.editor.flip(1, 'x')"  class="button button-play black round-btn button-control"> Flip X </button>
+					<button @click="$refs.editor.flip(1, 'y')"  class="button button-play black round-btn button-control"> Flip Y </button>
+					<button @click="$refs.editor.rotate(1)"     class="button button-play black round-btn button-control"> ⟳ </button>
+				</div>
+				<div style="margin-right: 20px; float: right;">
+					<button @click="$refs.editor.flip(2, 'x')"  class="button button-play black round-btn button-control"> Flip X </button>
+					<button @click="$refs.editor.flip(2, 'y')"  class="button button-play black round-btn button-control"> Flip Y </button>
+					<button @click="$refs.editor.rotate(2)"     class="button button-play black round-btn button-control"> ⟳ </button>
+				</div>
 			</span>
 
 		</div>

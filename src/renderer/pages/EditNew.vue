@@ -8,14 +8,6 @@
 			<button @click="save" class="button button-play black round-btn"> Save </button>
 			<button @click="$refs.editor.cancel()"  class="button button-play black round-btn"> Cancel </button>
 		</div>
-		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
-			<button @click="save" class="button button-play black round-btn"> Save </button>
-			<button @click="$refs.editor.cancel()"  class="button button-play black round-btn"> Cancel </button>
-		</div>
-
-		<div style="position: absolute; bottom: 10px; width: 100%; z-index: 12;">
-			<h3 style="color: white; text-align: center;"> {{ activeSlide + 1 }} </h3>
-		</div>
 		<MediaHolder ref="editor"/>
 	</div>
 </template>
@@ -83,9 +75,8 @@
 	}
 </script>
 
-<style scoped>
+<style>
 	.button{
-		padding: 2px 12px;
+		padding: 10px 22px;
 	}
-
 </style>
