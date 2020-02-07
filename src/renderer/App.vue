@@ -19,6 +19,8 @@
 		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
 		const fs = require('fs');
 
+		console.log(require('electron').remote.app.getPath('userData'));
+
 		if (!fs.existsSync(path)) {
 			const XLSX = require('xlsx');
 			const book = XLSX.utils.book_new();

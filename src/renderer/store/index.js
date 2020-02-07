@@ -48,21 +48,17 @@ export default new Vuex.Store({
 									{
 										"image1":{
 											"path": slide.path_1,
-											"meta":{
-												"startX": slide.startX_1,
-												"startY": slide.startY_1,
-												"scale": slide.scale_1,
-												"orientation": slide.orientation_1
-											}
+											"startX": slide.startX_1,
+											"startY": slide.startY_1,
+											"scale": slide.scale_1,
+											"orientation": slide.orientation_1
 										},
 										"image2":{
 											"path": slide.path_2,
-											"meta":{
-												"startX": slide.startX_2,
-												"startY": slide.startY_2,
-												"scale": slide.scale_2,
-												"orientation": slide.orientation_2
-											}
+											"startX": slide.startX_2,
+											"startY": slide.startY_2,
+											"scale": slide.scale_2,
+											"orientation": slide.orientation_2
 										}
 									});
 							});

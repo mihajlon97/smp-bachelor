@@ -8,7 +8,7 @@ export default new Router({
 	  {
 		  path: '/',
 		  name: 'Play',
-		  component: () => import('../Pages/Play.vue')
+		  component: () => import('../Pages/PlayNew.vue')
 	  },
 	  {
 		  path: '/edit',

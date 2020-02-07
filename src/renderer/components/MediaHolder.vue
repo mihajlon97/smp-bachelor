@@ -3,13 +3,13 @@
 		<!-- Media 1 -->
 		<div id="media1" class="media">
 			<div class="wrapper">
-				<button v-if="image1" class="button button-play black round-btn button-control x-button" @click="reset(1)"> X </button>
+				<button v-if="image1 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(1)"> X </button>
 				<div v-if="image1" class="move" :style="`background-size: contain; background-image: url('${get_blob(image1)};transform: scale(${scale1}) rotate(${rotate1}deg);`"></div>
 				<h1 v-else class="chooseText" @click="choose(1)"> Choose Media </h1>
 			</div>
 
 			<!-- Filter Section -->
-			<span v-if="image1">
+			<span v-if="image1 && !playing">
 				<div style="position: absolute; bottom: 10px; right: 10px; z-index: 15;">
 					<button @click="rotate1 += 90" class="filter-button button-play black round-btn button-control"> ⟳ </button>
 					<button @click="reset(1, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
@@ -31,13 +31,13 @@
 		<!-- Media 2 -->
 		<div id="media2" class="media" style="left: 50%;">
 			<div class="wrapper">
-				<button v-if="image2" class="button button-play black round-btn button-control x-button" @click="reset(2)"> X </button>
+				<button v-if="image2 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(2)"> X </button>
 				<div v-if="image2" class="move" :style="`background-size: contain; background-image: url('${get_blob(image2)};transform: scale(${scale2}) rotate(${rotate2}deg);`"></div>
 				<h1 v-else class="chooseText" @click="choose(2)"> Choose Media </h1>
 			</div>
 
 			<!-- Filter Section -->
-			<span v-if="image2">
+			<span v-if="image2 && !playing">
 				<div style="position: absolute; bottom: 10px; right: 10px; z-index: 15;">
 					<button @click="rotate2 += 90" class="filter-button button-play black round-btn button-control"> ⟳ </button>
 					<button @click="reset(2, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
@@ -67,11 +67,25 @@
 		components: {
 			RangeSlider
 		},
+		props: {
+			playing: {
+				type: Boolean,
+			    default: false
+			},
+		    image1_prop: {
+		        type: String,
+		        required: false
+		    },
+		    image2_prop: {
+		        type: String,
+		        required: false
+		    },
+		},
 	    data() {
 			return {
 			    medias: [],
-				image1: null,
-				image2: null,
+				image1: this.image1_prop,
+				image2: this.image2_prop,
 			    slides: [],
 			    elem: null,
 			    div: null,
@@ -121,10 +135,12 @@
 		    nextSlide () {
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
+			    	    // Save current slide modification
 					    this.slides[this.activeSlide] = [
 						    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
 						    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
 					    ];
+					    // Apply next one
 					    this.$nextTick(() => {
 						    this.init();
 
@@ -136,14 +152,12 @@
 						    this.scale1 = this.slides[this.activeSlide][3];
 						    this.rotate1 = this.slides[this.activeSlide][4];
 
-
 						    // Slide 2
 						    this.image2 = this.slides[this.activeSlide][5];
 						    this.medias[1].style.left = this.slides[this.activeSlide][6];
 						    this.medias[1].style.top = this.slides[this.activeSlide][7];
 						    this.scale2 = this.slides[this.activeSlide][8];
 						    this.rotate2 = this.slides[this.activeSlide][9];
-
 					    });
 
 				    // If next slide is empty
