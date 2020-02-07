@@ -121,43 +121,49 @@
 		    nextSlide () {
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
-			    	console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
-				    // Slide 1
-				    this.image1 = this.slides[this.activeSlide + 1][0];
-				    this.medias[0].style.left = this.slides[this.activeSlide + 1][1];
-				    this.medias[0].style.top = this.slides[this.activeSlide + 1][2];
-					this.scale1 = this.slides[this.activeSlide + 1][3];
-					this.rotate1 = this.slides[this.activeSlide + 1][4];
+					    this.slides[this.activeSlide] = [
+						    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
+						    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
+					    ];
+					    this.$nextTick(() => {
+						    this.init();
+
+						    console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
+						    // Slide 1
+						    this.image1 = this.slides[this.activeSlide][0];
+						    this.medias[0].style.left = this.slides[this.activeSlide][1];
+						    this.medias[0].style.top = this.slides[this.activeSlide][2];
+						    this.scale1 = this.slides[this.activeSlide][3];
+						    this.rotate1 = this.slides[this.activeSlide][4];
 
 
-				    // Slide 2
-				    this.image2 = this.slides[this.activeSlide + 1][5];
-			        this.medias[1].style.left = this.slides[this.activeSlide + 1][6];
-			        this.medias[1].style.top = this.slides[this.activeSlide + 1][7];
-				    this.scale2 = this.slides[this.activeSlide + 1][8];
-				    this.rotate2 = this.slides[this.activeSlide + 1][9];
+						    // Slide 2
+						    this.image2 = this.slides[this.activeSlide][5];
+						    this.medias[1].style.left = this.slides[this.activeSlide][6];
+						    this.medias[1].style.top = this.slides[this.activeSlide][7];
+						    this.scale2 = this.slides[this.activeSlide][8];
+						    this.rotate2 = this.slides[this.activeSlide][9];
+
+					    });
+
+				    // If next slide is empty
+			    } else {
+			        console.log('NEXT NOT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide, this.slides);
+
+			        // Prevent going on next slide if and images are picked or active slide is the last one
+				    if ((!this.image1 || !this.image2) && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
+				      (this.slides.length === 0 && (!this.image1 || !this.image2))) return false;
 
 				    this.slides[this.activeSlide] = [
 					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
 					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
 				    ];
-				    // If next slide is empty
-			    } else {
-			        console.log('NEXT NOT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide, this.slides);
-
-			        // Prevent going on next slide if no images are picked or active slide is the last one
-				    if ((!this.image1 || !this.image2) || (this.activeSlide === this.slides.length && this.slides.length > 0)) return false;
-
-				    this.slides.push([
-					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-				    ]);
 
 				    this.reset(1, true);
 				    this.reset(2, true);
-
 			    }
-			    this.init();
+			    console.log('Active ' + this.activeSlide, this.slides);
+
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
 		    },
@@ -264,6 +270,12 @@
 					if (this.medias.length === 0 || !div) return;
 
 					if (this.medias[index]) {
+
+						// Calculate x and y in %
+						this.medias[index].style.left = '0%';
+						this.medias[index].style.top = '0%';
+
+
 						// div event mousedown
 						this.medias[index].addEventListener('mousedown', (e) => {
 							// mouse state set to true
