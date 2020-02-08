@@ -7,7 +7,7 @@
 		<h3 style="position: absolute; width: 100%; color: white; text-align: center; z-index: 11;"> {{ activeSlide + 1 }} </h3>
 		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
 			<button @click="save" class="button button-play black round-btn"> Save </button>
-			<button @click="$refs.editor.cancel()"  class="button button-play black round-btn"> Cancel </button>
+			<button @click="$router.push('/')"  class="button button-play black round-btn"> Cancel </button>
 		</div>
 		<MediaHolder ref="editor" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
 	</div>

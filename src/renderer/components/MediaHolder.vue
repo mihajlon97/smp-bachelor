@@ -1,5 +1,5 @@
 <template>
-	<div id="wrapper">
+	<div id="wrapper" :class="'id-' + id">
 		<!-- Media 1 -->
 		<div id="media1" class="media">
 			<div class="wrapper">
@@ -68,17 +68,53 @@
 			RangeSlider
 		},
 		props: {
+		    id: {
+		        type: String,
+		        default: 'id'
+		    },
 			playing: {
 				type: Boolean,
 			    default: false
 			},
 		    image1_prop: {
 		        type: String,
-		        required: false
+		        default: false
 		    },
 		    image2_prop: {
 		        type: String,
-		        required: false
+		        default: false
+		    },
+			x1_prop: {
+				type: String,
+			    default: '0%'
+			},
+		    x2_prop: {
+				type: String,
+		        default: '0%'
+			},
+		    y1_prop: {
+				type: String,
+		        default: '0%'
+			},
+			y2_prop: {
+				type: String,
+			    default: '0%'
+			},
+			scale1_prop: {
+				type: Number,
+			    default: 1
+			},
+			scale2_prop: {
+				type: Number,
+			    default: 1
+			},
+			rotate1_prop: {
+				type: Number,
+			    default: 0
+			},
+		    rotate2_prop: {
+				type: Number,
+		        default: 0
 		    },
 		},
 	    data() {
@@ -91,16 +127,20 @@
 			    div: null,
 			    x: [0,0],
 			    y: [0,0],
-			    rotate1: 0,
-			    rotate2: 0,
-			    scale1: 1,
-			    scale2: 1,
+			    rotate1: this.rotate1_prop,
+			    rotate2: this.rotate2_prop,
+			    scale1: this.scale1_prop,
+			    scale2: this.scale2_prop,
 			    mousedown: [false, false],
 			}
 	    },
 	    mounted() {
-	        console.log('Mounted');
+	        console.log('Mounted', this.$props, this.$data);
 
+	        setTimeout(() => {
+	        	this.scale1 = this.scale1_prop;
+	            this.scale2 = this.scale2_prop;
+	        }, 3000);
 	        this.init()
 
 	    },
@@ -118,15 +158,6 @@
 			    }
 		    },
 		    scale (number, factor) {
-		    	/*
-			    let element = document.getElementsByClassName('move')[0];
-			    let matrix = window.getComputedStyle(element).transform;
-			    console.log(element, matrix);
-			    let matrixArray = (matrix.replace("matrix(", "").replace(")", "")).split(",");
-			    let scaleX = parseFloat(matrixArray[0]);
-			    let scaleY = parseFloat(matrixArray[3]);
-		        console.log(this.scale, {matrix, scaleX, scaleY});
-		        */
 		        this['scale' + number] += factor;
 		    },
 
@@ -135,30 +166,30 @@
 		    nextSlide () {
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
-			    	    // Save current slide modification
-					    this.slides[this.activeSlide] = [
-						    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-						    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-					    ];
-					    // Apply next one
-					    this.$nextTick(() => {
-						    this.init();
+		            // Save current slide modification
+				    this.slides[this.activeSlide] = [
+					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
+					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
+				    ];
+				    // Apply next one
+				    this.$nextTick(() => {
+					    this.init();
 
-						    console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
-						    // Slide 1
-						    this.image1 = this.slides[this.activeSlide][0];
-						    this.medias[0].style.left = this.slides[this.activeSlide][1];
-						    this.medias[0].style.top = this.slides[this.activeSlide][2];
-						    this.scale1 = this.slides[this.activeSlide][3];
-						    this.rotate1 = this.slides[this.activeSlide][4];
+					    console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
+					    // Slide 1
+					    this.image1 = this.slides[this.activeSlide][0];
+					    this.medias[0].style.left = this.slides[this.activeSlide][1];
+					    this.medias[0].style.top = this.slides[this.activeSlide][2];
+					    this.scale1 = this.slides[this.activeSlide][3];
+					    this.rotate1 = this.slides[this.activeSlide][4];
 
-						    // Slide 2
-						    this.image2 = this.slides[this.activeSlide][5];
-						    this.medias[1].style.left = this.slides[this.activeSlide][6];
-						    this.medias[1].style.top = this.slides[this.activeSlide][7];
-						    this.scale2 = this.slides[this.activeSlide][8];
-						    this.rotate2 = this.slides[this.activeSlide][9];
-					    });
+					    // Slide 2
+					    this.image2 = this.slides[this.activeSlide][5];
+					    this.medias[1].style.left = this.slides[this.activeSlide][6];
+					    this.medias[1].style.top = this.slides[this.activeSlide][7];
+					    this.scale2 = this.slides[this.activeSlide][8];
+					    this.rotate2 = this.slides[this.activeSlide][9];
+				    });
 
 				    // If next slide is empty
 			    } else {
@@ -224,6 +255,42 @@
 		    },
 
 
+		    edit (presentation) {
+			    presentation.slides.forEach(slide => {
+				    this.slides.push([
+					    // Slide 1
+					    slide.image1.path, slide.image1.startX, slide.image1.startY, slide.image1.scale, slide.image1.orientation,
+					    // Slide 2
+					    slide.image2.path, slide.image2.startX, slide.image2.startY, slide.image2.scale, slide.image2.orientation,
+				    ]);
+			    });
+
+			    // Slide 1
+			    this.image1 = this.slides[this.activeSlide][0];
+
+			    // Slide 2
+			    this.image2 = this.slides[this.activeSlide][5];
+
+			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide);
+
+			    this.$nextTick(() => {
+				    this.init();
+
+				    console.log("ACTIVE: " + this.activeSlide);
+
+				    this.medias[0].style.left = this.slides[this.activeSlide][1];
+				    this.medias[0].style.top = this.slides[this.activeSlide][2];
+				    this.scale1 = this.slides[this.activeSlide][3];
+				    this.rotate1 = this.slides[this.activeSlide][4];
+
+				    this.medias[1].style.left = this.slides[this.activeSlide][6];
+				    this.medias[1].style.top = this.slides[this.activeSlide][7];
+				    this.scale2 = this.slides[this.activeSlide][8];
+				    this.rotate2 = this.slides[this.activeSlide][9];
+			    });
+			    this.$emit('updateTotalSlides', this.slides.length);
+		    },
+
 
 		    async save (name, edit = false, id = '') {
 			    // Write to storage
@@ -237,11 +304,13 @@
 			    const sheet = workbook.Sheets[sheet_name_list[0]];
 			    const presentations = XLSX.utils.sheet_to_json(sheet);
 
-
-			    this.slides.push([
-			        this.image1, this.medias[0].style.left, this.medias[0].style.top, 1, 1,
-				    this.image2, this.medias[1].style.left, this.medias[1].style.top, 1, 1
-			    ]);
+			    console.log('ACTIVE SLIDE ' + this.activeSlide, "SLIDES " + this.slides.length, this.slides);
+			    if (this.image1 && this.image2) {
+				    this.slides[this.activeSlide] = [
+					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
+					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
+				    ];
+			    }
 
 
 			    this.slides.unshift([
@@ -275,8 +344,8 @@
 			    this.$swal("Good job!", "Your presentation is ready!", "success");
 		    },
 			init() {
-				this.wrappers = [...document.querySelectorAll('.wrapper')];
-			    this.medias = [...document.querySelectorAll('.move')];
+				this.wrappers = [...document.querySelectorAll('.id-' + this.id + ' .wrapper')];
+			    this.medias = [...document.querySelectorAll('.id-' + this.id + ' .move')];
 
 			    for(let index = 0; this.wrappers.length; index++) {
 					let div = this.wrappers[index];
@@ -286,8 +355,8 @@
 					if (this.medias[index]) {
 
 						// Calculate x and y in %
-						this.medias[index].style.left = '0%';
-						this.medias[index].style.top = '0%';
+						this.medias[index].style.left = this['x' + (index + 1) + '_prop'];
+						this.medias[index].style.top = this['y' + (index + 1) + '_prop'];
 
 
 						// div event mousedown
@@ -374,13 +443,17 @@
 	.move:active {
 		cursor: move;
 	}
-	.move {
-		z-index: 10;
-		position: absolute;
-	    width: 100%;
-	    height: 100%;
+
+	/*
+			position: absolute;
 	    left: 0;
 	    top: 0;
+	 */
+	.move {
+		position: relative;
+		z-index: 10;
+	    width: 100%;
+	    height: 100%;
 		background: black no-repeat center;
 	}
 	.filter-button {

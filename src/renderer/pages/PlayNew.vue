@@ -10,7 +10,7 @@
 			</router-link>
 			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
-				<button v-if="!presentation.loaded && false" @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
+				<button v-if="!presentation.loaded && false " @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
 				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">
 					<span v-if="!loadingStarted || true">▶</span>
 					<span v-else>Loading...</span>
@@ -25,9 +25,23 @@
 						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
 							<MediaHolder v-if="init[presentation.id] || true"
+							        :id="String(i)"
 									:image1_prop="slide['image1'].path"
 									:image2_prop="slide['image2'].path"
-							        :playing="true"
+
+									:x1_prop="slide['image1'].startX"
+								    :x2_prop="slide['image2'].startX"
+
+								    :y1_prop="slide['image1'].startY"
+							        :y2_prop="slide['image2'].startY"
+
+						            :scale1_prop="slide['image1'].scale"
+						            :scale2_prop="slide['image2'].scale"
+
+						            :rotate1_prop="slide['image1'].orientation"
+					                :rotate2_prop="slide['image2'].orientation"
+
+						            :playing="true"
 							/>
 						</swiper-slide>
 					</swiper>
@@ -159,6 +173,8 @@
 	    presentations.forEach(presentation => {
 		  this.croppas[presentation.id] = presentation.slides;
 		});
+
+	    console.log(this.presentations)
 	  }
 	},
     mounted(){
