@@ -70,8 +70,8 @@
           <entry key="js" value="2539" />
           <entry key="json" value="719" />
           <entry key="md" value="310" />
-          <entry key="txt" value="941" />
-          <entry key="vue" value="20938" />
+          <entry key="txt" value="944" />
+          <entry key="vue" value="20968" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -80,8 +80,8 @@
           <entry key="EJS" value="21" />
           <entry key="JSON" value="719" />
           <entry key="JavaScript" value="2539" />
-          <entry key="PLAIN_TEXT" value="1251" />
-          <entry key="Vue.js" value="20938" />
+          <entry key="PLAIN_TEXT" value="1254" />
+          <entry key="Vue.js" value="20968" />
         </counts>
       </usages-collector>
     </session>
@@ -91,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="72" column="28" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="28" />
+            <state relative-caret-position="-161">
+              <caret line="348" column="71" lean-forward="true" selection-start-line="348" selection-start-column="71" selection-end-line="348" selection-end-column="71" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -144,8 +144,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/renderer/pages/PlayNew.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="20" column="112" selection-start-line="20" selection-start-column="112" selection-end-line="20" selection-end-column="112" />
+            <state relative-caret-position="111">
+              <caret line="21" column="91" selection-start-line="21" selection-start-column="91" selection-end-line="21" selection-end-column="91" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -246,7 +246,6 @@
       <find>save</find>
       <find>meta</find>
       <find>mySwiper1</find>
-      <find>mySwiper</find>
       <find>loadingStarted</find>
       <find>totalSlides</find>
       <find>edit</find>
@@ -272,6 +271,7 @@
       <find>id-</find>
       <find>presentation-</find>
       <find>id</find>
+      <find>mySwiper</find>
     </findStrings>
     <replaceStrings>
       <replace>openFullScreen</replace>
@@ -484,7 +484,7 @@
       <workItem from="1580072439668" duration="2071000" />
       <workItem from="1580820480781" duration="21534000" />
       <workItem from="1580941903788" duration="10758000" />
-      <workItem from="1581020016141" duration="35996000" />
+      <workItem from="1581020016141" duration="38052000" />
     </task>
     <task id="LOCAL-00001" summary=" - storage example">
       <created>1575237844625</created>
@@ -689,11 +689,18 @@
       <option name="project" value="LOCAL" />
       <updated>1581130263990</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary=" - playing fix">
+      <created>1581172638991</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1581172638992</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="340423000" />
+    <option name="totallyTimeSpent" value="342479000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -726,7 +733,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - styling" />
     <MESSAGE value=" - fixing css&#10; - debug events inside vue-croppa" />
     <MESSAGE value=" - debug loader" />
     <MESSAGE value=" - __dirname fix&#10; - loader fix" />
@@ -751,7 +757,8 @@
     <MESSAGE value=" - next &amp; previous new approach" />
     <MESSAGE value=" - moving done" />
     <MESSAGE value=" - playing done" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - playing done" />
+    <MESSAGE value=" - playing fix" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - playing fix" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -963,8 +970,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="72" column="28" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="28" />
+        <state relative-caret-position="-161">
+          <caret line="348" column="71" lean-forward="true" selection-start-line="348" selection-start-column="71" selection-end-line="348" selection-end-column="71" />
           <folding>
             <element signature="n#style#0;n#div#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -980,8 +987,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/pages/PlayNew.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="20" column="112" selection-start-line="20" selection-start-column="112" selection-end-line="20" selection-end-column="112" />
+        <state relative-caret-position="111">
+          <caret line="21" column="91" selection-start-line="21" selection-start-column="91" selection-end-line="21" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />

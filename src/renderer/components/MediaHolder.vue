@@ -344,7 +344,7 @@
 			    this.$swal("Good job!", "Your presentation is ready!", "success");
 		    },
 			init() {
-			    const container = document.querySelector('#' + this.id);
+			    let container = this.playing ? document.querySelector('#' + this.id) : document;
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 

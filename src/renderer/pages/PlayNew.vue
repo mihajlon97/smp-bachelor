@@ -19,7 +19,7 @@
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
-					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + (pr_i + 1)" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + pr_i" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<div :class="{'hide': !loadingStarted || true}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
 							<div class="loader" style="top: 40%;"></div>
 						</div>
@@ -188,15 +188,15 @@
 
 	      	for (let i = 0; i < sliders.length; i++) {
 			      sliders[i].addEventListener('contextmenu', () => {
-				      if (this.$refs['mySwiper1'][0].swiper) {
-					      this.$refs['mySwiper1'][0].swiper.slidePrev(500, () => {
+				      if (this.$refs['mySwiper' + i][0].swiper) {
+					      this.$refs['mySwiper' + i][0].swiper.slidePrev(500, () => {
 						      console.log('SLIDE PREVIOUS');
 					      });
 				      }
 			      });
 			      sliders[i].addEventListener('click', () => {
-			          if (this.$refs['mySwiper1'][0].swiper) {
-				          this.$refs['mySwiper1'][0].swiper.slideNext(500, () => {
+			          if (this.$refs['mySwiper' + i][0].swiper) {
+				          this.$refs['mySwiper' + i][0].swiper.slideNext(500, () => {
 					          console.log('SLIDE NEXT');
 				          });
 			          }
