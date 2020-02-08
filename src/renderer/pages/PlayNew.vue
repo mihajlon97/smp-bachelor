@@ -12,19 +12,15 @@
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 				<button v-if="!presentation.loaded && false " @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
 				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">
-					<span v-if="!loadingStarted || true">▶</span>
-					<span v-else>Loading...</span>
+					<span>▶</span>
 				</button>
 				<button @click="editPresentation(presentation)" class="button button-play round-btn" style="color: black;">✎</button>
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + pr_i" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
-						<div :class="{'hide': !loadingStarted || true}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
-							<div class="loader" style="top: 40%;"></div>
-						</div>
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;" :id="'id-' + pr_i + '-' + i" >
-							<MediaHolder v-if="init[presentation.id] || true"
+							<MediaHolder
 							        :id="'id-' + pr_i + '-' + i"
 									:image1_prop="slide['image1'].path"
 									:image2_prop="slide['image2'].path"
@@ -68,16 +64,6 @@
 	},
     data () {
 		return {
-		    init: {},
-		    imgPlay: '',
-			something1: {},
-			something2: {},
-			croppas: {},
-			loading: [],
-			slides: [],
-			played: false,
-		    loadingStarted: false,
-		    loaded: false,
 			swiperOption: {
 				speed: 500,
 				slidesPerView: 1,
@@ -99,8 +85,11 @@
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),
+	/**
+	 * Play chosen presentation in fullscreen mode
+	 * @param presentation
+	 */
 	  playPresentation(presentation) {
-	      if(this.loadingStarted === true) return;
 		  let elem = document.getElementById('presentation-' + presentation.id);
 		  if (elem) {
 			  if (elem.requestFullscreen) {
@@ -123,10 +112,6 @@
 	    		presentation.loaded = true;
 		    }
 	    });
-
-	    this.loadingStarted = true;
-	    this.init[data.id] = true;
-	    this.loadingStarted = false
 	  },
 	  editPresentation(presentation) {
 	  	this.$router.push('/edit?edit=' + presentation.id);
@@ -168,22 +153,28 @@
 	        }
 	      });
 	  },
-	  initialize() {
-	  	let presentations = Array.concat(this.presentations, []);
-	    presentations.forEach(presentation => {
-		  this.croppas[presentation.id] = presentation.slides;
-		});
-
-	    console.log(this.presentations)
-	  }
 	},
     mounted(){
-		this.initialize();
 	    setTimeout(() => {
-		    this.loadingStarted = false
+			// Fullscreen exit - Slide to beginning of each presentation
+	        const exitHandler = () => {
+			    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
+				    for (let i = 0; i < sliders.length; i++) {
+					    if (this.$refs['mySwiper' + i][0].swiper) {
+						    this.$refs['mySwiper' + i][0].swiper.slideTo(0, 500);
+					    }
+				    }
+			    }
+		    };
+		    if (document.addEventListener) {
+			    document.addEventListener('fullscreenchange', exitHandler, false);
+			    document.addEventListener('mozfullscreenchange', exitHandler, false);
+			    document.addEventListener('MSFullscreenChange', exitHandler, false);
+			    document.addEventListener('webkitfullscreenchange', exitHandler, false);
+		    }
 
-	      //
 
+	        // Click moving through presentation events
 	      	let sliders = document.getElementsByClassName('mySwiper');
 
 	      	for (let i = 0; i < sliders.length; i++) {
