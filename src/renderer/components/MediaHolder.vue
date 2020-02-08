@@ -1,7 +1,7 @@
 <template>
-	<div id="wrapper" :class="'id-' + id">
+	<div class="wrapper-parent">
 		<!-- Media 1 -->
-		<div id="media1" class="media">
+		<div class="media">
 			<div class="wrapper">
 				<button v-if="image1 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(1)"> X </button>
 				<div v-if="image1" class="move" :style="`background-size: contain; background-image: url('${get_blob(image1)};transform: scale(${scale1}) rotate(${rotate1}deg);`"></div>
@@ -29,7 +29,7 @@
 
 
 		<!-- Media 2 -->
-		<div id="media2" class="media" style="left: 50%;">
+		<div class="media" style="left: 50%;">
 			<div class="wrapper">
 				<button v-if="image2 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(2)"> X </button>
 				<div v-if="image2" class="move" :style="`background-size: contain; background-image: url('${get_blob(image2)};transform: scale(${scale2}) rotate(${rotate2}deg);`"></div>
@@ -78,11 +78,11 @@
 			},
 		    image1_prop: {
 		        type: String,
-		        default: false
+		        default: null
 		    },
 		    image2_prop: {
 		        type: String,
-		        default: false
+		        default: null
 		    },
 			x1_prop: {
 				type: String,
@@ -344,8 +344,9 @@
 			    this.$swal("Good job!", "Your presentation is ready!", "success");
 		    },
 			init() {
-				this.wrappers = [...document.querySelectorAll('.id-' + this.id + ' .wrapper')];
-			    this.medias = [...document.querySelectorAll('.id-' + this.id + ' .move')];
+			    const container = document.querySelector('#' + this.id);
+				this.wrappers = [...container.querySelectorAll('.wrapper')];
+			    this.medias = [...container.querySelectorAll('.move')];
 
 			    for(let index = 0; this.wrappers.length; index++) {
 					let div = this.wrappers[index];
@@ -405,7 +406,7 @@
 </script>
 
 <style>
-	#wrapper{
+	.wrapper-parent{
 		width: 100%;
 		height: 100%;
 		background-color: black;

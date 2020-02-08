@@ -8,7 +8,7 @@
 			<router-link to="edit" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
 				Create new presentation
 			</router-link>
-			<div v-for="(presentation, i) in presentations" :key="i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
+			<div v-for="(presentation, pr_i) in presentations" :key="pr_i" :id="'presentation' + presentation.id" style="margin-bottom: 15px;">
 				<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 				<button v-if="!presentation.loaded && false " @click="loadPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">Load</button>
 				<button v-else @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;">
@@ -19,13 +19,13 @@
 				<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
 				<!--  position: absolute; z-index: -200; -->
 				<div style="width: 100%!important; max-width: 100%!important; position: absolute; z-index: -200;">
-					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + (i + 1)" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + (pr_i + 1)" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<div :class="{'hide': !loadingStarted || true}" style="width: 100vw; height: 100vh; position: absolute; z-index: 500; top:0; background-color: #000000;">
 							<div class="loader" style="top: 40%;"></div>
 						</div>
-						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;">
+						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;" :id="'id-' + pr_i + '-' + i" >
 							<MediaHolder v-if="init[presentation.id] || true"
-							        :id="String(i)"
+							        :id="'id-' + pr_i + '-' + i"
 									:image1_prop="slide['image1'].path"
 									:image2_prop="slide['image2'].path"
 
