@@ -74,6 +74,7 @@
 		      this.media[indexFirst] = this.media[indexSecond];
 		      this.media[indexSecond] = {...help};
 		      this.$nextTick(this.init);
+		      this.$forceUpdate();
 		    },
 		    rotate(i) {
 		    	this.media[i - 1].rotate += 90;
