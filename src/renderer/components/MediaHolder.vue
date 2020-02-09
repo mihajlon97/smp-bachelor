@@ -58,12 +58,13 @@
 			    media_count: 2,
 			    media: this.media_prop,
 			    medias: [],
+			    wrappers: [],
 			    slides: [],
 			}
 	    },
 	    mounted() {
 	        console.log('Mounted', this.$props, this.$data);
-	        this.init()
+	        setTimeout(this.init, 1000);
 	    },
 		computed: {
 			...mapState(['activeSlide']),
@@ -73,8 +74,8 @@
 		      let help = this.media[indexFirst];
 		      this.media[indexFirst] = this.media[indexSecond];
 		      this.media[indexSecond] = {...help};
-		      this.$nextTick(this.init);
 		      this.$forceUpdate();
+		      this.$nextTick(this.init);
 		    },
 		    rotate(i) {
 		    	this.media[i - 1].rotate += 90;
@@ -87,11 +88,9 @@
 
 		    anyMediaLeft() {
 			    let result = false;
-
 			    for (let i = 0; i < this.media_count; i++) {
 				    if (!this.media[i] || !this.media[i].path) result = true;
 			    }
-
 			    return result;
 		    },
 		    reset (number, removePhoto = true) {
@@ -107,8 +106,8 @@
 			        this.medias[number - 1].style.left = '0%';
 			        this.medias[number - 1].style.top = '0%';
 			    }
-		        this.$nextTick(this.init);
 		        this.$forceUpdate();
+		        this.$nextTick(this.init);
 		    },
 
 
@@ -311,18 +310,16 @@
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
-
+			    console.log('1', this.wrappers, this.medias);
 
 			    for(let index = 0; index < this.media_count; index++) {
 					let div = this.wrappers[index];
 
-				    if (this.playing) {
-				    	console.log('PLAYING INIT')
-				    }
-
 					if (this.medias.length === 0 || !div) return;
+							    console.log('1.2')
 
 					if (this.medias[index]) {
+											console.log('2')
 
 						// Calculate x and y in %
 						this.medias[index].style.left = !this.medias[index].style.left ? this.media_prop[index].startX : this.medias[index].style.left;
@@ -346,9 +343,12 @@
 
 					// Element mousemove to stop
 					div.addEventListener('mousemove', (e) => {
-						// Is mouse pressed
+											console.log('3')
+
+											// Is mouse pressed
 						if (this.medias[index] && this.medias[index].mousedown) {
-						    // Calculate x and y in %
+													console.log('4')
+													// Calculate x and y in %
 						    this.medias[index].style.left = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
 							this.medias[index].style.top = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
 
@@ -357,6 +357,7 @@
 						}
 					}, true);
 			    }
+			    this.$forceUpdate();
 			},
 			choose(number) {
 				dialog.showOpenDialog({
@@ -373,8 +374,8 @@
 						    scale: 1,
 						    rotate: 0
 						};
-						this.$nextTick(this.init);
 					    this.$forceUpdate();
+						this.$nextTick(this.init);
 					}
 				});
 			},
