@@ -1,56 +1,28 @@
 <template>
 	<div class="wrapper-parent">
-		<!-- Media 1 -->
-		<div class="media">
+		<!-- Media -->
+		<div class="media" v-for="i in media_count" :key="'media-' + i" :class="'media-nr-' + media_count">
 			<div class="wrapper">
-				<button v-if="image1 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(1)"> X </button>
-				<div v-if="image1" class="move" :style="`background-size: contain; background-image: url('${get_blob(image1)};transform: scale(${scale1}) rotate(${rotate1}deg);`"></div>
-				<h1 v-else class="chooseText" @click="choose(1)"> Choose Media </h1>
+				<div v-if="media[i - 1] && media[i - 1].path" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
+				<h1 v-else class="chooseText" @click="choose(i)"> Choose Media </h1>
 			</div>
 
 			<!-- Filter Section -->
-			<span v-if="image1 && !playing">
-				<div style="position: absolute; bottom: 10px; right: 10px; z-index: 15;">
-					<button @click="rotate1 += 90" class="filter-button button-play black round-btn button-control"> ⟳ </button>
-					<button @click="reset(1, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+			<span v-if="media[i - 1] && media[i - 1].path && !playing">
+				<div v-if="i !== media_count" style="position: absolute; bottom: 10px; right: -23px; z-index: 15;">
+					<button @click="switchMedia(i - 1, i)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
-				<div style="position: absolute; bottom: 10px; left: 20px; z-index: 15;">
-					<span style="color: white; font-size: 40px;"> Size: </span>
-					<range-slider
-							class="slider"
-							min="0"
-							max="2"
-							step="0.1"
-							v-model="scale1">
-					</range-slider>
+				<div v-else style="position: absolute; bottom: 10px; left: -23px; z-index: 15;">
+					<button @click="switchMedia(i - 2, i - 1)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
-			</span>
-		</div>
-
-
-		<!-- Media 2 -->
-		<div class="media" style="left: 50%;">
-			<div class="wrapper">
-				<button v-if="image2 && !playing" class="button button-play black round-btn button-control x-button" @click="reset(2)"> X </button>
-				<div v-if="image2" class="move" :style="`background-size: contain; background-image: url('${get_blob(image2)};transform: scale(${scale2}) rotate(${rotate2}deg);`"></div>
-				<h1 v-else class="chooseText" @click="choose(2)"> Choose Media </h1>
-			</div>
-
-			<!-- Filter Section -->
-			<span v-if="image2 && !playing">
-				<div style="position: absolute; bottom: 10px; right: 10px; z-index: 15;">
-					<button @click="rotate2 += 90" class="filter-button button-play black round-btn button-control"> ⟳ </button>
-					<button @click="reset(2, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+				<div style="position: absolute; bottom: 10px; right: 50px; z-index: 15;">
+					<button @click="reset(i, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+					<button @click="reset(i, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
 				</div>
-				<div style="position: absolute; bottom: 10px; left: 20px; z-index: 15;">
-					<span style="color: white; font-size: 40px;"> Size: </span>
-					<range-slider
-							class="slider"
-							min="0"
-							max="2"
-							step="0.1"
-							v-model="scale2">
-					</range-slider>
+				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15;">
+					<button @click="rotate(i)" class="filter-button button-play black round-btn button-control">⟳</button>
+					<button @click="scale(i, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
+					<button @click="scale(i, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
 				</div>
 			</span>
 		</div>
@@ -76,89 +48,66 @@
 				type: Boolean,
 			    default: false
 			},
-		    image1_prop: {
-		        type: String,
-		        default: null
-		    },
-		    image2_prop: {
-		        type: String,
-		        default: null
-		    },
-			x1_prop: {
-				type: String,
-			    default: '0%'
-			},
-		    x2_prop: {
-				type: String,
-		        default: '0%'
-			},
-		    y1_prop: {
-				type: String,
-		        default: '0%'
-			},
-			y2_prop: {
-				type: String,
-			    default: '0%'
-			},
-			scale1_prop: {
-				type: Number,
-			    default: 1
-			},
-			scale2_prop: {
-				type: Number,
-			    default: 1
-			},
-			rotate1_prop: {
-				type: Number,
-			    default: 0
-			},
-		    rotate2_prop: {
-				type: Number,
-		        default: 0
+		    media_prop: {
+		        type: Array,
+		        default: () =>  []
 		    },
 		},
 	    data() {
 			return {
+			    media_count: 2,
+			    media: this.media_prop,
 			    medias: [],
-				image1: this.image1_prop,
-				image2: this.image2_prop,
 			    slides: [],
-			    elem: null,
-			    div: null,
-			    x: [0,0],
-			    y: [0,0],
-			    rotate1: this.rotate1_prop,
-			    rotate2: this.rotate2_prop,
-			    scale1: this.scale1_prop,
-			    scale2: this.scale2_prop,
-			    mousedown: [false, false],
 			}
 	    },
 	    mounted() {
 	        console.log('Mounted', this.$props, this.$data);
-
-	        setTimeout(() => {
-	        	this.scale1 = this.scale1_prop;
-	            this.scale2 = this.scale2_prop;
-	        }, 3000);
 	        this.init()
-
 	    },
 		computed: {
-			...mapState(['activeSlide'])
+			...mapState(['activeSlide']),
 		},
 	    methods: {
-		    reset (number, removePhoto = true) {
-		    	this['scale' + number] = 1;
-		    	this['rotate' + number] = 0;
-		    	this.x[number] = 0;
-		    	this.y[number] = 0;
-		    	if (removePhoto) {
-			      this['image' + number] = null;
-			    }
+		    switchMedia(indexFirst, indexSecond) {
+		      let help = this.media[indexFirst];
+		      this.media[indexFirst] = this.media[indexSecond];
+		      this.media[indexSecond] = {...help};
+		      this.$nextTick(this.init);
 		    },
-		    scale (number, factor) {
-		        this['scale' + number] += factor;
+		    rotate(i) {
+		    	this.media[i - 1].rotate += 90;
+		    	this.$forceUpdate();
+		    },
+	        scale (number, factor) {
+	            this.media[number - 1].scale += factor;
+	            this.$forceUpdate();
+	        },
+
+		    anyMediaLeft() {
+			    let result = false;
+
+			    for (let i = 0; i < this.media_count; i++) {
+				    if (!this.media[i] || !this.media[i].path) result = true;
+			    }
+
+			    return result;
+		    },
+		    reset (number, removePhoto = true) {
+		    	if (removePhoto) this.media[number - 1] = {};
+		    	else {
+				    this.media[number - 1] = {
+					    path: this.media[number - 1].path,
+					    startX: '0%',
+					    startY: '0%',
+					    scale: 1,
+					    rotate: 0,
+				    };
+			        this.medias[number - 1].style.left = '0%';
+			        this.medias[number - 1].style.top = '0%';
+			    }
+		        this.$nextTick(this.init);
+		        this.$forceUpdate();
 		    },
 
 
@@ -166,48 +115,51 @@
 		    nextSlide () {
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
+
 		            // Save current slide modification
-				    this.slides[this.activeSlide] = [
-					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-				    ];
+			        let slide = [];
+			        this.media.forEach(media => {
+			        	slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+			        });
+			        console.log(slide);
+				    this.slides[this.activeSlide] = slide;
+
 				    // Apply next one
 				    this.$nextTick(() => {
 					    this.init();
 
 					    console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
-					    // Slide 1
-					    this.image1 = this.slides[this.activeSlide][0];
-					    this.medias[0].style.left = this.slides[this.activeSlide][1];
-					    this.medias[0].style.top = this.slides[this.activeSlide][2];
-					    this.scale1 = this.slides[this.activeSlide][3];
-					    this.rotate1 = this.slides[this.activeSlide][4];
-
-					    // Slide 2
-					    this.image2 = this.slides[this.activeSlide][5];
-					    this.medias[1].style.left = this.slides[this.activeSlide][6];
-					    this.medias[1].style.top = this.slides[this.activeSlide][7];
-					    this.scale2 = this.slides[this.activeSlide][8];
-					    this.rotate2 = this.slides[this.activeSlide][9];
+					    for (let i = 0; i < this.media_count; i++) {
+					    	this.media[i] = {
+					    		path: this.slides[this.activeSlide][(5 * i)],
+					    		startX: this.slides[this.activeSlide][1 + 5 * i],
+					    		startY: this.slides[this.activeSlide][2 + 5 * i],
+					    		scale: this.slides[this.activeSlide][3 + 5 * i],
+					    		rotate: this.slides[this.activeSlide][4 + 5 * i],
+						    }
+					    }
 				    });
 
 				    // If next slide is empty
 			    } else {
-			        console.log('NEXT NOT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide, this.slides);
+			        console.log('NEXT NOT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide, this.slides, this.anyMediaLeft(), this.media);
 
 			        // Prevent going on next slide if and images are picked or active slide is the last one
-				    if ((!this.image1 || !this.image2) && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
-				      (this.slides.length === 0 && (!this.image1 || !this.image2))) return false;
+				    if (this.anyMediaLeft() && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
+				       (this.anyMediaLeft() && this.slides.length === 0)) return false;
 
-				    this.slides[this.activeSlide] = [
-					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-				    ];
+				    console.log('EME')
+				    // Save current slide modification
+				    let slide = [];
+				    this.media.forEach(media => {
+					    slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+				    });
+				    this.slides[this.activeSlide] = slide;
 
 				    this.reset(1, true);
 				    this.reset(2, true);
 			    }
-			    console.log('Active ' + this.activeSlide, this.slides);
+		        console.log("ACTIVE: " + this.activeSlide, "SLIDES", this.slides, "MEDIA", this.media);
 
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
@@ -216,39 +168,43 @@
 			    // If no slides prevent going back
 			    if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
-		        console.log('PREVIOUS', this.medias, this.slides, "ACTIVE: " + this.activeSlide);
+		        console.log('PREVIOUS', this.media, this.slides, "ACTIVE: " + this.activeSlide, this.anyMediaLeft());
 
-		        if (this.image1 && this.image2)
-			        this.slides[this.activeSlide] = [
-					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-				    ];
+		        if (!this.anyMediaLeft()) {
+			        // Save current slide modification
+		            console.log('Save current slide modification')
+			        let slide = [];
+			        this.media.forEach(media => {
+				        slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+			        });
+			        this.slides[this.activeSlide] = slide;
+		        }
 
-			    this.reset(1, true);
-			    this.reset(2, true);
+			    this.reset(1);
+			    this.reset(2);
 
-			    // Slide 1
-			    this.image1 = this.slides[this.activeSlide - 1][0];
+			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide, this.media);
 
-			    // Slide 2
-			    this.image2 = this.slides[this.activeSlide - 1][5];
-
-			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide);
-
+			    for (let i = 0; i < this.media_count; i++) {
+				    this.media[i] = {
+					    path: this.slides[this.activeSlide - 1][(5 * i)],
+				    }
+			    }
 		        this.$nextTick(() => {
 		        	this.init();
 
-		        	console.log("ACTIVE: " + this.activeSlide);
-
-				    this.medias[0].style.left = this.slides[this.activeSlide][1];
-				    this.medias[0].style.top = this.slides[this.activeSlide][2];
-				    this.scale1 = this.slides[this.activeSlide][3];
-				    this.rotate1 = this.slides[this.activeSlide][4];
-
-				    this.medias[1].style.left = this.slides[this.activeSlide][6];
-				    this.medias[1].style.top = this.slides[this.activeSlide][7];
-				    this.scale2 = this.slides[this.activeSlide][8];
-				    this.rotate2 = this.slides[this.activeSlide][9];
+			        for (let i = 0; i < this.media_count; i++) {
+				        this.media[i] = {
+				            ...this.media[i],
+					        // path: this.slides[this.activeSlide][(5 * i)],
+					        startX: this.slides[this.activeSlide][1 + 5 * i],
+					        startY: this.slides[this.activeSlide][2 + 5 * i],
+					        scale: this.slides[this.activeSlide][3 + 5 * i],
+					        rotate: this.slides[this.activeSlide][4 + 5 * i],
+				        }
+			        }
+		            console.log("ACTIVE: " + this.activeSlide, "SLIDES", this.slides, "MEDIA", this.media);
+			        this.$forceUpdate();
 		        });
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
@@ -256,37 +212,41 @@
 
 
 		    edit (presentation) {
+		    	console.log(presentation);
 			    presentation.slides.forEach(slide => {
-				    this.slides.push([
-					    // Slide 1
-					    slide.image1.path, slide.image1.startX, slide.image1.startY, slide.image1.scale, slide.image1.orientation,
-					    // Slide 2
-					    slide.image2.path, slide.image2.startX, slide.image2.startY, slide.image2.scale, slide.image2.orientation,
-				    ]);
+
+				    let slideToAdd = [];
+				    slide.forEach(media => {
+				        slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+				    });
+
+				    this.slides.push(slideToAdd);
 			    });
 
-			    // Slide 1
-			    this.image1 = this.slides[this.activeSlide][0];
-
-			    // Slide 2
-			    this.image2 = this.slides[this.activeSlide][5];
-
 			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide);
+
+			    for (let i = 0; i < this.media_count; i++) {
+				    this.media[i] = {
+					    path: this.slides[this.activeSlide][(5 * i)],
+				    }
+			    }
 
 			    this.$nextTick(() => {
 				    this.init();
 
-				    console.log("ACTIVE: " + this.activeSlide);
+				    console.log("ACTIVE: " + this.activeSlide, "MEDIA", this.media);
 
-				    this.medias[0].style.left = this.slides[this.activeSlide][1];
-				    this.medias[0].style.top = this.slides[this.activeSlide][2];
-				    this.scale1 = this.slides[this.activeSlide][3];
-				    this.rotate1 = this.slides[this.activeSlide][4];
-
-				    this.medias[1].style.left = this.slides[this.activeSlide][6];
-				    this.medias[1].style.top = this.slides[this.activeSlide][7];
-				    this.scale2 = this.slides[this.activeSlide][8];
-				    this.rotate2 = this.slides[this.activeSlide][9];
+				    for (let i = 0; i < this.media_count; i++) {
+					    this.media[i] = {
+					        ...this.media[i],
+						    // path: this.slides[this.activeSlide][(5 * i)],
+						    startX: this.slides[this.activeSlide][1 + 5 * i],
+						    startY: this.slides[this.activeSlide][2 + 5 * i],
+						    scale: this.slides[this.activeSlide][3 + 5 * i],
+						    rotate: this.slides[this.activeSlide][4 + 5 * i],
+					    }
+				    }
+			        this.$forceUpdate();
 			    });
 			    this.$emit('updateTotalSlides', this.slides.length);
 		    },
@@ -305,17 +265,19 @@
 			    const presentations = XLSX.utils.sheet_to_json(sheet);
 
 			    console.log('ACTIVE SLIDE ' + this.activeSlide, "SLIDES " + this.slides.length, this.slides);
-			    if (this.image1 && this.image2) {
-				    this.slides[this.activeSlide] = [
-					    this.image1, this.medias[0].style.left, this.medias[0].style.top, this.scale1, this.rotate1,
-					    this.image2, this.medias[1].style.left, this.medias[1].style.top, this.scale2, this.rotate2
-				    ];
+			    if (!this.anyMediaLeft()) {
+				    // Save current slide modification
+				    let slide = [];
+				    this.media.forEach(media => {
+					    slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+				    });
+				    console.log(slide);
+				    this.slides[this.activeSlide] = slide;
 			    }
 
-
 			    this.slides.unshift([
-				    'path_1', 'startX_1', 'startY_1', 'scale_1', 'orientation_1',
-				    'path_2', 'startX_2', 'startY_2', 'scale_2', 'orientation_2'
+				    'path_1', 'startX_1', 'startY_1', 'scale_1', 'rotate_1',
+				    'path_2', 'startX_2', 'startY_2', 'scale_2', 'rotate_2'
 			    ]);
 
 			    const book = XLSX.utils.book_new();
@@ -348,17 +310,22 @@
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
-			    for(let index = 0; this.wrappers.length; index++) {
+
+
+			    for(let index = 0; index < this.media_count; index++) {
 					let div = this.wrappers[index];
+
+				    if (this.playing) {
+				    	console.log('PLAYING INIT')
+				    }
 
 					if (this.medias.length === 0 || !div) return;
 
 					if (this.medias[index]) {
 
 						// Calculate x and y in %
-						this.medias[index].style.left = this['x' + (index + 1) + '_prop'];
-						this.medias[index].style.top = this['y' + (index + 1) + '_prop'];
-
+						this.medias[index].style.left = !this.medias[index].style.left ? this.media_prop[index].startX : this.medias[index].style.left;
+						this.medias[index].style.top = !this.medias[index].style.top ? this.media_prop[index].startY : this.medias[index].style.top;
 
 						// div event mousedown
 						this.medias[index].addEventListener('mousedown', (e) => {
@@ -376,13 +343,16 @@
 						}, true);
 					}
 
-					// element mousemove to stop
+					// Element mousemove to stop
 					div.addEventListener('mousemove', (e) => {
 						// Is mouse pressed
 						if (this.medias[index] && this.medias[index].mousedown) {
 						    // Calculate x and y in %
 						    this.medias[index].style.left = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
-						    this.medias[index].style.top = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
+							this.medias[index].style.top = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
+
+							this.media[index].startX = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
+						    this.media[index].startY = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
 						}
 					}, true);
 			    }
@@ -395,8 +365,15 @@
 					]
 				}, (files) => {
 					if (files) {
-						this['image' + number] = files[0];
+						this.media[number - 1] = {
+							path: files[0],
+						    startX: '0%',
+						    startY: '0%',
+						    scale: 1,
+						    rotate: 0
+						};
 						this.$nextTick(this.init);
+					    this.$forceUpdate();
 					}
 				});
 			},
@@ -406,6 +383,19 @@
 </script>
 
 <style>
+	.media-nr-1 {
+		width: 100%;
+	}
+	.media-nr-2 {
+		width: 50%;
+	}
+	.media-nr-3 {
+		width: 33.33%;
+	}
+	.media-nr-4 {
+		width: 25%;
+	}
+
 	.wrapper-parent{
 		width: 100%;
 		height: 100%;
@@ -414,8 +404,8 @@
 
 	.media {
 		margin: 0;
-		position: absolute;
-		width: 50%;
+		position: relative;
+		float: left;
 		height: 100%;
 		color: white;
 	}
@@ -456,9 +446,13 @@
 	    width: 100%;
 	    height: 100%;
 		background: black no-repeat center;
+		transition: transform 1s;
 	}
 	.filter-button {
-		padding: 10px 20px;
-		font-size: 18px!important;
+		padding: 10px 12px;
+		font-size: 20px!important;
+	}
+	button {
+		cursor: pointer;
 	}
 </style>

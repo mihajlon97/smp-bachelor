@@ -45,22 +45,19 @@ export default new Vuex.Store({
 							// Slides
 							slides.forEach(slide => {
 								presentations[presentations.length - 1].slides.push(
-									{
-										"image1":{
-											"path": slide.path_1,
-											"startX": slide.startX_1,
-											"startY": slide.startY_1,
-											"scale": slide.scale_1,
-											"orientation": slide.orientation_1
-										},
-										"image2":{
-											"path": slide.path_2,
-											"startX": slide.startX_2,
-											"startY": slide.startY_2,
-											"scale": slide.scale_2,
-											"orientation": slide.orientation_2
-										}
-									});
+									[{
+										"path": slide.path_1,
+										"startX": slide.startX_1,
+										"startY": slide.startY_1,
+										"scale": slide.scale_1,
+										"rotate": slide.rotate_1
+									}, {
+										"path": slide.path_2,
+										"startX": slide.startX_2,
+										"startY": slide.startY_2,
+										"scale": slide.scale_2,
+										"rotate": slide.rotate_2
+									}]);
 							});
 						});
 					}

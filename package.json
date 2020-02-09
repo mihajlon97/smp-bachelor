@@ -63,6 +63,7 @@
     "vue-range-slider": "^0.6.0",
     "vue-router": "^3.1.5",
     "vue-swal": "^1.0.0",
+    "vue-zoomer": "^0.3.6",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0",
     "xlsx": "^0.15.4"

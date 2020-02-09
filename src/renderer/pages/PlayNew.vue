@@ -10,6 +10,9 @@
 				<router-link to="edit" tag="button" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
 					Create new presentation
 				</router-link>
+				<button @click="importPresentation" class="button button-play black" style="margin: 20px 0 20px 0; border-radius: 15px; font-weight: bold">
+					Import presentation
+				</button>
 			</div>
 
 			<div v-for="(presentation, pr_i) in presentations" :key="pr_i" :id="'presentation' + presentation.id" :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''" v-if="!$route.query.autoplay || $route.query.autoplay === presentation.id">
@@ -26,21 +29,7 @@
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;" :id="'id-' + pr_i + '-' + i" >
 							<MediaHolder
 							        :id="'id-' + pr_i + '-' + i"
-									:image1_prop="slide['image1'].path"
-									:image2_prop="slide['image2'].path"
-
-									:x1_prop="slide['image1'].startX"
-								    :x2_prop="slide['image2'].startX"
-
-								    :y1_prop="slide['image1'].startY"
-							        :y2_prop="slide['image2'].startY"
-
-						            :scale1_prop="slide['image1'].scale"
-						            :scale2_prop="slide['image2'].scale"
-
-						            :rotate1_prop="slide['image1'].orientation"
-					                :rotate2_prop="slide['image2'].orientation"
-
+									:media_prop="slide"
 						            :playing="true"
 							/>
 						</swiper-slide>
@@ -147,6 +136,53 @@
 			});
 			win.maximize();
 			win.loadURL(modalPath);
+	  },
+	  importPresentation() {
+	        const { dialog } = require('electron').remote;
+	        dialog.showOpenDialog({
+			  properties: ['openFile'],
+			  filters: [
+				  { name: 'Excel', extensions: ['xlsx', 'csv'] },
+			  ]
+		    }, (files) => {
+	          if (files) {
+	            console.log(files);
+	            const XLSX = require('xlsx');
+	            const workbook = XLSX.readFile(require('path').join(files[0]));
+				const sheet_name_list = workbook.SheetNames;
+				const sheet = workbook.Sheets[sheet_name_list[0]];
+				const slides = XLSX.utils.sheet_to_json(sheet);
+				console.log(slides);
+
+				this.$swal("Name your presentation", {
+				  content: "input",
+				  buttons: ["Save"],
+				}).then((name) => {
+				  if (name && name.length > 0) {
+					  const XLSX = require('xlsx');
+					  const path = require('path');
+					  const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+					  const workbook = XLSX.readFile(path.join(storageDir));
+					  const sheet_name_list = workbook.SheetNames;
+					  const sheet = workbook.Sheets[sheet_name_list[0]];
+					  const presentations = XLSX.utils.sheet_to_json(sheet);
+				      console.log('PRESENTATIONS', presentations);
+
+				      const presentation = {
+						  id: this.uuidv4(),
+						  name: name,
+						  file: files[0]
+					  };
+					  console.log('PRESENTATION', presentation);
+					  presentations.push(presentation);
+
+					  workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
+					  XLSX.writeFile(workbook, storageDir);
+				      this.fetchPresentations();
+				  }
+				});
+	          }
+			});
 	  },
 	  editPresentation(presentation) {
 	  	this.$router.push('/edit?edit=' + presentation.id);
