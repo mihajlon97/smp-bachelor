@@ -14,7 +14,7 @@
 			<button @click="save" class="button button-play black round-btn"> Save </button>
 			<button @click="$router.push('/')"  class="button button-play black round-btn"> Cancel </button>
 		</div>
-		<MediaHolder ref="editor" :media_count="media_cnt" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
+		<MediaHolder v-if="(!!$route.query.edit && media_cnt) || !$route.query.edit" ref="editor" :media_count="media_cnt" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
 	</div>
 </template>
 
@@ -26,7 +26,7 @@
 		components: { MediaHolder },
 	    data() {
 	      return {
-	        media_cnt: this.$route.query.media_count,
+	        media_cnt: this.$route.query.media_count || false,
 	        totalSlides: 0,
 	        mode: 'create',
 	        loading: {
@@ -39,9 +39,12 @@
 		  // Edit presentation
 		  if (this.$route.query.edit !== undefined) {
 			this.mode = 'edit';
-		    this.$refs.editor.edit(this.presentations.filter(presentation => presentation.id === this.$route.query.edit)[0]);
+			const presentationToEdit = this.presentations.filter(presentation => presentation.id === this.$route.query.edit)[0];
+		    this.media_cnt = presentationToEdit.slides[0].length;
+		    this.$nextTick(() => {
+		        this.$refs.editor.edit(presentationToEdit);
+		    });
 		  }
-		  this.media_cnt = this.$route.query.media_count || 2;
 		},
 		computed: {
 			...mapState(['activeSlide', 'presentations'])

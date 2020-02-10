@@ -167,9 +167,9 @@
 			        let slide = [];
 			        this.media.forEach((media, i) => {
 				        slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+			            this.reset(i);
 			        });
 			        this.slides[this.activeSlide] = slide;
-		            this.reset(i);
 		        }
 
 			    for (let i = 0; i < this.media_count; i++) {
@@ -206,6 +206,7 @@
 				    this.slides.push(slideToAdd);
 			    });
 
+				console.log('MEDIA COUNT ' + this.media_count, this.media, presentation.slides);
 			    for (let i = 0; i < this.media_count; i++) {
 				    this.media[i] = {
 					    path: this.slides[this.activeSlide][(5 * i)],

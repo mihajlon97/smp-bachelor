@@ -12,7 +12,7 @@
 				</button>
 			</div>
 
-			<div v-for="(presentation, presentation_id) in presentations" :key="presentation_id" :id="'presentation' + presentation.id" :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''" v-if="!$route.query.autoplay || $route.query.autoplay === presentation.id">
+			<div v-for="(presentation, presentation_id) in presentations" :key="presentation_id" :id="'presentation' + presentation.id" :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''" v-show="!$route.query.autoplay || $route.query.autoplay === presentation.id">
 				<span v-if="!$route.query.autoplay">
 					<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 					<button @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;"> ▶</button>
@@ -172,7 +172,7 @@
 
 			win.on('close', function () { console.log('presentation closed') });
 			win.webContents.on("devtools-opened", () => {
-			    win.webContents.closeDevTools();
+			   win.webContents.closeDevTools();
 			});
 			win.maximize();
 			win.loadURL(modalPath);
@@ -304,8 +304,11 @@
 	        // Click moving through presentation events
 	      	let sliders = document.getElementsByClassName('mySwiper');
 
+		    console.log('SLIDERS', sliders);
 	      	for (let i = 0; i < sliders.length; i++) {
+	      		console.log('EEE', this.$refs)
 			      sliders[i].addEventListener('contextmenu', () => {
+			      	console.log(i, this.$refs['mySwiper' + i][0])
 				      if (this.$refs['mySwiper' + i][0].swiper) {
 					      this.$refs['mySwiper' + i][0].swiper.slidePrev(500, () => {
 						      console.log('SLIDE PREVIOUS');
