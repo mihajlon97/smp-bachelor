@@ -19,6 +19,7 @@
 </template>
 
 <script>
+
 	import MediaHolder from '../components/MediaHolder';
 	import { mapState, mapGetters, mapActions } from 'vuex';
 	export default {

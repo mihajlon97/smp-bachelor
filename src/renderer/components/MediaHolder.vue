@@ -8,7 +8,7 @@
 				     v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1"
 				     :class="'media-nr-' + media_count"
 				     ondragstart="return false;" :style="`transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"
-				     :src="get_blob(media[i - 1].path)" style="margin: 0; width: 100%;" alt="">
+				     :src="get_blob(media[i - 1].path)" style="margin: 0;" alt="">
 				<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop
 				       :class="'media-nr-' + media_count" class="move" style="position:absolute; object-fit: contain;">
 					<source :src="get_blob(media[i - 1].path)" type="video/mp4">
@@ -74,6 +74,31 @@
 	    },
 	    mounted() {
 	        this.init();
+
+		    let holder = document.getElementsByClassName('wrapper')[0];
+
+		    holder.ondragover = () => { return false; };
+		    holder.ondragleave = () => { return false; };
+		    holder.ondragend = () => { return false; };
+
+		    holder.ondrop = (e) => {
+			    e.preventDefault();
+			    for (let f of e.dataTransfer.files) {
+				    console.log('File(s) you dragged here: ', f.path)
+				    this.media[this.media.length] = {
+					    path: f.path,
+					    startX: '0%',
+					    startY: '0%',
+					    scale: 1,
+					    rotate: 0
+				    };
+				    if (this.media.length > this.media_count) this.media_count = this.media.length;
+				    this.$forceUpdate();
+				    this.$nextTick(this.init);
+			    }
+			    return false;
+		    };
+
 	    },
 		computed: {
 			...mapState(['activeSlide']),
