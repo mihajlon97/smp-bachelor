@@ -3,7 +3,10 @@
 		<!-- Media -->
 		<div class="media" v-for="i in media_count" :key="'media-' + i" :class="'media-nr-' + media_count">
 			<div class="wrapper">
-				<div v-if="media[i - 1] && media[i - 1].path" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
+				<div v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
+				<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
+					<source :src="get_blob(media[i - 1].path)" type="video/mp4">
+				</video>
 				<h1 v-else class="chooseText" @click="choose(i)"> Choose Media </h1>
 			</div>
 
@@ -339,7 +342,7 @@
 				dialog.showOpenDialog({
 					properties: ['openFile'],
 					filters: [
-						{ name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+						{ name: 'Image/Video', extensions: ['jpg', 'png', 'gif', 'mp4'] },
 					]
 				}, (files) => {
 					if (files) {

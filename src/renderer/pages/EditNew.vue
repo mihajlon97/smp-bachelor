@@ -26,7 +26,7 @@
 		components: { MediaHolder },
 	    data() {
 	      return {
-	        media_cnt: this.$route.query.media_count || false,
+	        media_cnt: this.$route.query.edit ? false : 2,
 	        totalSlides: 0,
 	        mode: 'create',
 	        loading: {
