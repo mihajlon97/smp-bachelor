@@ -9,15 +9,15 @@
 
 			<!-- Filter Section -->
 			<span v-if="media[i - 1] && media[i - 1].path && !playing">
-				<div v-if="i !== media_count" style="position: absolute; bottom: 10px; right: -23px; z-index: 15;">
+				<div v-if="i !== media_count || i === 1" style="position: absolute; bottom: 10px; right: -23px; z-index: 15;">
 					<button @click="switchMedia(i - 1, i)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
 				<div v-else style="position: absolute; bottom: 10px; left: -23px; z-index: 15;">
 					<button @click="switchMedia(i - 2, i - 1)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
 				<div style="position: absolute; bottom: 10px; right: 50px; z-index: 15;">
-					<button @click="reset(i, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
-					<button @click="reset(i, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
+					<button @click="reset(i - 1, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+					<button @click="reset(i - 1, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
 				</div>
 				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15;">
 					<button @click="rotate(i)" class="filter-button button-play black round-btn button-control">⟳</button>
@@ -52,10 +52,13 @@
 		        type: Array,
 		        default: () =>  []
 		    },
+			media_count: {
+				type: Number,
+				default: 2
+			},
 		},
 	    data() {
 			return {
-			    media_count: 2,
 			    media: this.media_prop,
 			    medias: [],
 			    wrappers: [],
@@ -63,8 +66,7 @@
 			}
 	    },
 	    mounted() {
-	        console.log('Mounted', this.$props, this.$data);
-	        setTimeout(this.init, 1000);
+	        this.init();
 	    },
 		computed: {
 			...mapState(['activeSlide']),
@@ -93,18 +95,18 @@
 			    }
 			    return result;
 		    },
-		    reset (number, removePhoto = true) {
-		    	if (removePhoto) this.media[number - 1] = {};
+		    reset (index, removePhoto = true) {
+		    	if (removePhoto) this.media[index] = {};
 		    	else {
-				    this.media[number - 1] = {
-					    path: this.media[number - 1].path,
+				    this.media[index] = {
+					    path: this.media[index].path,
 					    startX: '0%',
 					    startY: '0%',
 					    scale: 1,
 					    rotate: 0,
 				    };
-			        this.medias[number - 1].style.left = '0%';
-			        this.medias[number - 1].style.top = '0%';
+			        this.medias[index].style.left = '0%';
+			        this.medias[index].style.top = '0%';
 			    }
 		        this.$forceUpdate();
 		        this.$nextTick(this.init);
@@ -121,14 +123,12 @@
 			        this.media.forEach(media => {
 			        	slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 			        });
-			        console.log(slide);
 				    this.slides[this.activeSlide] = slide;
 
 				    // Apply next one
 				    this.$nextTick(() => {
 					    this.init();
 
-					    console.log('NEXT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide);
 					    for (let i = 0; i < this.media_count; i++) {
 					    	this.media[i] = {
 					    		path: this.slides[this.activeSlide][(5 * i)],
@@ -142,25 +142,19 @@
 
 				    // If next slide is empty
 			    } else {
-			        console.log('NEXT NOT EXISTS ' + this.slides.length + ' Active ' + this.activeSlide, this.slides, this.anyMediaLeft(), this.media);
 
 			        // Prevent going on next slide if and images are picked or active slide is the last one
 				    if (this.anyMediaLeft() && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
 				       (this.anyMediaLeft() && this.slides.length === 0)) return false;
 
-				    console.log('EME')
 				    // Save current slide modification
 				    let slide = [];
-				    this.media.forEach(media => {
+				    this.media.forEach((media, i) => {
 					    slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+				        this.reset(i, true);
 				    });
 				    this.slides[this.activeSlide] = slide;
-
-				    this.reset(1, true);
-				    this.reset(2, true);
 			    }
-		        console.log("ACTIVE: " + this.activeSlide, "SLIDES", this.slides, "MEDIA", this.media);
-
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
 		    },
@@ -168,22 +162,15 @@
 			    // If no slides prevent going back
 			    if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
-		        console.log('PREVIOUS', this.media, this.slides, "ACTIVE: " + this.activeSlide, this.anyMediaLeft());
-
 		        if (!this.anyMediaLeft()) {
 			        // Save current slide modification
-		            console.log('Save current slide modification')
 			        let slide = [];
-			        this.media.forEach(media => {
+			        this.media.forEach((media, i) => {
 				        slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 			        });
 			        this.slides[this.activeSlide] = slide;
+		            this.reset(i);
 		        }
-
-			    this.reset(1);
-			    this.reset(2);
-
-			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide, this.media);
 
 			    for (let i = 0; i < this.media_count; i++) {
 				    this.media[i] = {
@@ -203,7 +190,6 @@
 					        rotate: this.slides[this.activeSlide][4 + 5 * i],
 				        }
 			        }
-		            console.log("ACTIVE: " + this.activeSlide, "SLIDES", this.slides, "MEDIA", this.media);
 			        this.$forceUpdate();
 		        });
 		        this.$emit('updateTotalSlides', this.slides.length);
@@ -212,18 +198,13 @@
 
 
 		    edit (presentation) {
-		    	console.log(presentation);
 			    presentation.slides.forEach(slide => {
-
 				    let slideToAdd = [];
 				    slide.forEach(media => {
 				        slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 				    });
-
 				    this.slides.push(slideToAdd);
 			    });
-
-			    console.log('SLIDES', this.slides, "ACTIVE: " + this.activeSlide);
 
 			    for (let i = 0; i < this.media_count; i++) {
 				    this.media[i] = {
@@ -233,8 +214,6 @@
 
 			    this.$nextTick(() => {
 				    this.init();
-
-				    console.log("ACTIVE: " + this.activeSlide, "MEDIA", this.media);
 
 				    for (let i = 0; i < this.media_count; i++) {
 					    this.media[i] = {
@@ -264,21 +243,25 @@
 			    const sheet = workbook.Sheets[sheet_name_list[0]];
 			    const presentations = XLSX.utils.sheet_to_json(sheet);
 
-			    console.log('ACTIVE SLIDE ' + this.activeSlide, "SLIDES " + this.slides.length, this.slides);
+			    let columnNames = [];
 			    if (!this.anyMediaLeft()) {
 				    // Save current slide modification
 				    let slide = [];
-				    this.media.forEach(media => {
+				    this.media.forEach((media, i) => {
 					    slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+				        columnNames.push(
+				        	'path_' + (i + 1),
+				            'startX_' + (i + 1),
+				            'startY_'  + (i + 1),
+				            'scale_'  + (i + 1),
+				            'rotate_'  + (i + 1)
+				        );
 				    });
-				    console.log(slide);
 				    this.slides[this.activeSlide] = slide;
 			    }
 
-			    this.slides.unshift([
-				    'path_1', 'startX_1', 'startY_1', 'scale_1', 'rotate_1',
-				    'path_2', 'startX_2', 'startY_2', 'scale_2', 'rotate_2'
-			    ]);
+			    // Add column names at the beginning
+			    this.slides.unshift(columnNames);
 
 			    const book = XLSX.utils.book_new();
 			    const sheet1 = XLSX.utils.aoa_to_sheet(this.slides);
@@ -310,17 +293,12 @@
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
-			    console.log('1', this.wrappers, this.medias);
-
 			    for(let index = 0; index < this.media_count; index++) {
 					let div = this.wrappers[index];
 
 					if (this.medias.length === 0 || !div) return;
-							    console.log('1.2')
 
 					if (this.medias[index]) {
-											console.log('2')
-
 						// Calculate x and y in %
 						this.medias[index].style.left = !this.medias[index].style.left ? this.media_prop[index].startX : this.medias[index].style.left;
 						this.medias[index].style.top = !this.medias[index].style.top ? this.media_prop[index].startY : this.medias[index].style.top;
@@ -343,12 +321,9 @@
 
 					// Element mousemove to stop
 					div.addEventListener('mousemove', (e) => {
-											console.log('3')
-
-											// Is mouse pressed
+					    // Is mouse pressed
 						if (this.medias[index] && this.medias[index].mousedown) {
-													console.log('4')
-													// Calculate x and y in %
+						    // Calculate x and y in %
 						    this.medias[index].style.left = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
 							this.medias[index].style.top = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
 
@@ -385,76 +360,5 @@
 </script>
 
 <style>
-	.media-nr-1 {
-		width: 100%;
-	}
-	.media-nr-2 {
-		width: 50%;
-	}
-	.media-nr-3 {
-		width: 33.33%;
-	}
-	.media-nr-4 {
-		width: 25%;
-	}
 
-	.wrapper-parent{
-		width: 100%;
-		height: 100%;
-		background-color: black;
-	}
-
-	.media {
-		margin: 0;
-		position: relative;
-		float: left;
-		height: 100%;
-		color: white;
-	}
-	.chooseText {
-		text-align: center;
-		vertical-align: middle;
-		line-height: 100vh;
-		cursor: pointer;
-	}
-
-	.wrapper {
-		overflow: hidden;
-		display: block;
-		width: 100%;
-		height: 100%;
-		position: relative;
-	}
-
-	.move img {
-		cursor: pointer;
-		position: absolute;
-	}
-	.move:hover {
-		cursor: pointer;
-	}
-	.move:active {
-		cursor: move;
-	}
-
-	/*
-			position: absolute;
-	    left: 0;
-	    top: 0;
-	 */
-	.move {
-		position: relative;
-		z-index: 10;
-	    width: 100%;
-	    height: 100%;
-		background: black no-repeat center;
-		transition: transform 1s;
-	}
-	.filter-button {
-		padding: 10px 12px;
-		font-size: 20px!important;
-	}
-	button {
-		cursor: pointer;
-	}
 </style>

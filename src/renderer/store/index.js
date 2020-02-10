@@ -44,8 +44,16 @@ export default new Vuex.Store({
 
 							// Slides
 							slides.forEach(slide => {
+								let allSlides = [];
+								Object.keys(slide).forEach(key => {
+									let keyValue = key.split('_');
+									const index = (parseInt(keyValue[1]) - 1);
+									if (!allSlides[index]) allSlides[index] = {};
+									allSlides[index][keyValue[0]] = slide[key];
+								});
 								presentations[presentations.length - 1].slides.push(
-									[{
+									allSlides
+									/*[{
 										"path": slide.path_1,
 										"startX": slide.startX_1,
 										"startY": slide.startY_1,
@@ -57,7 +65,8 @@ export default new Vuex.Store({
 										"startY": slide.startY_2,
 										"scale": slide.scale_2,
 										"rotate": slide.rotate_2
-									}]);
+									}]*/
+								);
 							});
 						});
 					}
@@ -77,6 +86,7 @@ export default new Vuex.Store({
 			state.loading = loading
 		},
 		setPresentations(state, data) {
+			console.log(data);
 			state.presentations = data;
 		}
 	}
