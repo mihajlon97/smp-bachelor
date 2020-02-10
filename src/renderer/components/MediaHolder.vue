@@ -1,17 +1,22 @@
 <template>
 	<div class="wrapper-parent">
+		<button class="button" style="position: absolute; top: 100px; color: white; z-index: 124124214;" @click="choose(media.length)"> Choose Media </button>
+
 		<!-- Media -->
-		<div class="media" v-for="i in media_count" :key="'media-' + i" :class="'media-nr-' + media_count">
 			<div class="wrapper">
-				<div v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
-				<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
+				<img v-for="i in media_count" :key="'media-' + i"  class="move"
+				     v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1"
+				     :class="'media-nr-' + media_count"
+				     ondragstart="return false;" :style="`transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"
+				     :src="get_blob(media[i - 1].path)" style="margin: 0; width: 100%;" alt="">
+				<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop
+				       :class="'media-nr-' + media_count" class="move" style="position:absolute; object-fit: contain;">
 					<source :src="get_blob(media[i - 1].path)" type="video/mp4">
 				</video>
-				<h1 v-else class="chooseText" @click="choose(i)"> Choose Media </h1>
 			</div>
 
 			<!-- Filter Section -->
-			<span v-if="media[i - 1] && media[i - 1].path && !playing">
+			<span v-if="false && media[i - 1] && media[i - 1].path && !playing">
 				<div v-if="i !== media_count || i === 1" style="position: absolute; bottom: 10px; right: -23px; z-index: 15;">
 					<button @click="switchMedia(i - 1, i)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
@@ -28,7 +33,6 @@
 					<button @click="scale(i, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
 				</div>
 			</span>
-		</div>
 	</div>
 </template>
 
@@ -297,8 +301,9 @@
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
-			    for(let index = 0; index < this.media_count; index++) {
-					let div = this.wrappers[index];
+			    console.log("INIT", this.media);
+			    for(let index = 0; index < this.media.length; index++) {
+					let div = this.wrappers[0];
 
 					if (this.medias.length === 0 || !div) return;
 
@@ -311,15 +316,23 @@
 						this.medias[index].addEventListener('mousedown', (e) => {
 							// mouse state set to true
 						    this.medias[index].mousedown = true;
+						    console.log('MOUSE DOWN!!!');
+						    console.log("L: " +this.medias[index].offsetLeft + ' T: ' + this.medias[index].offsetTop);
+						    console.log("X: " + e.clientX + ' Y: ' + e.clientY);
+						    let x = (e.pageX - this.medias[index].offsetLeft), y = (e.pageY - this.medias[index].offsetTop);
 							// subtract offset
-							this.medias[index].x = this.medias[index].offsetLeft - e.clientX;
-							this.medias[index].y = this.medias[index].offsetTop - e.clientY;
-						}, true);
+							this.medias[index].dim_x = e.clientX - parseInt(this.medias[index].style.left || 0);
+							this.medias[index].dim_y = e.clientY - parseInt(this.medias[index].style.top || 0);
+
+							console.log("DIM X, Y", this.medias[index].dim_x, this.medias[index].dim_y)
+						}, false);
 
 						// div event mouseup
 						this.medias[index].addEventListener('mouseup', (e) => {
 							// mouse state set to false
 						    this.medias[index].mousedown = false;
+							console.log('X: ' + this.medias[index].dim_x + ' Y: ' + this.medias[index].dim_y);
+						    console.log('W: ' +this.medias[index].clientWidth + ' H: ' + this.medias[index].clientHeight);
 						}, true);
 					}
 
@@ -327,12 +340,18 @@
 					div.addEventListener('mousemove', (e) => {
 					    // Is mouse pressed
 						if (this.medias[index] && this.medias[index].mousedown) {
+							console.log('X: ' + this.medias[index].dim_x + ' Y: ' + this.medias[index].dim_y);
+							console.log('W: ' +this.medias[index].clientWidth + ' H: ' + this.medias[index].clientHeight);
+							let l = (e.pageX - this.medias[index].clientWidth), t = (e.pageY - this.medias[index].clientHeight);
 						    // Calculate x and y in %
-						    this.medias[index].style.left = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
-							this.medias[index].style.top = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
+						    // this.medias[index].style.left = (((e.clientX + this.medias[index].dim_x) * 100) / this.medias[index].offsetWidth) + '%';
+						    this.medias[index].style.left = (e.clientX - this.medias[index].dim_x) + 'px';
+							// this.medias[index].style.top = (((e.clientY + this.medias[index].dim_y) * 100) / this.medias[index].offsetHeight) + '%';
+							this.medias[index].style.top = (e.clientY - this.medias[index].dim_y) + 'px';
 
-							this.media[index].startX = (((e.clientX + this.medias[index].x) * 100) / this.medias[index].offsetWidth) + '%';
-						    this.media[index].startY = (((e.clientY + this.medias[index].y) * 100) / this.medias[index].offsetHeight) + '%';
+							console.log("T: " + this.medias[index].style.top  + " L: " + this.medias[index].style.left);
+							// this.media[index].startX = (((e.clientX + this.medias[index].dim_x) * 100) / this.medias[index].offsetWidth) + '%';
+						    // this.media[index].startY = (((e.clientY + this.medias[index].dim_y) * 100) / this.medias[index].offsetHeight) + '%';
 						}
 					}, true);
 			    }
@@ -346,7 +365,7 @@
 					]
 				}, (files) => {
 					if (files) {
-						this.media[number - 1] = {
+						this.media[number] = {
 							path: files[0],
 						    startX: '0%',
 						    startY: '0%',
