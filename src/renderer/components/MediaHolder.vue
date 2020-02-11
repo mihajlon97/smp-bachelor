@@ -1,13 +1,24 @@
 <template>
 	<div class="wrapper-parent">
+			<!-- Context Menu -->
+			<div v-show="menu_opened" ref="menu" @click="menu_opened = false" class="context-menu">
+				<ul>
+					<li @click="media[selected].z_index = 9">Move to Back </li>
+					<li @click="media[selected].z_index = 10">Move to Middle</li>
+					<li @click="media[selected].z_index = 11">Move to Front</li>
+					<li class="remove-option" @click="reset(selected, true)"> Remove</li>
+				</ul>
+			</div>
+
 			<!-- Media -->
 			<div class="wrapper">
 				<Media v-for="i in media.length" :key="'media-' + i" :class="(( media[i - 1].selected) ? 'selected' : '')"
-				       :style="`transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"
+				       :style="`transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX}; z-index:${media[i - 1].z_index};`"
 				       v-if="media[i - 1] && media[i - 1].path"
 				       :path="media[i - 1].path"
 				       :index="i"
 				       @remove="reset(i - 1, true)"
+				       @contextmenu.native.prevent="menu_open($event)"
 				/>
 
 				<div v-if="media.length === 0" @click="choose" style="text-align: center; padding: 40px; border: 3px solid white; border-radius: 50px; height: 50%; width: 70%; cursor: pointer; margin: 10% auto 0;">
@@ -61,6 +72,7 @@
 		},
 	    data() {
 			return {
+			    menu_opened: false,
 			    media: this.media_prop,
 			    medias: [],
 			    wrappers: [],
@@ -86,6 +98,7 @@
 					    startX: '0%',
 					    startY: '0%',
 					    scale: 0.5,
+				        z_index: 10,
 					    rotate: 0,
 				        selected: false
 				    };
@@ -120,6 +133,12 @@
 			    }
 			    return result;
 		    },
+		    menu_open(e) {
+		    	console.log('MRS U KURAC', e);
+			    this.menu_opened = !this.menu_opened;
+			    this.$refs.menu.style.left = e.x + 'px';
+			    this.$refs.menu.style.top = e.y + 'px';
+		    },
 		    reset (index, removePhoto = true) {
 		    	if (removePhoto) {
 				    for(let i = this.media.length - 1; i >= 0; i--){
@@ -134,6 +153,7 @@
 					    startX: '0%',
 					    startY: '0%',
 					    scale: 0.5,
+				        z_index: 10,
 					    rotate: 0,
 				        selected: false
 				    };
@@ -402,6 +422,7 @@
 						    startX: '0%',
 						    startY: '0%',
 						    scale: 0.5,
+						    z_index: 10,
 						    rotate: 0,
 						    selected: false
 						};
@@ -418,5 +439,43 @@
 <style>
 	.selected {
 		border: 5px solid cornflowerblue;
+	}
+	.context-menu {
+		border-radius: 10px;
+		position: absolute;
+		z-index: 15;
+	}
+
+	.context-menu ul {
+		border-radius: 10px;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		width: 300px!important;
+		background-color: #f1f1f1;
+	}
+
+	.context-menu li {
+		border-radius: 10px;
+		display: block;
+		color: #000;
+		padding: 16px 32px;
+		text-decoration: none;
+		font-size: 24px;
+	}
+
+	/* Change the link color on hover */
+	.context-menu li:hover {
+		background-color: #555;
+		color: white;
+	}
+
+	.context-menu .remove-option {
+		background-color: rgba(255, 0, 0, 0.69);
+		color: white;
+	}
+	.context-menu .remove-option:hover {
+		background-color: rgba(172, 0, 0, 0.79);
+		color: white;
 	}
 </style>
