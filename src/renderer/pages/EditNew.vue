@@ -5,9 +5,9 @@
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
 		<div style="position: absolute; width: 100%; color: white; text-align: center; z-index: 11; padding-top: 10px;">
-			<button @click="changeMediaCnt(-1)" class="filter-button black round-btn">－</button>
-			<span style="font-size: 25px; margin: 0 10px;"> Medias </span>
-			<button @click="changeMediaCnt(1)"  class="filter-button black round-btn">＋</button>
+			<button @click="$refs.editor.choose()"  class="filter-button black round-btn">
+				Insert Media ＋
+			</button>
 			<h3> {{ activeSlide + 1 }} </h3>
 		</div>
 		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
