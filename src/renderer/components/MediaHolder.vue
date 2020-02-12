@@ -92,7 +92,6 @@
 		    holder.ondrop = (e) => {
 			    e.preventDefault();
 			    for (let f of e.dataTransfer.files) {
-			    	console.log(this.media.length);
 				    this.media[this.media.length] = {
 					    path: f.path,
 					    startX: '0%',
@@ -106,7 +105,8 @@
 				    this.$nextTick(this.init);
 			        this.$forceUpdate();
 			    }
-			    return false;
+		        console.log('MEDIA', this.media);
+		        return false;
 		    };
 
 	    },
@@ -134,7 +134,6 @@
 			    return result;
 		    },
 		    menu_open(e) {
-		    	console.log('MRS U KURAC', e);
 			    this.menu_opened = !this.menu_opened;
 			    this.$refs.menu.style.left = e.x + 'px';
 			    this.$refs.menu.style.top = e.y + 'px';
@@ -167,6 +166,7 @@
 
 
 		    nextSlide () {
+		    	console.log('MEDIA', this.media);
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
 
@@ -199,14 +199,22 @@
 				    if (this.anyMediaLeft() && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
 				       (this.anyMediaLeft() && this.slides.length === 0)) return false;
 
+				    console.log('NEXT NOT EXIST', this.media, this.slides);
 				    // Save current slide modification
 				    let slide = [];
+				    for (let i = 0; i < this.media.length; i++) {
+					    slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
+					    this.reset(i, true);
+				    }
+				    /*
 				    this.media.forEach((media, i) => {
 					    slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 				        this.reset(i, true);
 				    });
+				    */
 				    this.slides[this.activeSlide] = slide;
 			    }
+			    console.log(this.slides, this.media);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
 		    },
@@ -364,7 +372,6 @@
 						this.medias[index].addEventListener('mousedown', (e) => {
 							// mouse state set to true
 						    this.medias[index].mousedown = true;
-						    console.log(this.media[index].selected);
 						    this.media[index].selected = !this.media[index].selected;
 
 						    // Deselect other medias
@@ -395,15 +402,13 @@
 						    this.media[index].selected = true;
 						    this.selected = index;
 						    this.$forceUpdate();
-							console.log("W: " + this.medias[index].offsetWidth + " H: " + this.medias[index].offsetHeight);
-							console.log("X: " + this.medias[index].dim_x + " Y: " + this.medias[index].dim_y);
 
 							// Calculate x and y in %
 						    this.medias[index].style.left = (((e.clientX + this.medias[index].dim_x) / div.offsetWidth) * 100) + '%';
 							this.medias[index].style.top = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100) + '%';
 
-						    // this.media[index].startX = (((e.clientX + this.medias[index].dim_x) / div.offsetWidth)  * 100)  + '%';
-						    // this.media[index].startY = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100)  + '%';
+						    this.media[index].startX = (((e.clientX + this.medias[index].dim_x) / div.offsetWidth) * 100) + '%';
+						    this.media[index].startY = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100) + '%';
 						}
 					}, true);
 			    }
@@ -438,7 +443,8 @@
 
 <style>
 	.selected {
-		border: 5px solid cornflowerblue;
+		outline-style: solid;
+		outline-color: cornflowerblue;
 	}
 	.context-menu {
 		border-radius: 10px;
