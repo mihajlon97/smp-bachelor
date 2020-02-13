@@ -1,6 +1,7 @@
 <template>
 	<div class="create page" style="padding-top: 0;">
-		<div style="position: absolute; left:65px; top: 5px; z-index: 400;">
+		<span v-if="!$route.query.play">
+			<div style="position: absolute; left:65px; top: 5px; z-index: 400;">
 			<button v-show="activeSlide > 0" @click="previousSlide()" class="button button-play black round-btn"> Previous Slide </button>
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
@@ -14,7 +15,9 @@
 			<button @click="save" class="button button-play black round-btn"> Save </button>
 			<button @click="$router.push('/')"  class="button button-play black round-btn"> Cancel </button>
 		</div>
-		<MediaHolder v-if="(!!$route.query.edit && media_cnt) || !$route.query.edit" ref="editor" :media_count="media_cnt" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
+		</span>
+
+		<MediaHolder ref="editor" :playing="!!$route.query.play" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
 	</div>
 </template>
 
@@ -27,7 +30,6 @@
 		components: { MediaHolder },
 	    data() {
 	      return {
-	        media_cnt: this.$route.query.edit ? false : 2,
 	        totalSlides: 0,
 	        mode: 'create',
 	        loading: {
@@ -41,11 +43,52 @@
 		  if (this.$route.query.edit !== undefined) {
 			this.mode = 'edit';
 			const presentationToEdit = this.presentations.filter(presentation => presentation.id === this.$route.query.edit)[0];
-		    this.media_cnt = presentationToEdit.slides[0].length;
 		    this.$nextTick(() => {
 		        this.$refs.editor.edit(presentationToEdit);
 		    });
 		  }
+
+			// Play presentation
+			if (this.$route.query.play !== undefined) {
+				this.mode = 'play';
+				const presentationToPlay = this.presentations.filter(presentation => presentation.id === this.$route.query.play)[0];
+				this.$nextTick(() => {
+					this.$refs.editor.play(presentationToPlay);
+				});
+
+
+				setTimeout(() => {
+					if (this.$route.query.play) {
+						document.onkeydown = (evt) => {
+							evt = evt || window.event;
+							let isEscape = false;
+							if ("key" in evt) {
+								isEscape = (evt.key === "Escape" || evt.key === "Esc");
+							} else {
+								isEscape = (evt.keyCode === 27);
+							}
+							if (isEscape) {
+								require('electron').remote.getCurrentWindow().close();
+							}
+						};
+					}
+
+					// Click moving through presentation events
+					let slider = document.getElementsByClassName('create')[0];
+
+					slider.addEventListener('contextmenu', () => {
+						console.log('RIGHT CLICK')
+					    if (this.activeSlide > 0) this.previousSlide()
+					});
+					slider.addEventListener('click', () => {
+					    console.log('LEFT CLICK')
+						if (presentationToPlay.slides.length === this.activeSlide + 1) return;
+					    this.nextSlide()
+					})
+
+				}, 1000);
+
+			}
 		},
 		computed: {
 			...mapState(['activeSlide', 'presentations'])

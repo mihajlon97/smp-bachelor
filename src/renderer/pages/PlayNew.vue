@@ -23,7 +23,7 @@
 
 				<div :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? '' : '')">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
-						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 100%; height: 100vh;'">
+						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100%;'">
 							<MediaHolder
 							        :id="'id-' + presentation_id + '-' + i"
 									:media_prop="slide"
@@ -156,8 +156,8 @@
 
 			const { BrowserWindow } = require('electron').remote;
 			const modalPath = process.env.NODE_ENV === 'development'
-				? 'http://localhost:9080/#/play?autoplay=' + presentation.id
-				: `file://${__dirname}/index.html#play?autoplay=` + presentation.id;
+				? 'http://localhost:9080/#/edit?play=' + presentation.id
+				: `file://${__dirname}/index.html#edit?play=` + presentation.id;
 
 			let win = new BrowserWindow({
 				x: (externalDisplay && chosenScreen === 'external') ? externalDisplay.bounds.x + 50 : 0,
@@ -172,7 +172,7 @@
 
 			win.on('close', function () { console.log('presentation closed') });
 			win.webContents.on("devtools-opened", () => {
-			   win.webContents.closeDevTools();
+			   // win.webContents.closeDevTools();
 			});
 			win.maximize();
 			win.loadURL(modalPath);

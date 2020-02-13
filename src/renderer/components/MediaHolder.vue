@@ -225,8 +225,8 @@
 			        // Save current slide modification
 			        let slide = [];
 			        for (let i = 0, size = this.media.length; i < size; i++) {
-				        slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
-				        this.reset(0);
+				        slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
+				        this.reset(0, true);
 			        }
 		            if (slide.length > 0) this.slides[this.activeSlide] = slide;
 		        }
@@ -300,6 +300,45 @@
 
 					    this.$emit('updateTotalSlides', this.slides.length);
 		    },
+
+
+			    play (presentation) {
+				    presentation.slides.forEach(slide => {
+					    let slideToAdd = [];
+					    slide.forEach(media => {
+						    slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
+					    });
+					    if (slideToAdd.length > 0) this.slides.push(slideToAdd);
+				    });
+
+				    for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
+					    if (this.slides[this.activeSlide][(5 * i)])
+						    this.media[i] = {
+							    path: this.slides[this.activeSlide][(5 * i)],
+						    }
+				    }
+
+				    this.$forceUpdate();
+
+				    this.$nextTick(() => {
+					    this.init();
+
+					    for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
+						    if (this.media[i].path)
+							    this.media[i] = {
+								    ...this.media[i],
+								    // path: this.slides[this.activeSlide][(5 * i)],
+								    startX: this.slides[this.activeSlide][1 + 5 * i],
+								    startY: this.slides[this.activeSlide][2 + 5 * i],
+								    scale: this.slides[this.activeSlide][3 + 5 * i],
+								    rotate: this.slides[this.activeSlide][4 + 5 * i],
+							    }
+					    }
+					    this.$forceUpdate();
+				    });
+
+				    this.$emit('updateTotalSlides', this.slides.length);
+			    },
 
 
 		    async save (name, edit = false, id = '') {
@@ -382,7 +421,8 @@
 			},
 			init() {
 		    	console.log('INIT', this.media)
-			    let container = this.playing ? document.querySelector('#' + this.id) : document;
+			    // let container = this.playing ? document.querySelector('#' + this.id) : document;
+			    let container = document;
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
