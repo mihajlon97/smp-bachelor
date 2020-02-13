@@ -21,7 +21,7 @@
 					<!--  position: absolute; z-index: -200; -->
 				</span>
 
-				<div :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? '' : '')">
+				<div :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100%;'">
 							<MediaHolder
@@ -126,7 +126,7 @@
 	  async playPresentation(presentation) {
 
 			const displays = require('electron').remote.screen.getAllDisplays();
-
+			console.log(displays);
 			let chosenScreen;
 			if (displays.length > 0) {
 				chosenScreen = await this.$swal({
