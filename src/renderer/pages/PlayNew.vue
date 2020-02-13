@@ -21,9 +21,9 @@
 					<!--  position: absolute; z-index: -200; -->
 				</span>
 
-				<div :style="'width: 100%!important; max-width: 100%!important;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
+				<div :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? '' : '')">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
-						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" style="height:100vh; text-align: center; display: inline-block;" :id="'id-' + presentation_id + '-' + i" >
+						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 100%; height: 100vh;'">
 							<MediaHolder
 							        :id="'id-' + presentation_id + '-' + i"
 									:media_prop="slide"
