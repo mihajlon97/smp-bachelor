@@ -165,25 +165,34 @@
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
 					console.log('NEXT EXISTS');
-		            // Save current slide modification
-			        let slide = [];
-			        this.media.forEach(media => {
-			        	slide.push(media.path, media.startX, media.startY, media.scale, media.rotate);
-			        });
-			        if (slide.length > 0) this.slides[this.activeSlide] = slide;
+				    // Save current slide modification
+				    let slide = [];
+				    for (let i = 0, size = this.media.length; i < size; i++) {
+					    slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
+					    this.reset(0, true);
+				    }
+				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
+
+				    for (let i = 0; i < this.slides[this.activeSlide + 1].length / 5; i++) {
+					    this.media[i] = {
+						    path: this.slides[this.activeSlide + 1][(5 * i)],
+					    }
+				    }
 
 				    // Apply next one
 				    this.$nextTick(() => {
 					    this.init();
 
-					    for (let i = 0; i < this.media.length; i++) {
-					    	this.media[i] = {
-					    		path: this.slides[this.activeSlide][(5 * i)],
-					    		startX: this.slides[this.activeSlide][1 + 5 * i],
-					    		startY: this.slides[this.activeSlide][2 + 5 * i],
-					    		scale: this.slides[this.activeSlide][3 + 5 * i],
-					    		rotate: this.slides[this.activeSlide][4 + 5 * i],
-						    }
+					    for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
+					    	if (this.slides[this.activeSlide][(5 * i)])
+						        this.media[i] = {
+						            ...this.media[i],
+					    		    // path: this.slides[this.activeSlide][(5 * i)],
+						            startX: this.slides[this.activeSlide][1 + 5 * i],
+						            startY: this.slides[this.activeSlide][2 + 5 * i],
+						            scale: this.slides[this.activeSlide][3 + 5 * i],
+						            rotate: this.slides[this.activeSlide][4 + 5 * i],
+							    }
 					    }
 				    });
 
@@ -201,7 +210,6 @@
 					    slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
 				        this.reset(0, true);
 				    }
-
 				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
 			    }
 		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
@@ -233,7 +241,7 @@
 		        this.$nextTick(() => {
 		        	this.init();
 
-			        for (let i = 0; i < this.media.length; i++) {
+			        for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
 				        this.media[i] = {
 				            ...this.media[i],
 					        // path: this.slides[this.activeSlide][(5 * i)],
@@ -258,31 +266,39 @@
 				    slide.forEach(media => {
 				        slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 				    });
-				    this.slides.push(slideToAdd);
+				    if (slideToAdd.length > 0) this.slides.push(slideToAdd);
 			    });
 
-			    for (let i = 0; i < this.media.length; i++) {
-				    this.media[i] = {
-					    path: this.slides[this.activeSlide][(5 * i)],
-				    }
+			    console.log('EDIT', this.slides);
+
+			    for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
+			    	if (this.slides[this.activeSlide][(5 * i)])
+					    this.media[i] = {
+						    path: this.slides[this.activeSlide][(5 * i)],
+					    }
 			    }
+
+			    this.$forceUpdate();
 
 			    this.$nextTick(() => {
 				    this.init();
 
-				    for (let i = 0; i < this.media.length; i++) {
-					    this.media[i] = {
-					        ...this.media[i],
-						    // path: this.slides[this.activeSlide][(5 * i)],
-						    startX: this.slides[this.activeSlide][1 + 5 * i],
-						    startY: this.slides[this.activeSlide][2 + 5 * i],
-						    scale: this.slides[this.activeSlide][3 + 5 * i],
-						    rotate: this.slides[this.activeSlide][4 + 5 * i],
-					    }
+				    for (let i = 0; i < this.slides[this.activeSlide].length / 5; i++) {
+				    	if (this.media[i].path)
+						    this.media[i] = {
+						        ...this.media[i],
+							    // path: this.slides[this.activeSlide][(5 * i)],
+							    startX: this.slides[this.activeSlide][1 + 5 * i],
+							    startY: this.slides[this.activeSlide][2 + 5 * i],
+							    scale: this.slides[this.activeSlide][3 + 5 * i],
+							    rotate: this.slides[this.activeSlide][4 + 5 * i],
+						    }
 				    }
 			        this.$forceUpdate();
 			    });
-			    this.$emit('updateTotalSlides', this.slides.length);
+					    console.log('MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
+
+					    this.$emit('updateTotalSlides', this.slides.length);
 		    },
 
 
@@ -365,6 +381,7 @@
 				this.$forceUpdate()
 			},
 			init() {
+		    	console.log('INIT', this.media)
 			    let container = this.playing ? document.querySelector('#' + this.id) : document;
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
