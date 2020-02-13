@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper-parent">
 			<!-- Context Menu -->
-			<div v-show="menu_opened" ref="menu" @click="menu_opened = false" class="context-menu">
+			<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
 				<ul>
 					<li @click="media[selected].z_index = 9">Move to Back </li>
 					<li @click="media[selected].z_index = 10">Move to Middle</li>
@@ -11,9 +11,9 @@
 			</div>
 
 			<!-- Media -->
-			<div class="wrapper">
-				<Media v-for="i in media.length" :key="'media-' + i" :class="(( media[i - 1].selected) ? 'selected' : '')"
-				       :style="`transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX}; z-index:${media[i - 1].z_index};`"
+			<div class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
+				<Media v-for="i in media.length" :key="'media-' + i" :class="(( media[i - 1].selected && !playing) ? 'selected' : '')"
+				       :style="`top:${media[i - 1].startY}; left:${media[i - 1].startX}; transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); z-index:${media[i - 1].z_index};`"
 				       v-if="media[i - 1] && media[i - 1].path"
 				       :path="media[i - 1].path"
 				       :index="i"
@@ -72,6 +72,8 @@
 		},
 	    data() {
 			return {
+			    width: 1600,
+			    height: 900,
 			    menu_opened: false,
 			    media: this.media_prop,
 			    medias: [],
@@ -105,7 +107,6 @@
 				    this.$nextTick(this.init);
 			        this.$forceUpdate();
 			    }
-		        console.log('MEDIA', this.media);
 		        return false;
 		    };
 
@@ -166,7 +167,6 @@
 
 
 		    nextSlide () {
-		    	console.log('MEDIA', this.media);
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
 
@@ -199,7 +199,6 @@
 				    if (this.anyMediaLeft() && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
 				       (this.anyMediaLeft() && this.slides.length === 0)) return false;
 
-				    console.log('NEXT NOT EXIST', this.media, this.slides);
 				    // Save current slide modification
 				    let slide = [];
 				    for (let i = 0; i < this.media.length; i++) {
@@ -214,7 +213,6 @@
 				    */
 				    this.slides[this.activeSlide] = slide;
 			    }
-			    console.log(this.slides, this.media);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
 		    },
@@ -348,10 +346,27 @@
 			    this.$router.push('/');
 			    this.$swal("Good job!", "Your presentation is ready!", "success");
 		    },
+			adaptWrapper() {
+				const windowRatio = window.innerWidth / window.innerHeight;
+
+				if (windowRatio >= 1.77) {
+					this.height = window.innerHeight;
+					this.width = this.height * 1.77;
+				} else {
+					this.width = window.innerWidth;
+					this.height = this.width / 1.77;
+				}
+				this.$forceUpdate()
+			},
 			init() {
+			    this.adaptWrapper();
 			    let container = this.playing ? document.querySelector('#' + this.id) : document;
 				this.wrappers = [...container.querySelectorAll('.wrapper')];
 			    this.medias = [...container.querySelectorAll('.move')];
+
+			    window.addEventListener('resize', (e) => {
+			    	this.adaptWrapper();
+			    });
 
 			    for(let index = 0; index < this.media.length; index++) {
 					let div = this.wrappers[0];

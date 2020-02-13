@@ -69,12 +69,8 @@ body {
     border-radius: 20px;
 }
 
-.create .croppa-containerr   {
-    margin: 0!important;
-    float: left;
-    max-height: 90vh;
-    width: 45vw;
-    height: 80%;
+.create   {
+    background-color: #dddddd!important;
 }
 
 .play .croppa-containerr   {
@@ -181,8 +177,11 @@ body {
 
 .wrapper-parent{
     width: 100%;
-    height: 100%;
     background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .media {
@@ -201,20 +200,24 @@ body {
     width: 100%;
 }
 
+
+
 .wrapper {
+    background-color: black;
+    margin: 0 auto;
     overflow: hidden;
     display: block;
     align-items: center;
-    width: 100%;
-    height: 100%;
     position: relative;
+    transition: ease 1s;
 }
+
 
 .move video {
     object-fit: contain;
+    display: table-row;
 }
 .move img {
-    cursor: pointer;
     max-width: 100%;
     max-height: 100vh;
     display: table-row;
@@ -229,12 +232,11 @@ body {
 .move {
     margin: 0;
     position: absolute;
-    max-width: 100%;
-    max-height: 100vh;
     background: black no-repeat center;
     background-clip: border-box;
     transition: transform 1s;
     display: table;
+    box-sizing: border-box;
 }
 .filter-button {
     padding: 10px 12px;

@@ -1,5 +1,5 @@
 <template>
-	<div class="play page" style="overflow-y: scroll!important;">
+	<div class="play page" style="overflow-y: hidden!important;">
 		<div style="width: 100%; margin: 0 auto; text-align: center;">
 			<router-link to="/">
 				<img src="../assets/256x256.png" alt="Smart Image Presenter">

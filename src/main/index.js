@@ -18,10 +18,10 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 900,
     useContentSize: true,
-    width: 1000
-  })
+    width: 1600
+  });
 
 	mainWindow.setMenuBarVisibility(false)
 	mainWindow.maximize()
@@ -33,6 +33,20 @@ function createWindow () {
 
 	mainWindow.webContents.on("devtools-opened", () => {
 		// mainWindow.webContents.closeDevTools();
+	});
+
+	let oldSize;
+	setInterval(() => {
+		oldSize = mainWindow.getSize();
+	}, 10);
+	mainWindow.on('resize', () => {
+		let size = mainWindow.getSize();
+		let widthChanged = oldSize[0] !== size[0];
+		let ratioY2X = 900 / 1600;
+		if (widthChanged)
+			mainWindow.setSize(size[0], parseInt((size[0] * ratioY2X).toString()));
+		else
+			mainWindow.setSize(parseInt((size[1] / ratioY2X).toString()), size[1]);
 	});
 
 

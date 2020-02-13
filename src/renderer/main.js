@@ -16,6 +16,7 @@ Vue.use(VueSwal)
 import VueZoomer from 'vue-zoomer'
 Vue.use(VueZoomer)
 
+
 import Croppa from 'vue-croppa2';
 Vue.use(Croppa);
 import 'vue-croppa2/dist/vue-croppa.css';
