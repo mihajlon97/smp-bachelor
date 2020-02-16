@@ -218,8 +218,8 @@ body {
     display: table-row;
 }
 .move img {
+    object-fit: contain;
     max-width: 100%;
-    max-height: 100vh;
     display: table-row;
 }
 .move:hover {

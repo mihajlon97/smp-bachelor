@@ -9,6 +9,12 @@
 			<source :src="get_blob(path)" type="video/mp4">
 		</video>
 
+		<!--
+		<div v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
+		<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
+			<source :src="get_blob(media[i - 1].path)" type="video/mp4">
+		</video>
+		-->
 	</div>
 </template>
 
