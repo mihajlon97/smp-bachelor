@@ -6,6 +6,12 @@
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
 		<div style="position: absolute; width: 100%; color: white; text-align: center; z-index: 11; padding-top: 10px;">
+			<button @click="$refs.editor.changeLayout([''])"  class="button button-play filter-button black round-btn">
+				Layout 2x2
+			</button>
+			<button @click="$refs.editor.changeLayout(2)"  class="button button-play filter-button black round-btn">
+				Layout 1:1:1
+			</button>
 			<button @click="$refs.editor.choose()"  class="button button-play filter-button black round-btn">
 				Insert Media
 			</button>

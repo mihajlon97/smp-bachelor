@@ -55,7 +55,7 @@
 	},
     data () {
 		return {
-			win: null,
+		    displays: [],
 			swiperOption: {
 				speed: 500,
 				slidesPerView: 1,
@@ -125,19 +125,28 @@
 	 */
 	  async playPresentation(presentation) {
 
-			const displays = require('electron').remote.screen.getAllDisplays();
-			console.log(displays);
+			this.displays = require('electron').remote.screen.getAllDisplays();
+			console.log(this.displays);
 			let chosenScreen;
-			if (displays.length > 0) {
+
+			let external = {};
+			for (let i in this.displays) {
+				if (this.displays[i].bounds.x !== 0 || this.displays[i].bounds.y !== 0) {
+					const id = Object.keys(external).length + 1;
+				    external['external' + id] = {
+				    	value: this.displays[i].id,
+				        text: 'External Screen ' + id
+					}
+				}
+			}
+
+			if (this.displays.length > 1) {
 				chosenScreen = await this.$swal({
 					title: "Select the screen",
 					text: "Pick a screen on which the presentation should be played.",
 					icon: "info",
 					buttons: {
-						external:{
-							text: "External screen",
-							value: "external",
-						},
+					    ...external,
 						main: {
 							text: "Main screen",
 							value: "main"
@@ -147,9 +156,9 @@
 			}
 
 			let externalDisplay = null;
-			for (let i in displays) {
-				if (displays[i].bounds.x !== 0 || displays[i].bounds.y !== 0) {
-					externalDisplay = displays[i];
+			for (let i in this.displays) {
+				if ((this.displays[i].bounds.x !== 0 || this.displays[i].bounds.y !== 0) && this.displays[i].id === chosenScreen) {
+					externalDisplay = this.displays[i];
 					break;
 				}
 			}
@@ -160,8 +169,8 @@
 				: `file://${__dirname}/index.html#edit?play=` + presentation.id;
 
 			let win = new BrowserWindow({
-				x: (externalDisplay && chosenScreen === 'external') ? externalDisplay.bounds.x + 50 : 0,
-				y: (externalDisplay && chosenScreen === 'external') ? externalDisplay.bounds.y + 50 : 0,
+				x: (chosenScreen !== 'main') ? externalDisplay.bounds.x + 50 : 0,
+				y: (chosenScreen !== 'main') ? externalDisplay.bounds.y + 50 : 0,
 				frame: false,
 			    fullscreen: true,
 				webPreferences: {
@@ -172,7 +181,7 @@
 
 			win.on('close', function () { console.log('presentation closed') });
 			win.webContents.on("devtools-opened", () => {
-			   // win.webContents.closeDevTools();
+			   win.webContents.closeDevTools();
 			});
 			win.maximize();
 			win.loadURL(modalPath);
