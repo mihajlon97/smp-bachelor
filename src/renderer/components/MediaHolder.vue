@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper-parent">
 		<!-- Media -->
-		<div class="media" v-for="i in media_count" :key="'media-' + i" :class="'media-nr-' + media_count">
+		<div class="media" v-for="i in media_count" :key="'media-' + i" :class="'media-nr-' + media_count + '-' + row_count">
 			<div class="wrapper">
 				<div v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
 				<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
@@ -57,11 +57,12 @@
 		    },
 			media_count: {
 				type: Number,
-				default: 2
+				default: 4
 			},
 		},
 	    data() {
 			return {
+			    row_count: 2,
 			    media: this.media_prop,
 			    medias: [],
 			    wrappers: [],
