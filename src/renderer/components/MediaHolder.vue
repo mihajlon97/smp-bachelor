@@ -1,16 +1,40 @@
 <template>
 	<div class="wrapper-parent">
-			<!-- Context Menu -->
-			<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
-				<ul>
-					<li @click="media[selected].z_index -= 1">Move to Back </li>
-					<li @click="media[selected].z_index += 1">Move to Front</li>
-					<li class="remove-option" @click="reset(selected, true)"> Remove</li>
-				</ul>
+		<!-- Context Menu -->
+		<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
+			<ul>
+				<li @click="media[selected].z_index -= 1">Move to Back </li>
+				<li @click="media[selected].z_index += 1">Move to Front</li>
+				<li class="remove-option" @click="reset(selected, true)"> Remove</li>
+			</ul>
+		</div>
+
+		<div class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
+			<div v-for="i in rows" :key="i" :class="'row row-' + rows">
+				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
+					<Media
+							:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg); z-index:${media[((i-1)*columns)+j-1].z_index};`"
+							v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
+							:path="media[((i-1)*columns)+j-1].path"
+							:index="((i-1)*columns)+j-1"
+							@remove="reset(((i-1)*columns)+j-1, true)"
+							@contextmenu.native.prevent="menu_open($event)"
+							@click.native="menu_opened = false"
+							ondragstart="return false;"
+					/>
+
+					<!-- Drag & Drop -->
+					<div v-else class="chooseText">
+						<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
+							Drag & Drop Media Here
+						</h1>
+					</div>
+				</div>
 			</div>
+		</div>
 
 			<!-- Media width: ${width}px; height: ${height}px; -->
-			<div class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
+			<div v-if="false" class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
 				<Media v-for="i in media.length" :key="'media-' + i" :class="(( media[i - 1].selected && !playing) ? 'selected' : '')"
 				       :style="`top:${media[i - 1].startY}; left:${media[i - 1].startX}; transform: scale(${media[i - 1].scale}) translate(${media[i - 1].translate[0]}%, ${media[i - 1].translate[1]}%) rotate(${media[i - 1].rotate}deg); z-index:${media[i - 1].z_index};`"
 				       v-if="media[i - 1] && media[i - 1].path"
@@ -19,10 +43,11 @@
 				       @remove="reset(i - 1, true)"
 				       @contextmenu.native.prevent="menu_open($event)"
 				       @click.native="menu_opened = false"
+				       ondragstart="return false;"
 				/>
 
 				<!-- Drag & Drop -->
-				<div v-if="media.length === 0" @click="choose" style="text-align: center; padding: 40px; border: 3px solid white; border-radius: 50px; height: 50%; width: 70%; cursor: pointer; margin: 10% auto 0;">
+				<div v-if="media.length === 0" @click="choose" class="chooseText">
 					<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
 						Drag & Drop Media Here
 					</h1>
@@ -76,166 +101,51 @@
 		},
 	    data() {
 			return {
+			    rows: 2,
+			    columns: 1,
 			    layout: [['0%', '50%', '33.33%'], ['0%', '50%', '33.33%']],
 			    width: 1600,
 			    height: 1200,
 			    menu_opened: false,
-			    media: this.media_prop,
+			    media: [],
 			    medias: [],
 			    wrappers: [],
 			    slides: [],
 			    selected: null,
-			    grid: [
-			      [{ startX: '0%', startY: '0%',   scale: 1, rotate: 0, z_index: 10 }],
-			      [
-			      	{ startX: '0%', startY: '0%',  scale: 0.5, rotate: 0, z_index: 10 },
-			      	{ startX: '50%', startY: '0%', scale: 0.5, rotate: 0, z_index: 10 },
-			      ],
-				  [
-				    { startX: '0%', startY: '0%',     scale: 0.33, rotate: 0, z_index: 10 },
-				    { startX: '33.33%', startY: '0%', scale: 0.33, rotate: 0, z_index: 10 },
-				    { startX: '66.66%', startY: '0%', scale: 0.33, rotate: 0, z_index: 10 },
-				  ],
-			      [
-				    { startX: '0%', startY: '0%',     scale: 0.25, rotate: 0, z_index: 10 },
-				    { startX: '50%', startY: '0%',    scale: 0.25, rotate: 0, z_index: 10 },
-				    { startX: '0%', startY: '50%',    scale: 0.25, rotate: 0, z_index: 10 },
-				    { startX: '50%', startY: '50%',   scale: 0.25, rotate: 0, z_index: 10 },
-			      ],
-			    ]
 			}
 	    },
 	    mounted() {
 	        this.init();
 
-		    let holder = document.getElementsByClassName('wrapper')[0];
+		    let holders = [...document.querySelectorAll('.column')];
 
-		    holder.ondragover = () => { return false; };
-		    holder.ondragleave = () => { return false; };
-		    holder.ondragend = () => { return false; };
+		    console.log(holders);
 
-		    holder.ondrop = (e) => {
-			    e.preventDefault();
-			    const mediaChanged = false;
-			    for (let f of e.dataTransfer.files) {
-				    /*
-			        this.media[this.media.length] = {
-					    path: f.path,
-					    startX: '0%',
-					    startY: '0%',
-					    scale: 0.5,
-				        z_index: 10,
-					    rotate: 0,
-				        selected: false
+		    for (let i = 0; i < holders.length; i++) {
+		    	let holder = holders[i];
+				    holder.ondragover = () => { return false; };
+				    holder.ondragleave = () => { return false; };
+				    holder.ondragend = () => { return false; };
+
+				    holder.ondrop = (e) => {
+					    e.preventDefault();
+					    for (let f of e.dataTransfer.files) {
+						    this.media[i] = {
+							    path: f.path,
+							    startX: '0%',
+							    startY: '0%',
+							    scale: 1,
+							    z_index: 10,
+							    rotate: 0,
+							    selected: false
+						    };
+						    this.$forceUpdate();
+						    this.$nextTick(this.init);
+						    this.$forceUpdate();
+					    }
+					    return false;
 				    };
-				    */
-				    console.log(this.media.length);
-				    if (this.media.length === 0) {
-					    this.media[this.media.length] = {
-						    path: f.path,
-						    startX: '0%',
-						    startY: '0%',
-						    scale: 1,
-						    translate: [0,0],
-						    z_index: 10,
-						    rotate: 0,
-						    selected: false
-					    };
-				    } else if (this.media.length === 1){
-					    this.media[0] = {
-						    ...this.media[0],
-						    startX: !mediaChanged ? '0%' : this.media[0].startX,
-						    startY: !mediaChanged ? '25%' : this.media[0].startY,
-						    scale: !mediaChanged ? 0.5 : this.media[0].scale,
-						    z_index: !mediaChanged ? 10 : this.media[0].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[0].rotate,
-					        translate: [-50,-50],
-						    selected: false
-					    };
-					    this.media[this.media.length] = {
-						    path: f.path,
-						    startX: '50%',
-						    startY: '25%',
-						    scale: 0.5,
-						    z_index: 10,
-						    rotate: 0,
-					        translate: [-50,-50],
-						    selected: false
-					    };
-				    } else if (this.media.length === 2){
-					    this.media[0] = {
-						    ...this.media[0],
-						    startX: !mediaChanged ? '0%' : this.media[0].startX,
-						    startY: !mediaChanged ? '0%' : this.media[0].startY,
-						    scale: !mediaChanged ? 0.33 : this.media[0].scale,
-						    z_index: !mediaChanged ? 10 : this.media[0].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[0].rotate,
-						    selected: false
-					    };
-					    this.media[1] = {
-						    ...this.media[1],
-						    startX: !mediaChanged ? '33.33%' : this.media[1].startX,
-						    startY: !mediaChanged ? '0%' : this.media[1].startY,
-						    scale: !mediaChanged  ? 0.33 : this.media[1].scale,
-						    z_index: !mediaChanged ? 10 : this.media[1].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[1].rotate,
-						    selected: false
-					    };
-					    this.media[this.media.length] = {
-						    path: f.path,
-						    startX: '66.66%',
-						    startY: '0%',
-						    scale: 0.33,
-						    z_index: 10,
-						    rotate: 0,
-						    selected: false
-					    };
-				    } else if (this.media.length === 3){
-					    this.media[0] = {
-						    ...this.media[0],
-						    startX: !mediaChanged ? '0%' : this.media[0].startX,
-						    startY: !mediaChanged ? '0%' : this.media[0].startY,
-						    scale: !mediaChanged ? 0.5 : this.media[0].scale,
-						    z_index: !mediaChanged ? 10 : this.media[0].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[0].rotate,
-						    selected: false
-					    };
-					    this.media[1] = {
-						    ...this.media[1],
-						    startX: !mediaChanged ? '50%' : this.media[1].startX,
-						    startY: !mediaChanged ? '0%' : this.media[1].startY,
-						    scale: !mediaChanged  ? 0.5 : this.media[1].scale,
-						    z_index: !mediaChanged ? 10 : this.media[1].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[1].rotate,
-						    selected: false
-					    };
-					    this.media[2] = {
-						    ...this.media[1],
-						    startX: !mediaChanged ? '0%' : this.media[1].startX,
-						    startY: !mediaChanged ? '50%' : this.media[1].startY,
-						    scale: !mediaChanged  ? 0.5 : this.media[1].scale,
-						    z_index: !mediaChanged ? 10 : this.media[1].z_index,
-						    rotate: !mediaChanged ? 0 : this.media[1].rotate,
-						    selected: false
-					    };
-					    this.media[this.media.length] = {
-						    path: f.path,
-						    startX: '50%',
-						    startY: '50%',
-						    scale: 0.5,
-						    z_index: 10,
-						    rotate: 0,
-						    selected: false
-					    };
-				    }
-
-				    this.$forceUpdate();
-				    this.$nextTick(this.init);
-			        this.$forceUpdate();
-			    }
-		        return false;
-		    };
-
+		    }
 	    },
 		computed: {
 			...mapState(['activeSlide']),
@@ -267,11 +177,7 @@
 		    reset (index, removePhoto = false) {
 		    	console.log('RESET ' + index + ' R ' + removePhoto);
 		    	if (removePhoto) {
-				    for(let i = this.media.length - 1; i >= 0; i--){
-					    if (parseInt(i) === parseInt(index)){
-					    	this.media.splice(i, 1);
-					    }
-				    }
+				    this.media[index] = {};
 			    }
 		    	else {
 				    this.media[index] = {
@@ -291,7 +197,6 @@
 		    },
 
 
-
 		    nextSlide () {
 		    	console.log('MEDIA', this.media, "SLIDES", this.slides);
 			    // If next slide exist
@@ -300,8 +205,8 @@
 				    // Save current slide modification
 				    let slide = [];
 				    for (let i = 0, size = this.media.length; i < size; i++) {
-					    slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
-					    this.reset(0, true);
+					    slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
+					    this.reset(i, true);
 				    }
 				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
 
@@ -339,8 +244,8 @@
 				    // Save current slide modification
 				    let slide = [];
 				    for (let i = 0, size = this.media.length; i < size; i++) {
-					    slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
-				        this.reset(0, true);
+					    slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
+				        this.reset(i, true);
 				    }
 				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
 			    }
@@ -357,10 +262,12 @@
 			        // Save current slide modification
 			        let slide = [];
 			        for (let i = 0, size = this.media.length; i < size; i++) {
-				        slide.push(this.media[0].path, this.media[0].startX, this.media[0].startY, this.media[0].scale, this.media[0].rotate);
-				        this.reset(0, true);
+				        slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
+				        this.reset(i, true);
 			        }
-		            if (slide.length > 0) this.slides[this.activeSlide] = slide;
+		            if (slide.length > 0 && slide[0]) {
+		            	this.slides[this.activeSlide] = slide;
+		            }
 		        }
 
 			    for (let i = 0; i < this.slides[this.activeSlide - 1].length / 5; i++) {
@@ -541,33 +448,33 @@
 		    },
 			adaptWrapper() {
 				const windowRatio = window.innerWidth / window.innerHeight;
-				console.log("windowRation " + windowRatio);
-				if (windowRatio >= 1.77) {
+				if (windowRatio >= 1.33) {
 					this.height = window.innerHeight;
 					this.width = this.height * 1.33;
 				} else {
 					this.width = window.innerWidth;
 					this.height = this.width / 1.33;
 				}
-				console.log(this.width, this.height);
 				this.$forceUpdate()
 			},
 			init() {
 		    	console.log('INIT', this.media)
 			    // let container = this.playing ? document.querySelector('#' + this.id) : document;
 			    let container = document;
-				this.wrappers = [...container.querySelectorAll('.wrapper')];
+				this.wrappers = [...container.querySelectorAll('.column')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
 			    for(let index = 0; index < this.media.length; index++) {
-					let div = this.wrappers[0];
+					let div = this.wrappers[index];
 
 					if (this.medias.length === 0 || !div) return;
 
 					if (this.medias[index]) {
+						console.log(this.medias[index]);
+
 						// Calculate x and y in %
-						this.medias[index].style.left = !this.medias[index].style.left ? this.media_prop[index].startX : this.medias[index].style.left;
-						this.medias[index].style.top = !this.medias[index].style.top ? this.media_prop[index].startY : this.medias[index].style.top;
+						this.medias[index].style.left = !this.medias[index].style.left && this.media_prop[index] ? this.media_prop[index].startX : this.medias[index].style.left;
+						this.medias[index].style.top = !this.medias[index].style.top &&  this.media_prop[index] ? this.media_prop[index].startY : this.medias[index].style.top;
 
 
 						// Mousedown when mouse leave
@@ -576,6 +483,7 @@
 						});
 
 						this.medias[index].addEventListener('mousedown', (e) => {
+							console.log(this.media);
 							// mouse state set to true
 						    this.medias[index].mousedown = true;
 						    this.media[index].selected = !this.media[index].selected;
@@ -617,11 +525,6 @@
 						    this.media[index].startY = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100) + '%';
 						}
 					}, true);
-
-				    // Default media props
-			        console.log(this.medias[index]);
-					this.media[index].ratio = this.medias[index].offsetWidth / this.medias[index].offsetHeight;
-					console.log('RATION ' + this.media[index].ratio);
 			    }
 				this.adaptWrapper();
 				window.addEventListener('resize', (e) => {
@@ -629,26 +532,9 @@
 				});
 			    this.$forceUpdate();
 			},
-	        compareMediaToGridPosition(grid, media) {
-		    	console.log(grid, media);
-		    	return grid.startX === media.startX &&
-			        grid.startY === media.startY &&
-	                grid.scale === media.scale &&
-	                grid.z_index === media.z_index;
-	        },
-			isAnyMediaChanged() {
-		        let result = false;
-			    this.media.forEach((media, i) => {
-			    	if (!result && i + 1 !== this.media.length &&
-				      !this.compareMediaToGridPosition(this.grid[this.media.length - 1][i], media)
-				    ) {
-			    		result = true;
-				    }
-			    });
-			    return result;
-			},
-			changeLayout(layout) {
-			    this.layout = layout;
+			changeLayout(rows, columns) {
+			    this.rows = rows;
+			    this.columns = columns;
 			},
 			choose() {
 				dialog.showOpenDialog({
@@ -658,104 +544,15 @@
 					]
 				}, (files) => {
 					if (files) {
-						const mediaChanged = this.isAnyMediaChanged();
-						console.log('mediaChanged: ' + mediaChanged);
-						if (this.media.length === 0) {
-							this.media[this.media.length] = {
-								path: files[0],
-								startX: '0%',
-								startY: '0%',
-								scale: 1,
-								z_index: 10,
-								rotate: 0,
-								selected: false
-							};
-						} else if (this.media.length === 1){
-							this.media[0] = {
-							    ...this.media[0],
-								startX: !mediaChanged ? '0%' : this.media[0].startX,
-								startY: !mediaChanged ? '0%' : this.media[0].startY,
-							    scale: !mediaChanged ? 0.5 : this.media[0].scale,
-							    z_index: !mediaChanged ? 10 : this.media[0].z_index,
-							    rotate: !mediaChanged ? 0 : this.media[0].rotate,
-								selected: false
-							};
-							this.media[this.media.length] = {
-								path: files[0],
-								startX: '50%',
-								startY: '0%',
-								scale: 0.5,
-								z_index: 10,
-								rotate: 0,
-								selected: false
-							};
-						} else if (this.media.length === 2){
-							this.media[0] = {
-							    ...this.media[0],
-								startX: !mediaChanged ? '0%' : this.media[0].startX,
-								startY: !mediaChanged ? '0%' : this.media[0].startY,
-							    scale: !mediaChanged ? 0.33 : this.media[0].scale,
-								z_index: !mediaChanged ? 10 : this.media[0].z_index,
-								rotate: !mediaChanged ? 0 : this.media[0].rotate,
-								selected: false
-							};
-							this.media[1] = {
-							  ...this.media[1],
-								startX: !mediaChanged ? '33.33%' : this.media[1].startX,
-								startY: !mediaChanged ? '0%' : this.media[1].startY,
-							    scale: !mediaChanged  ? 0.33 : this.media[1].scale,
-								z_index: !mediaChanged ? 10 : this.media[1].z_index,
-								rotate: !mediaChanged ? 0 : this.media[1].rotate,
-								selected: false
-							};
-							this.media[this.media.length] = {
-								path: files[0],
-								startX: '66.66%',
-								startY: '0%',
-								scale: 0.33,
-								z_index: 10,
-								rotate: 0,
-								selected: false
-							};
-						} else if (this.media.length === 3){
-							this.media[0] = {
-								...this.media[0],
-								startX: !mediaChanged ? '0%' : this.media[0].startX,
-								startY: !mediaChanged ? '0%' : this.media[0].startY,
-								scale: !mediaChanged ? 0.5 : this.media[0].scale,
-								z_index: !mediaChanged ? 10 : this.media[0].z_index,
-								rotate: !mediaChanged ? 0 : this.media[0].rotate,
-								selected: false
-							};
-							this.media[1] = {
-								...this.media[1],
-								startX: !mediaChanged ? '50%' : this.media[1].startX,
-								startY: !mediaChanged ? '0%' : this.media[1].startY,
-								scale: !mediaChanged  ? 0.5 : this.media[1].scale,
-								z_index: !mediaChanged ? 10 : this.media[1].z_index,
-								rotate: !mediaChanged ? 0 : this.media[1].rotate,
-								selected: false
-							};
-							this.media[2] = {
-								...this.media[2],
-								startX: !mediaChanged ? '0%' : this.media[1].startX,
-								startY: !mediaChanged ? '50%' : this.media[1].startY,
-								scale: !mediaChanged  ? 0.5 : this.media[1].scale,
-								z_index: !mediaChanged ? 10 : this.media[1].z_index,
-								rotate: !mediaChanged ? 0 : this.media[1].rotate,
-								selected: false
-							};
-							this.media[this.media.length] = {
-								path: files[0],
-								startX: '50%',
-								startY: '50%',
-								scale: 0.50,
-								z_index: 10,
-								rotate: 0,
-								selected: false
-							};
-						}
-
+						this.media[this.media.length] = {
+							path: files[0],
+							startX: '0%',
+							startY: '0%',
+							scale: 1,
+							z_index: 10,
+							rotate: 0,
+							selected: false
+						};
 					    this.$forceUpdate();
 						this.$nextTick(this.init);
 					}

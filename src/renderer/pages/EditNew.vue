@@ -6,11 +6,11 @@
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
 		<div style="position: absolute; width: 100%; color: white; text-align: center; z-index: 11; padding-top: 10px;">
-			<button @click="$refs.editor.changeLayout([''])"  class="button button-play filter-button black round-btn">
-				Layout 2x2
+			<button @click="changeLayout(1,2)"  class="button button-play filter-button black round-btn">
+				1x2
 			</button>
-			<button @click="$refs.editor.changeLayout(2)"  class="button button-play filter-button black round-btn">
-				Layout 1:1:1
+			<button @click="changeLayout(2,2)"  class="button button-play filter-button black round-btn">
+				2x2
 			</button>
 			<button @click="$refs.editor.choose()"  class="button button-play filter-button black round-btn">
 				Insert Media
@@ -101,6 +101,9 @@
 		},
 		methods: {
 		  ...mapActions(['fetchPresentations']),
+		  changeLayout(rows, columns) {
+		  	this.$refs.editor.changeLayout(rows, columns);
+		  },
 		  changeMediaCnt(number) {
 		  	if ((this.media_cnt === 1 && number < 0) || (this.media_cnt === 5 && number > 0 )) return;
 		    this.media_cnt += number;

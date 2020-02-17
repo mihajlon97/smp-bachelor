@@ -1,21 +1,10 @@
 <template>
-	<div class="move" ondragstart="return false;">
-
-		<!-- Image -->
-		<img v-if="path.indexOf('.mp4') === -1" :src="get_blob(path)" style="margin: 0;" alt="">
-
-		<!-- Video -->
-		<video v-else-if="path.indexOf('.mp4') !== -1" autoplay muted loop  style="margin: 0;">
-			<source :src="get_blob(path)" type="video/mp4">
-		</video>
-
-		<!--
-		<div v-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') === -1" class="move" :style="`background-size: contain; background-image: url('${get_blob(media[i - 1].path)};transform: scale(${media[i - 1].scale}) rotate(${media[i - 1].rotate}deg); top:${media[i - 1].startY}; left:${media[i - 1].startX};`"></div>
-		<video v-else-if="media[i - 1] && media[i - 1].path && media[i - 1].path.indexOf('.mp4') !== -1" autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
-			<source :src="get_blob(media[i - 1].path)" type="video/mp4">
-		</video>
-		-->
+	<div v-if="path.indexOf('.mp4') === -1" class="move" :style="`background-color: transparent;`">
+		<img :src="get_blob(path)" style="height: 100%; width: 100%; object-fit: contain;" alt="">
 	</div>
+	<video v-else autoplay muted loop class="move" style="position:absolute; object-fit: contain;">
+		<source :src="get_blob(path)" type="video/mp4">
+	</video>
 </template>
 
 <script>

@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/components/Media.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Media.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -38,52 +40,52 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="babelrc" value="1" />
-          <entry key="css" value="7" />
+          <entry key="css" value="8" />
           <entry key="ejs" value="4" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="48" />
+          <entry key="js" value="51" />
           <entry key="json" value="14" />
           <entry key="md" value="1" />
           <entry key="png" value="3" />
           <entry key="ts" value="1" />
-          <entry key="vue" value="28" />
+          <entry key="vue" value="33" />
           <entry key="yml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="7" />
+          <entry key="CSS" value="8" />
           <entry key="EJS" value="4" />
           <entry key="Image" value="4" />
           <entry key="JSON" value="14" />
-          <entry key="JavaScript" value="48" />
+          <entry key="JavaScript" value="51" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="TypeScript" value="1" />
-          <entry key="Vue.js" value="28" />
+          <entry key="Vue.js" value="33" />
           <entry key="YAML" value="3" />
           <entry key="tsconfig" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="910" />
+          <entry key="css" value="1139" />
           <entry key="ejs" value="22" />
           <entry key="js" value="2779" />
           <entry key="json" value="720" />
           <entry key="md" value="310" />
           <entry key="txt" value="1460" />
-          <entry key="vue" value="34831" />
+          <entry key="vue" value="36198" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="910" />
+          <entry key="CSS" value="1139" />
           <entry key="EJS" value="22" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="720" />
           <entry key="JavaScript" value="2779" />
           <entry key="PLAIN_TEXT" value="1770" />
-          <entry key="Vue.js" value="34830" />
+          <entry key="Vue.js" value="36197" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -128,10 +130,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="130" column="22" lean-forward="true" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
+            <state relative-caret-position="18">
+              <caret line="529" column="58" lean-forward="true" selection-start-line="529" selection-start-column="58" selection-end-line="529" selection-end-column="58" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#3704#3746#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,11 +143,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+            <state relative-caret-position="17">
+              <caret line="1" column="52" lean-forward="true" selection-start-line="1" selection-start-column="52" selection-end-line="1" selection-end-column="52" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#video#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,8 +174,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/pages/EditNew.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+            <state relative-caret-position="120">
+              <caret line="104" column="36" lean-forward="true" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -184,8 +187,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="218" column="1" lean-forward="true" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
+            <state relative-caret-position="69">
+              <caret line="282" selection-start-line="282" selection-end-line="282" />
             </state>
           </provider>
         </entry>
@@ -203,27 +206,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>swiper</find>
-      <find>overflow-</find>
-      <find>overflow</find>
-      <find>a</find>
-      <find>100</find>
-      <find>size</find>
-      <find>this.slides[this.activeSlide].length</find>
-      <find>EEE</find>
-      <find>&lt; this.media</find>
-      <find>playing</find>
-      <find>media_cnt</find>
-      <find>exitHandler</find>
-      <find>init</find>
-      <find>edit</find>
-      <find>win</find>
-      <find>displays</find>
-      <find>z_index</find>
-      <find>layoutId</find>
-      <find>layout</find>
-      <find>choose</find>
-      <find>scale</find>
       <find>this.grid</find>
       <find>switchMedia</find>
       <find>isAnyMediaChanged</find>
@@ -232,7 +214,28 @@
       <find>0%</find>
       <find>translate</find>
       <find>width</find>
+      <find>choose</find>
+      <find>media-nr-</find>
+      <find>scale</find>
+      <find>dra</find>
+      <find>media</find>
+      <find>] =</find>
+      <find>layout</find>
+      <find>(i*j)</find>
+      <find>((i-1)*columns)+j</find>
+      <find>((i-1)*columns)-1</find>
+      <find>.co</find>
+      <find>wrapper</find>
       <find>drag</find>
+      <find>column</find>
+      <find>querySelector</find>
+      <find>Layout</find>
+      <find>reset</find>
+      <find>reset(0</find>
+      <find>2</find>
+      <find>move</find>
+      <find>changeLayout</find>
+      <find>media_prop</find>
     </findStrings>
     <replaceStrings>
       <replace>openFullScreen</replace>
@@ -257,6 +260,8 @@
       <replace>presentation_id</replace>
       <replace>anyMediaChosen</replace>
       <replace>this.displays</replace>
+      <replace>(i+j)</replace>
+      <replace>((i-1)*columns)+j-1</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -288,9 +293,10 @@
         <option value="$PROJECT_DIR$/src/renderer/main.js" />
         <option value="$PROJECT_DIR$/src/main/index.js" />
         <option value="$PROJECT_DIR$/src/renderer/pages/PlayNew.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Media.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Layout.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" />
-        <option value="$PROJECT_DIR$/src/renderer/components/Media.vue" />
         <option value="$PROJECT_DIR$/src/renderer/assets/css/main.css" />
       </list>
     </option>
@@ -776,7 +782,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="495646000" />
+    <option name="totallyTimeSpent" value="526288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -1048,10 +1054,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Layout.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="52" lean-forward="true" selection-start-line="1" selection-start-column="52" selection-end-line="1" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/pages/EditNew.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        <state relative-caret-position="120">
+          <caret line="104" column="36" lean-forward="true" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
           <folding>
             <element signature="n#style#0;n#div#0;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1059,31 +1086,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#video#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="130" column="22" lean-forward="true" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
+        <state relative-caret-position="18">
+          <caret line="529" column="58" lean-forward="true" selection-start-line="529" selection-start-column="58" selection-end-line="529" selection-end-column="58" />
           <folding>
             <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#3704#3746#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="218" column="1" lean-forward="true" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
+        <state relative-caret-position="69">
+          <caret line="282" selection-start-line="282" selection-end-line="282" />
         </state>
       </provider>
     </entry>
