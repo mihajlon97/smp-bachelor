@@ -24,7 +24,7 @@
 					/>
 
 					<!-- Drag & Drop -->
-					<div v-else class="chooseText">
+					<div v-else class="chooseText" @click="choose(((i-1)*columns)+j)">
 						<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
 							Drag & Drop Media Here
 						</h1>
@@ -448,12 +448,12 @@
 		    },
 			adaptWrapper() {
 				const windowRatio = window.innerWidth / window.innerHeight;
-				if (windowRatio >= 1.33) {
+				if (windowRatio >= 1.77) {
 					this.height = window.innerHeight;
-					this.width = this.height * 1.33;
+					this.width = this.height * 1.77;
 				} else {
 					this.width = window.innerWidth;
-					this.height = this.width / 1.33;
+					this.height = this.width / 1.77;
 				}
 				this.$forceUpdate()
 			},
@@ -536,7 +536,7 @@
 			    this.rows = rows;
 			    this.columns = columns;
 			},
-			choose() {
+			choose(index = null) {
 				dialog.showOpenDialog({
 					properties: ['openFile'],
 					filters: [
@@ -544,7 +544,7 @@
 					]
 				}, (files) => {
 					if (files) {
-						this.media[this.media.length] = {
+						this.media[index ? index - 1 : this.media.length] = {
 							path: files[0],
 							startX: '0%',
 							startY: '0%',
