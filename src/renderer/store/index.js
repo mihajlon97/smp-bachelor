@@ -51,22 +51,7 @@ export default new Vuex.Store({
 									if (!allSlides[index]) allSlides[index] = {};
 									allSlides[index][keyValue[0]] = slide[key];
 								});
-								presentations[presentations.length - 1].slides.push(
-									allSlides
-									/*[{
-										"path": slide.path_1,
-										"startX": slide.startX_1,
-										"startY": slide.startY_1,
-										"scale": slide.scale_1,
-										"rotate": slide.rotate_1
-									}, {
-										"path": slide.path_2,
-										"startX": slide.startX_2,
-										"startY": slide.startY_2,
-										"scale": slide.scale_2,
-										"rotate": slide.rotate_2
-									}]*/
-								);
+								presentations[presentations.length - 1].slides.push(allSlides);
 							});
 						});
 					}
