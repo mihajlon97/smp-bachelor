@@ -12,6 +12,7 @@
 		<div class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
 			<div v-for="i in rows" :key="i" :class="'row row-' + rows">
 				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
+					<transition name="fade">
 					<Media
 							:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg); z-index:${media[((i-1)*columns)+j-1].z_index};`"
 							v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
@@ -29,6 +30,7 @@
 							Drag & Drop Media Here
 						</h1>
 					</div>
+					</transition>
 				</div>
 			</div>
 		</div>
@@ -218,9 +220,13 @@
 				        this.reset(i, true);
 				    }
 				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
+
+				    console.log('OOOOOOOOO');
+				    this.$forceUpdate();
+			        this.$nextTick(this.init);
 			    }
-			    this.rows = null;
-			    this.columns = null;
+			    this.rows = this.slides[this.activeSlide][0];
+			    this.columns = this.slides[this.activeSlide][1];
 
 		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A: " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
@@ -265,8 +271,8 @@
 			        }
 			        this.$forceUpdate();
 		        });
-			    this.rows = null;
-			    this.columns = null;
+			    this.rows = this.slides[this.activeSlide][0];
+			    this.columns = this.slides[this.activeSlide][1];
 
 		        console.log('MEDIA', this.media, "SLIDES", this.slides);
 
@@ -311,8 +317,8 @@
 				    }
 			        this.$forceUpdate();
 			    });
-			    this.rows = null;
-			    this.columns = null;
+			    this.rows = this.slides[this.activeSlide][0];
+			    this.columns = this.slides[this.activeSlide][1];
 		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		    },
@@ -433,10 +439,7 @@
 			},
 			init() {
 		    	this.$forceUpdate();
-
 		    	console.log('INIT', this.media);
-		    	this.rows = this.slides[0] && !this.rows ? this.slides[0][0] : this.rows;
-		    	this.columns = this.slides[0] && !this.columns ? this.slides[0][1] : this.columns;
 			    console.log('R: ' + this.rows, 'C: ' + this.columns);
 			    // let container = this.playing ? document.querySelector('#' + this.id) : document;
 			    let container = document;
@@ -446,7 +449,7 @@
 
 				// Drag & Drop
 				let holders = [...document.querySelectorAll('.column')];
-				console.log('HOLDERS', holders);
+				console.log('HOLDERS', holders, document.getElementsByClassName('column'));
 				for (let i = 0; i < holders.length; i++) {
 					let holder = holders[i];
 					holder.ondragover = () => { return false; };

@@ -279,7 +279,11 @@ body {
     position: relative;
     background: black no-repeat center;
     background-clip: border-box;
-    transition: transform 1s;
+    transition: transform 1s!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+
     display: table;
     box-sizing: border-box;
     width: 100%;
@@ -291,4 +295,11 @@ body {
 }
 button {
     cursor: pointer;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }
