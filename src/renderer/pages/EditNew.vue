@@ -6,16 +6,50 @@
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
 		</div>
 		<div style="position: absolute; width: 100%; color: white; text-align: center; z-index: 11; padding-top: 10px;">
-			<button @click="changeLayout(1,2)"  class="button button-play filter-button black round-btn">
-				1x2
-			</button>
-			<button @click="changeLayout(2,2)"  class="button button-play filter-button black round-btn">
-				2x2
+			<button @click="showLayout = !showLayout"
+					class="button button-play filter-button black round-btn">
+				Layout ˅
 			</button>
 			<button @click="$refs.editor.choose()"  class="button button-play filter-button black round-btn">
 				Insert Media
 			</button>
-			<h3> {{ activeSlide + 1 }} </h3>
+
+			<table v-if="showLayout">
+				<tr>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 1 && hoverLayout[1] >= 1 }"
+					    @mouseover="hoverLayout = [1,1]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(1,1)">1x1</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 1 && hoverLayout[1] >= 2 }"
+					    @mouseover="hoverLayout = [1,2]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(1,2)">1x2</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 1 && hoverLayout[1] >= 3 }"
+					    @mouseover="hoverLayout = [1,3]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(1,3)">1x3</td>
+				</tr>
+				<tr>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 2 && hoverLayout[1] >= 1 }"
+					    @mouseover="hoverLayout = [2,1]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(2,1)">2x1</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 2 && hoverLayout[1] >= 2 }"
+					    @mouseover="hoverLayout = [2,2]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(2,2)">2x2</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 2 && hoverLayout[1] >= 3 }"
+					    @mouseover="hoverLayout = [2,3]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(2,3)">2x3</td>
+				</tr>
+				<tr>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 3 && hoverLayout[1] >= 1 }"
+					    @mouseover="hoverLayout = [3,1]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(3,1)">3x1</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 3 && hoverLayout[1] >= 2 }"
+					    @mouseover="hoverLayout = [3,2]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(3,2)">3x2</td>
+					<td :class="{'selectedLayout': hoverLayout[0] >= 3 && hoverLayout[1] >= 3 }"
+					    @mouseover="hoverLayout = [3,3]" @mouseleave="hoverLayout = [0,0]"
+					    @click="changeLayout(3,3)">3x3</td>
+				</tr>
+			</table>
+
 		</div>
 		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
 			<button @click="save" class="button button-play black round-btn"> Save </button>
@@ -24,6 +58,8 @@
 		</span>
 
 		<MediaHolder ref="editor" :playing="!!$route.query.play" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
+
+		<h3 id="slideNumber"> {{ activeSlide + 1 }} </h3>
 	</div>
 </template>
 
@@ -36,6 +72,8 @@
 		components: { MediaHolder },
 	    data() {
 	      return {
+	        hoverLayout: [1,1],
+	        showLayout: false,
 	        totalSlides: 0,
 	        mode: 'create',
 	        loading: {
@@ -103,6 +141,7 @@
 		  ...mapActions(['fetchPresentations']),
 		  changeLayout(rows, columns) {
 		  	this.$refs.editor.changeLayout(rows, columns);
+		  	this.showLayout = false;
 		  },
 		  changeMediaCnt(number) {
 		  	if ((this.media_cnt === 1 && number < 0) || (this.media_cnt === 5 && number > 0 )) return;
@@ -140,5 +179,33 @@
 <style>
 	.button{
 		padding: 10px 22px;
+	}
+	table {
+		width: 200px;
+		height: 200px;
+		background-color: white;
+		margin: 0 auto;
+		border-radius: 20px;
+	}
+
+	table td {
+		background-color: #dddddd;
+		border-radius: 20px;
+		font-size: 20px;
+		color: black;
+		cursor: pointer;
+	}
+
+	#slideNumber {
+		text-align: center;
+		width:100%;
+		font-size: 20px;
+		position: absolute;
+		bottom: 20px;
+		color: black;
+	}
+	.selectedLayout {
+		box-shadow: 0 0 3px #ff932b;
+		background-color: #bcbcbc;
 	}
 </style>

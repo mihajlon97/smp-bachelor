@@ -147,7 +147,6 @@
 			    this.$refs.menu.style.top = e.y + 'px';
 		    },
 		    reset (index, removePhoto = false) {
-		    	console.log('RESET ' + index + ' R ' + removePhoto);
 		    	if (removePhoto) {
 				    this.media[index] = {};
 			    }
@@ -483,8 +482,6 @@
 					if (this.medias.length === 0 || !div) return;
 
 					if (this.medias[index]) {
-						console.log(this.medias[index]);
-
 						// Calculate x and y in %
 						this.medias[index].style.left = this.media[index] ? this.media[index].startX : this.medias[index].style.left;
 						this.medias[index].style.top = this.media[index]  ? this.media[index].startY : this.medias[index].style.top;
@@ -493,10 +490,12 @@
 						// Mousedown when mouse leave
 						this.medias[index].addEventListener('mouseleave', (e) => {
 							this.medias[index].mousedown = false;
+						    this.medias[index].style.transition = 'all 1s';
 						});
 
 						this.medias[index].addEventListener('mousedown', (e) => {
-							console.log(this.media);
+						    this.medias[index].style.transition = 'transform 1s';
+
 							// mouse state set to true
 						    this.medias[index].mousedown = true;
 						    this.media[index].selected = !this.media[index].selected;

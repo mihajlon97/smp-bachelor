@@ -279,10 +279,7 @@ body {
     position: relative;
     background: black no-repeat center;
     background-clip: border-box;
-    transition: transform 1s!important;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    transition: all 1s;
 
     display: table;
     box-sizing: border-box;
