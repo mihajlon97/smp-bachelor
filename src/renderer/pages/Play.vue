@@ -164,7 +164,7 @@
 			const modalPath = process.env.NODE_ENV === 'development'
 				// ? 'http://localhost:9080/#/edit?play=' + presentation.id
 				? 'http://localhost:9080/#/play?autoplay=' + presentation.id
-				: `file://${__dirname}/index.html#edit?play=` + presentation.id;
+				: `file://${__dirname}/index.html#play?autoplay=` + presentation.id;
 
 			let win = new BrowserWindow({
 				x: (chosenScreen !== 'main') ? externalDisplay.bounds.x + 50 : 0,
