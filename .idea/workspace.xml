@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sip-bachelor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/smp-bachelor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/pages/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/Play.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/builder-effective-config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/builder-effective-config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/latest.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/latest.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/win-unpacked/resources/app-update.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/win-unpacked/resources/app-update.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,7 +25,7 @@
     <session id="-2060221866">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
@@ -43,7 +49,7 @@
           <entry key="jpg" value="2" />
           <entry key="js" value="54" />
           <entry key="json" value="14" />
-          <entry key="md" value="1" />
+          <entry key="md" value="2" />
           <entry key="png" value="4" />
           <entry key="rnc" value="2" />
           <entry key="ts" value="2" />
@@ -58,7 +64,7 @@
           <entry key="Image" value="6" />
           <entry key="JSON" value="14" />
           <entry key="JavaScript" value="54" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
           <entry key="RNG Compact" value="2" />
           <entry key="TypeScript" value="2" />
           <entry key="Vue.js" value="34" />
@@ -73,8 +79,8 @@
           <entry key="js" value="2886" />
           <entry key="json" value="720" />
           <entry key="md" value="310" />
-          <entry key="txt" value="2091" />
-          <entry key="vue" value="39717" />
+          <entry key="txt" value="2144" />
+          <entry key="vue" value="39722" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -84,8 +90,8 @@
           <entry key="HTML" value="1" />
           <entry key="JSON" value="720" />
           <entry key="JavaScript" value="2886" />
-          <entry key="PLAIN_TEXT" value="2401" />
-          <entry key="Vue.js" value="39716" />
+          <entry key="PLAIN_TEXT" value="2454" />
+          <entry key="Vue.js" value="39721" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -111,6 +117,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/main.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,8 +141,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="461" column="19" selection-start-line="461" selection-start-column="19" selection-end-line="461" selection-end-column="19" />
+            <state relative-caret-position="178">
+              <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -152,24 +167,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/renderer/pages/Play.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="168" column="41" lean-forward="true" selection-start-line="168" selection-start-column="41" selection-end-line="168" selection-end-column="41" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#src#0;n#img#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#1;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#2;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/assets/256x256.png">
           <provider selected="true" editor-type-id="images" />
@@ -179,7 +176,7 @@
         <entry file="file://$PROJECT_DIR$/src/renderer/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -188,7 +185,7 @@
         <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="137">
-              <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+              <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -209,7 +206,7 @@
         <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="323" column="20" lean-forward="true" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
+              <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -227,8 +224,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>media_prop</find>
-      <find>media</find>
       <find>abso</find>
       <find>create</find>
       <find>router</find>
@@ -254,9 +249,11 @@
       <find>absol</find>
       <find>layout</find>
       <find>init</find>
-      <find>id</find>
       <find>close</find>
       <find>Smart Image</find>
+      <find>play?</find>
+      <find>id</find>
+      <find>sip-bachelor</find>
     </findStrings>
     <replaceStrings>
       <replace>openFullScreen</replace>
@@ -286,6 +283,7 @@
       <replace>(this.slides[this.activeSlide].length - 2) / 5</replace>
       <replace>class=&quot;layoutBtn&quot;</replace>
       <replace>Smart Media</replace>
+      <replace>smp-bachelor</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -302,7 +300,6 @@
         <option value="$PROJECT_DIR$/node_modules/vue-croppa/dist/vue-croppa.js" />
         <option value="$PROJECT_DIR$/src/renderer/storage/storage.json" />
         <option value="$PROJECT_DIR$/src/renderer/pages/Create.vue" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/renderer/mixins/global.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/Editor.vue" />
         <option value="$PROJECT_DIR$/node_modules/vue-croppa2/dist/vue-croppa.js" />
@@ -319,9 +316,10 @@
         <option value="$PROJECT_DIR$/src/renderer/App.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/PlayNew.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/pages/Play.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" />
         <option value="$PROJECT_DIR$/src/main/index.js" />
-        <option value="$PROJECT_DIR$/src/renderer/pages/Play.vue" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -343,7 +341,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="312" />
-    <option name="y" value="-8" />
+    <option name="y" value="-9" />
     <option name="width" value="1890" />
     <option name="height" value="930" />
   </component>
@@ -358,35 +356,35 @@
         <subPane>
           <expand>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
@@ -394,42 +392,42 @@
               <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="mixins" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -441,7 +439,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CC/4 - Cloud Storage/cc-cloud-computing" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -490,21 +488,7 @@
       <workItem from="1581020016141" duration="136640000" />
       <workItem from="1581859335527" duration="2479000" />
       <workItem from="1582146466554" duration="11349000" />
-      <workItem from="1582297754878" duration="39985000" />
-    </task>
-    <task id="LOCAL-00011" summary=" - remove unused dependencies">
-      <created>1578763461830</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1578763461830</updated>
-    </task>
-    <task id="LOCAL-00012" summary=" - path.join&#10; - not working when built - TODO: storage">
-      <created>1578782462351</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1578782462351</updated>
+      <workItem from="1582297754878" duration="42966000" />
     </task>
     <task id="LOCAL-00013" summary=" - photos">
       <created>1578992989257</created>
@@ -835,11 +819,25 @@
       <option name="project" value="LOCAL" />
       <updated>1582393301821</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary=" - play in production url">
+      <created>1582393363736</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1582393363736</updated>
+    </task>
+    <task id="LOCAL-00061" summary=" - filter div size">
+      <created>1582395372914</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1582395372914</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="595393000" />
+    <option name="totallyTimeSpent" value="598374000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -860,7 +858,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30960855" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.30960855" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -873,8 +871,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - forceUpdate before init" />
-    <MESSAGE value=" - dynamic number od medias per slide done" />
     <MESSAGE value=" - dynamic number od medias per slide fix" />
     <MESSAGE value=" - video support enabled - autoplay" />
     <MESSAGE value=" - all elements in one div" />
@@ -898,7 +894,9 @@
     <MESSAGE value=" - remove playing on edit page" />
     <MESSAGE value=" - play fix&#10; - removed old pages&#10; - removed playing on edit page" />
     <MESSAGE value=" - logo changed &#10; - Smart Image Presenter to Smart Media Presenter because of video support" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - logo changed &#10; - Smart Image Presenter to Smart Media Presenter because of video support" />
+    <MESSAGE value=" - play in production url" />
+    <MESSAGE value=" - filter div size" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - filter div size" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -944,13 +942,6 @@
     <entry file="file://$PROJECT_DIR$/.electron-vue/build.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/vue-croppa2/dist/vue-croppa.js">
@@ -1080,7 +1071,7 @@
     <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
-          <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+          <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -1090,7 +1081,7 @@
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="323" column="20" lean-forward="true" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
+          <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1134,14 +1125,36 @@
     <entry file="file://$PROJECT_DIR$/src/renderer/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/assets/image.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/assets/256x256.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/pages/Play.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="173" column="33" selection-start-line="173" selection-start-column="33" selection-end-line="173" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#src#0;n#img#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#2;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="461" column="19" selection-start-line="461" selection-start-column="19" selection-end-line="461" selection-end-column="19" />
+        <state relative-caret-position="178">
+          <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1159,25 +1172,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/assets/image.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/assets/256x256.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/pages/Play.vue">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="168" column="41" lean-forward="true" selection-start-line="168" selection-start-column="41" selection-end-line="168" selection-end-column="41" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#src#0;n#img#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#2;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="115">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
         </state>
       </provider>
     </entry>

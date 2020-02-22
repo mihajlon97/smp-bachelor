@@ -1,5 +1,5 @@
 {
-  "name": "sip-bachelor",
+  "name": "smp-bachelor",
   "version": "0.0.1",
   "author": "Mihajlo Nikodijevic <a01646292@unet.univie.ac.at>",
   "description": "Smart Media Presenter - Bachelor",
@@ -18,7 +18,7 @@
   },
   "build": {
     "productName": "Smart Media Presenter",
-    "appId": "com.sip-bachelor.mihajlon97",
+    "appId": "com.smp-bachelor.mihajlon97",
     "directories": {
       "output": "build"
     },
