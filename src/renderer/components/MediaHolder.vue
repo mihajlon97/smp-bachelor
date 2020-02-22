@@ -43,7 +43,7 @@
 					<button @click="reset(selected, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
 					<button @click="reset(selected, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
 				</div>
-				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15; width: 30%;">
+				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15; width: 45%;">
 					<div style="margin-right: 50px; float: left;">
 						<p style="color: white; font-size: 25px; margin-bottom: 10px;"> Rotate </p>
 						<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
@@ -55,7 +55,7 @@
 						<input type="range" :value="media[selected].scale" @input="scaling($event)" step="0.01" min="0" max="2">
 						<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
 					</div>
-					</div>
+				</div>
 			</span>
 		</div>
 	</div>
