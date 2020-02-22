@@ -3,7 +3,8 @@
 		<!-- Context Menu -->
 		<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
 			<ul>
-				<li @click="rotate(selected)">Rotate</li>
+				<li @click="rotate(selected)">Rotate 90°</li>
+				<li @click="reset(selected, false)">Reset</li>
 				<li class="remove-option" @click="reset(selected, true)"> Remove</li>
 			</ul>
 		</div>
@@ -42,11 +43,19 @@
 					<button @click="reset(selected, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
 					<button @click="reset(selected, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
 				</div>
-				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15;">
-					<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
-					<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
-					<button @click="scale(selected, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
-				</div>
+				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15; width: 30%;">
+					<div style="margin-right: 50px; float: left;">
+						<p style="color: white; font-size: 25px; margin-bottom: 10px;"> Rotate </p>
+						<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
+						<input type="range" :value="media[selected].rotate" @input="rotating($event)" min="0" max="360">
+					</div>
+					<div style="float: left;">
+						<p style="color: white; font-size: 25px; margin-bottom: 10px;"> Resize </p>
+						<button @click="scale(selected, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
+						<input type="range" :value="media[selected].scale" @input="scaling($event)" step="0.01" min="0" max="2">
+						<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
+					</div>
+					</div>
 			</span>
 		</div>
 	</div>
@@ -124,12 +133,20 @@
 			    this.$forceUpdate();
 			    this.$nextTick(this.init);
 		    },
+		    rotating(event) {
+				this.media[this.selected].rotate = event.target.value;
+		        this.$forceUpdate();
+		    },
+		    scaling(event) {
+			    this.media[this.selected].scale = event.target.value;
+			    this.$forceUpdate();
+		    },
 		    rotate(index) {
-		    	this.media[index].rotate += 90;
+		    	this.media[index].rotate = parseInt(this.media[index].rotate) + 90;
 		    	this.$forceUpdate();
 		    },
 	        scale (index, factor) {
-	            this.media[index].scale += factor;
+	            this.media[index].scale = parseFloat(this.media[index].scale) + factor;
 	            this.$forceUpdate();
 	        },
 		    menu_open(e) {
@@ -146,7 +163,7 @@
 					    path: this.media[index].path,
 					    startX: '0%',
 					    startY: '0%',
-					    scale: 0.5,
+					    scale: 1,
 					    rotate: 0,
 				    };
 			        this.medias[index].style.left = '0%';
