@@ -100,7 +100,6 @@
 			return {
 			    rows: this.prop_rows,
 			    columns: this.prop_columns,
-			    layout: [['0%', '50%', '33.33%'], ['0%', '50%', '33.33%']],
 			    width: 1600,
 			    height: 1200,
 			    menu_opened: false,
@@ -459,8 +458,8 @@
 			},
 			init() {
 		    	this.$forceUpdate();
-			    // let container = this.playing ? document.querySelector('#' + this.id) : document;
-			    let container = document;
+			    let container = this.playing ? document.querySelector('#' + this.id) : document;
+			    // let container = document;
 				this.wrappers = [...container.querySelectorAll('.column')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
@@ -502,6 +501,8 @@
 						this.medias[index].style.left = this.media[index] ? this.media[index].startX : this.medias[index].style.left;
 						this.medias[index].style.top = this.media[index]  ? this.media[index].startY : this.medias[index].style.top;
 
+						console.log(index + ' ' + this.medias[index].style.left);
+						console.log(index + ' ' + this.medias[index].style.top);
 
 						// Mousedown when mouse leave
 						this.medias[index].addEventListener('mouseleave', (e) => {
