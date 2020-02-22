@@ -1,4 +1,4 @@
-# Smart Image Presenter
+# Smart Media Presenter
 ## Cross-platform Desktop Application written in Electron
 ### Bachelor Thesis | Mihajlo Nikodijević
 ### University of Vienna | WS2019
