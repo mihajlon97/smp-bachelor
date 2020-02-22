@@ -218,7 +218,7 @@
 
 			        // Prevent going on next slide if and images are picked or active slide is the last one
 				    if (this.media.length === 0 && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
-				       (this.media.length === 0 && this.slides.length === 0) || this.isEmpty(this.media[0]) || this.isEmpty(this.media[1])) return false;
+				       (this.media.length === 0 && this.slides.length === 0) || this.countChosenMedia() < this.rows * this.columns) return false;
 
 				    console.log('NEXT EMPTY', this.media, this.slides);
 				    // Save current slide modification
