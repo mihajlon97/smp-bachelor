@@ -1,6 +1,6 @@
 <template>
 	<div class="create page" style="padding-top: 0;">
-		<span v-if="!$route.query.play">
+		<span>
 			<div style="position: absolute; left:65px; top: 5px; z-index: 400;">
 			<button v-show="activeSlide > 0" @click="previousSlide()" class="button button-play black round-btn"> Previous Slide </button>
 			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
@@ -54,7 +54,7 @@
 		</div>
 		</span>
 
-		<MediaHolder ref="editor" :playing="!!$route.query.play" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
+		<MediaHolder ref="editor" :activeSlide="activeSlide" @updateTotalSlides="updateTotalSlides"/>
 
 		<h3 id="slideNumber"> {{ activeSlide + 1 }} </h3>
 	</div>
@@ -88,46 +88,6 @@
 		        this.$refs.editor.edit(presentationToEdit);
 		    });
 		  }
-
-			// Play presentation
-			if (this.$route.query.play !== undefined) {
-				this.mode = 'play';
-				const presentationToPlay = this.presentations.filter(presentation => presentation.id === this.$route.query.play)[0];
-				this.$nextTick(() => {
-					this.$refs.editor.play(presentationToPlay);
-				});
-
-
-				setTimeout(() => {
-					if (this.$route.query.play) {
-						document.onkeydown = (evt) => {
-							evt = evt || window.event;
-							let isEscape = false;
-							if ("key" in evt) {
-								isEscape = (evt.key === "Escape" || evt.key === "Esc");
-							} else {
-								isEscape = (evt.keyCode === 27);
-							}
-							if (isEscape) {
-								require('electron').remote.getCurrentWindow().close();
-							}
-						};
-					}
-
-					// Click moving through presentation events
-					let slider = document.getElementsByClassName('create')[0];
-
-					slider.addEventListener('contextmenu', () => {
-					    if (this.activeSlide > 0) this.previousSlide()
-					});
-					slider.addEventListener('click', () => {
-						if (presentationToPlay.slides.length === this.activeSlide + 1) return;
-					    this.nextSlide()
-					})
-
-				}, 1000);
-
-			}
 		},
 		computed: {
 			...mapGetters(['activeSlide', 'presentations'])
