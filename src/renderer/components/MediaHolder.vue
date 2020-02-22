@@ -3,8 +3,7 @@
 		<!-- Context Menu -->
 		<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
 			<ul>
-				<li @click="media[selected].z_index -= 1">Move to Back </li>
-				<li @click="media[selected].z_index += 1">Move to Front</li>
+				<li @click="rotate(selected)">Rotate</li>
 				<li class="remove-option" @click="reset(selected, true)"> Remove</li>
 			</ul>
 		</div>
@@ -14,7 +13,7 @@
 				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
 					<transition name="fade">
 						<Media
-								:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg); z-index:${media[((i-1)*columns)+j-1].z_index};`"
+								:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg);};`"
 								v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
 								:path="media[((i-1)*columns)+j-1].path"
 								:index="((i-1)*columns)+j-1"
@@ -50,43 +49,6 @@
 				</div>
 			</span>
 		</div>
-
-			<!-- Media width: ${width}px; height: ${height}px; -->
-			<div v-if="false" class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
-				<Media v-for="i in media.length" :key="'media-' + i" :class="(( media[i - 1].selected && !playing) ? 'selected' : '')"
-				       :style="`top:${media[i - 1].startY}; left:${media[i - 1].startX}; transform: scale(${media[i - 1].scale}) translate(${media[i - 1].translate[0]}%, ${media[i - 1].translate[1]}%) rotate(${media[i - 1].rotate}deg); z-index:${media[i - 1].z_index};`"
-				       v-if="media[i - 1] && media[i - 1].path"
-				       :path="media[i - 1].path"
-				       :index="i"
-				       @remove="reset(i - 1, true)"
-				       @contextmenu.native.prevent="menu_open($event)"
-				       @click.native="menu_opened = false"
-				       ondragstart="return false;"
-				/>
-
-				<!-- Drag & Drop -->
-				<div v-if="media.length === 0" @click="choose" class="chooseText">
-					<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
-						Drag & Drop Media Here
-					</h1>
-				</div>
-
-				<!-- Filter Section -->
-				<span v-if="selected !== null && !playing">
-					<div v-if="media.length === 2" style="position: absolute; bottom: 10px; left: 50%; z-index: 15;">
-						<button @click="switchMedia(0, 1)" class="filter-button button-play black round-btn button-control">⇄</button>
-					</div>
-					<div style="position: absolute; bottom: 10px; right: 50px; z-index: 15;">
-						<button @click="reset(selected, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
-						<button @click="reset(selected, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
-					</div>
-					<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15;">
-						<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
-						<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
-						<button @click="scale(selected, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
-					</div>
-				</span>
-			</div>
 	</div>
 </template>
 
@@ -145,10 +107,7 @@
 	        this.init();
 	    },
 		computed: {
-			...mapState(['activeSlide']),
-		    anyMediaSelected() {
-				return this.media.filter(m => m.selected === true).length > 0
-		    }
+			...mapState(['activeSlide'])
 		},
 	    methods: {
 		    countChosenMedia () {
@@ -188,9 +147,7 @@
 					    startX: '0%',
 					    startY: '0%',
 					    scale: 0.5,
-				        z_index: 10,
 					    rotate: 0,
-				        selected: false
 				    };
 			        this.medias[index].style.left = '0%';
 			        this.medias[index].style.top = '0%';
@@ -506,9 +463,7 @@
 								startX: '0%',
 								startY: '0%',
 								scale: 1,
-								z_index: 10,
 								rotate: 0,
-								selected: false
 							};
 							this.$forceUpdate();
 							this.$nextTick(this.init);
@@ -542,20 +497,13 @@
 
 							// mouse state set to true
 						    this.medias[index].mousedown = true;
-						    this.media[index].selected = !this.media[index].selected;
-
-						    // Deselect other medias
-						    if (this.media[index].selected === true) {
-							    for(let i = 0; i < this.media.length; i++) {
-							        if(i !== index) this.media[i].selected = false
-							    }
-								this.selected = index;
-							}
-							this.$forceUpdate();
+						    this.selected = index;
 
 						    // Subtract offset
 							this.medias[index].dim_x = this.medias[index].offsetLeft - e.clientX;
 							this.medias[index].dim_y = this.medias[index].offsetTop - e.clientY;
+
+						    this.$forceUpdate();
 						}, true);
 
 						// div event mouseup
@@ -569,7 +517,6 @@
 					div.addEventListener('mousemove', (e) => {
 					    // Is mouse pressed
 						if (this.medias[index] && this.medias[index].mousedown) {
-						    this.media[index].selected = true;
 						    this.selected = index;
 						    this.$forceUpdate();
 
@@ -608,9 +555,7 @@
 							startX: '0%',
 							startY: '0%',
 							scale: 1,
-							z_index: 10,
 							rotate: 0,
-							selected: false
 						};
 					    this.$forceUpdate();
 						this.$nextTick(this.init);
@@ -623,10 +568,6 @@
 </script>
 
 <style>
-	.selecte {
-		outline-style: solid;
-		outline-color: cornflowerblue;
-	}
 	.context-menu {
 		border-radius: 10px;
 		position: absolute;

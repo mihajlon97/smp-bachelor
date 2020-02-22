@@ -103,7 +103,7 @@
 				    title: "Name your presentation",
 				    content: "input",
 			        showCancelButton: true,
-			        buttons: ["Cancel", "Save"]
+			        buttons: ["Cancel", "Create"]
 			    }).then((name) => {
 				    if (name && name.length > 0) {
 				        return this.$router.push('/edit?presentation_name=' + name)

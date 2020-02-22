@@ -10,36 +10,15 @@
 <script>
 	export default {
 		name: "Media",
-	    data() {
-			return {
-				menu_opened: false,
-			    z_index: 10 + this.index,
-			}
-	    },
 	    props: {
-		    selected: {
-			    type: Boolean,
-			    required: false,
-			    default: false
-		    },
-	        index: {
-	          type: Number,
-	          required: true
-	        },
 			path: {
 				type: String,
 			    required: true,
 			    default: ''
 			}
-	    },
-		methods: {
-		    menu_open() {
-		        this.menu_opened = !this.menu_opened;
-		    }
-		}
+	    }
 	}
 </script>
 
 <style>
-
 </style>
