@@ -14,7 +14,7 @@
 				Insert Media
 			</button>
 
-			<table v-if="showLayout">
+			<table id="layoutTable" v-if="showLayout">
 				<tr>
 					<td :class="{'selectedLayout': hoverLayout[0] >= 1 && hoverLayout[1] >= 1 }"
 					    @mouseover="hoverLayout = [1,1]" @mouseleave="hoverLayout = [0,0]"
@@ -53,7 +53,7 @@
 		</div>
 		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
 			<button @click="save" class="button button-play black round-btn"> Save </button>
-			<button @click="$router.push('/')"  class="button button-play black round-btn"> Cancel </button>
+			<button @click="cancel"  class="button button-play black round-btn"> Cancel </button>
 		</div>
 		</span>
 
@@ -87,7 +87,7 @@
 		  if (this.$route.query.edit !== undefined) {
 			this.mode = 'edit';
 			const presentationToEdit = this.presentations.filter(presentation => presentation.id === this.$route.query.edit)[0];
-		    this.$nextTick(() => {
+			this.$nextTick(() => {
 		        this.$refs.editor.edit(presentationToEdit);
 		    });
 		  }
@@ -121,11 +121,9 @@
 					let slider = document.getElementsByClassName('create')[0];
 
 					slider.addEventListener('contextmenu', () => {
-						console.log('RIGHT CLICK')
 					    if (this.activeSlide > 0) this.previousSlide()
 					});
 					slider.addEventListener('click', () => {
-					    console.log('LEFT CLICK')
 						if (presentationToPlay.slides.length === this.activeSlide + 1) return;
 					    this.nextSlide()
 					})
@@ -135,7 +133,7 @@
 			}
 		},
 		computed: {
-			...mapState(['activeSlide', 'presentations'])
+			...mapGetters(['activeSlide', 'presentations'])
 		},
 		methods: {
 		  ...mapActions(['fetchPresentations']),
@@ -161,6 +159,10 @@
 		      this.$store.state.activeSlide += 1;
 		    }
 		  },
+		  cancel() {
+			  this.fetchPresentations();
+			  this.$router.push('/');
+		  },
 		  save() {
 		  	if (this.mode === 'create') {
 			  this.$refs.editor.save(this.$route.query.presentation_name);
@@ -176,36 +178,8 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.button{
 		padding: 10px 22px;
-	}
-	table {
-		width: 200px;
-		height: 200px;
-		background-color: white;
-		margin: 0 auto;
-		border-radius: 20px;
-	}
-
-	table td {
-		background-color: #dddddd;
-		border-radius: 20px;
-		font-size: 20px;
-		color: black;
-		cursor: pointer;
-	}
-
-	#slideNumber {
-		text-align: center;
-		width:100%;
-		font-size: 20px;
-		position: absolute;
-		bottom: 20px;
-		color: black;
-	}
-	.selectedLayout {
-		box-shadow: 0 0 3px #ff932b;
-		background-color: #bcbcbc;
 	}
 </style>

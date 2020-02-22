@@ -13,26 +13,42 @@
 			<div v-for="i in rows" :key="i" :class="'row row-' + rows">
 				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
 					<transition name="fade">
-					<Media
-							:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg); z-index:${media[((i-1)*columns)+j-1].z_index};`"
-							v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
-							:path="media[((i-1)*columns)+j-1].path"
-							:index="((i-1)*columns)+j-1"
-							@remove="reset(((i-1)*columns)+j-1, true)"
-							@contextmenu.native.prevent="menu_open($event)"
-							@click.native="menu_opened = false"
-							ondragstart="return false;"
-					/>
+						<Media
+								:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg); z-index:${media[((i-1)*columns)+j-1].z_index};`"
+								v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
+								:path="media[((i-1)*columns)+j-1].path"
+								:index="((i-1)*columns)+j-1"
+								@remove="reset(((i-1)*columns)+j-1, true)"
+								@contextmenu.native.prevent="menu_open($event)"
+								@click.native="menu_opened = false"
+								ondragstart="return false;"
+						/>
 
-					<!-- Drag & Drop -->
-					<div v-else class="chooseText" @click="choose(((i-1)*columns)+j)">
-						<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
-							Drag & Drop Media Here
-						</h1>
-					</div>
+						<!-- Drag & Drop -->
+						<div v-else-if="!playing" class="chooseText" @click="choose(((i-1)*columns)+j)">
+							<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
+								Drag & Drop Media Here
+							</h1>
+						</div>
 					</transition>
 				</div>
 			</div>
+
+			<!-- Filter Section -->
+			<span v-if="selected !== null && !playing">
+				<div v-if="media.length === 2" style="position: absolute; bottom: 10px; left: 50%; z-index: 15;">
+					<button @click="switchMedia(0, 1)" class="filter-button button-play black round-btn button-control">⇄</button>
+				</div>
+				<div style="position: absolute; bottom: 10px; right: 50px; z-index: 15;">
+					<button @click="reset(selected, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+					<button @click="reset(selected, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
+				</div>
+				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15;">
+					<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
+					<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
+					<button @click="scale(selected, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
+				</div>
+			</span>
 		</div>
 
 			<!-- Media width: ${width}px; height: ${height}px; -->
@@ -96,6 +112,14 @@
 				type: Boolean,
 			    default: false
 			},
+			prop_rows: {
+				type: Number,
+				default: 1
+			},
+		    prop_columns: {
+				type: Number,
+				default: 2
+			},
 		    media_prop: {
 		        type: Array,
 		        default: () =>  []
@@ -103,13 +127,13 @@
 		},
 	    data() {
 			return {
-			    rows: 2,
-			    columns: 1,
+			    rows: this.prop_rows,
+			    columns: this.prop_columns,
 			    layout: [['0%', '50%', '33.33%'], ['0%', '50%', '33.33%']],
 			    width: 1600,
 			    height: 1200,
 			    menu_opened: false,
-			    media: [],
+			    media: this.media_prop.splice(2),
 			    medias: [],
 			    wrappers: [],
 			    slides: [],
@@ -117,6 +141,7 @@
 			}
 	    },
 	    mounted() {
+			console.log("MOUNTED", this.media);
 	        this.init();
 	    },
 		computed: {
@@ -126,6 +151,13 @@
 		    }
 		},
 	    methods: {
+		    countChosenMedia () {
+		    	let cnt = 0;
+			    for (let i = 0; i < this.media.length; i++) {
+				    if (this.isEmpty(this.media[i]) === false) cnt++;
+			    }
+			    return cnt;
+		    },
 		    switchMedia(indexFirst, indexSecond) {
 		        let help = {...this.media[indexSecond], path: this.media[indexFirst].path};
 			    this.media[indexFirst] = {...this.media[indexFirst], path: this.media[indexSecond].path};
@@ -169,7 +201,7 @@
 
 
 		    nextSlide () {
-		    	console.log('MEDIA', this.media, "SLIDES", this.slides);
+		        console.log('MEDIA', this.media, "SLIDES", this.slides);
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
 					console.log('NEXT EXISTS');
@@ -186,6 +218,9 @@
 						    path: this.slides[this.activeSlide + 1][(5 * i) + 2],
 					    }
 				    }
+
+				    this.rows = this.slides[this.activeSlide + 1][0];
+				    this.columns = this.slides[this.activeSlide + 1][1];
 
 				    // Apply next one
 				    this.$nextTick(() => {
@@ -209,7 +244,7 @@
 
 			        // Prevent going on next slide if and images are picked or active slide is the last one
 				    if (this.media.length === 0 && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
-				       (this.media.length === 0 && this.slides.length === 0)) return false;
+				       (this.media.length === 0 && this.slides.length === 0) || this.isEmpty(this.media[0]) || this.isEmpty(this.media[1])) return false;
 
 				    console.log('NEXT EMPTY', this.media, this.slides);
 				    // Save current slide modification
@@ -220,12 +255,12 @@
 				    }
 				    if (slide.length > 0) this.slides[this.activeSlide] = slide;
 
-				    console.log('OOOOOOOOO');
+			        this.rows = this.slides[this.activeSlide][0];
+			        this.columns = this.slides[this.activeSlide][1];
+
 				    this.$forceUpdate();
 			        this.$nextTick(this.init);
 			    }
-			    this.rows = this.slides[this.activeSlide][0];
-			    this.columns = this.slides[this.activeSlide][1];
 
 		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A: " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
@@ -236,14 +271,20 @@
 		        // If no slides prevent going back
 			    if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
-		        if (this.media.length > 0) {
+		        let discard = false;
+			    if(this.countChosenMedia() < this.rows * this.columns) {
+			        discard = confirm("Discard changes for this slide?");
+			    }
+
+		        if (this.media.length > 0 && discard === false) {
 			        // Save current slide modification
 			        let slide = [this.rows, this.columns];
 			        for (let i = 0, size = this.media.length; i < size; i++) {
 				        slide.push(this.media[i].path, this.media[i].startX, this.media[i].startY, this.media[i].scale, this.media[i].rotate);
 				        this.reset(i, true);
 			        }
-		            if (slide.length > 0 && slide[0]) {
+		            if (slide.length > 0 && slide[2]) {
+		            	console.log('SLIDE');
 		            	this.slides[this.activeSlide] = slide;
 		            }
 		        }
@@ -270,10 +311,9 @@
 			        }
 			        this.$forceUpdate();
 		        });
-			    this.rows = this.slides[this.activeSlide][0];
-			    this.columns = this.slides[this.activeSlide][1];
-
-		        console.log('MEDIA', this.media, "SLIDES", this.slides);
+				this.rows = this.slides[this.activeSlide - 1][0];
+		        this.columns = this.slides[this.activeSlide - 1][1];
+		        console.log('MEDIA', this.media, "SLIDES", this.slides, 'ACTIVE ' + this.activeSlide);
 
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
@@ -281,15 +321,16 @@
 
 
 		    edit (presentation) {
+		    	console.log('EDIT', presentation);
 			    presentation.slides.forEach(slide => {
-				    let slideToAdd = [];
+				    let slideToAdd = [slide[0], slide[1]];
+				    slide.shift();
+				    slide.shift();
 				    slide.forEach(media => {
 				        slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 				    });
 				    if (slideToAdd.length > 0) this.slides.push(slideToAdd);
 			    });
-
-			    console.log('EDIT', this.slides);
 
 			    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
 			    	if (this.slides[this.activeSlide][(5 * i) + 2])
@@ -297,6 +338,10 @@
 						    path: this.slides[this.activeSlide][(5 * i) + 2],
 					    }
 			    }
+
+
+		        this.rows = this.slides[this.activeSlide][0];
+		        this.columns = this.slides[this.activeSlide][1];
 
 			    this.$forceUpdate();
 
@@ -316,14 +361,15 @@
 				    }
 			        this.$forceUpdate();
 			    });
-			    this.rows = this.slides[this.activeSlide][0];
-			    this.columns = this.slides[this.activeSlide][1];
 		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		    },
 		    play (presentation) {
+		    	console.log(presentation.slides);
 			    presentation.slides.forEach(slide => {
-				    let slideToAdd = [];
+				    let slideToAdd = [slide[0], slide[1]];
+				    slide.shift();
+				    slide.shift();
 				    slide.forEach(media => {
 					    slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
 				    });
@@ -343,6 +389,7 @@
 				    this.init();
 
 				    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
+				    	console.log(this.media);
 					    if (this.media[i].path)
 						    this.media[i] = {
 							    ...this.media[i],
@@ -385,7 +432,7 @@
 			    // Column format
 			    let maxMedias = 0;
 			    this.slides.forEach(slide => {
-			        if (slide.length / 5 > maxMedias) maxMedias = slide.length / 5;
+			        if (slide.length / 7 > maxMedias) maxMedias = slide.length / 7;
 			    });
 			    for (let i = 0; i < maxMedias; i++) {
 				    columnNames.push(
@@ -438,17 +485,13 @@
 			},
 			init() {
 		    	this.$forceUpdate();
-		    	console.log('INIT', this.media);
-			    console.log('R: ' + this.rows, 'C: ' + this.columns);
 			    // let container = this.playing ? document.querySelector('#' + this.id) : document;
 			    let container = document;
 				this.wrappers = [...container.querySelectorAll('.column')];
 			    this.medias = [...container.querySelectorAll('.move')];
 
-
 				// Drag & Drop
 				let holders = [...document.querySelectorAll('.column')];
-				console.log('HOLDERS', holders, document.getElementsByClassName('column'));
 				for (let i = 0; i < holders.length; i++) {
 					let holder = holders[i];
 					holder.ondragover = () => { return false; };
@@ -470,6 +513,7 @@
 							this.$forceUpdate();
 							this.$nextTick(this.init);
 							this.$forceUpdate();
+							if (this.countChosenMedia() < this.rows * this.columns) i++;
 						}
 						return false;
 					};
@@ -549,6 +593,7 @@
 			changeLayout(rows, columns) {
 			    this.rows = rows;
 			    this.columns = columns;
+			    this.$nextTick(this.init);
 			},
 			choose(index = null) {
 				dialog.showOpenDialog({

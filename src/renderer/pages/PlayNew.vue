@@ -23,11 +23,13 @@
 
 				<div :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
-						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100%;'">
+						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100vh;'">
 							<MediaHolder
 							        :id="'id-' + presentation_id + '-' + i"
 									:media_prop="slide"
 						            :playing="true"
+							        :prop_rows="slide[0]"
+							        :prop_columns="slide[1]"
 							        :media_count="slide.length"
 							/>
 						</swiper-slide>
@@ -100,13 +102,8 @@
 			    this.$swal({
 				    title: "Name your presentation",
 				    content: "input",
-				    buttons: {
-				        cancel: "Cancel",
-				        save: {
-				    		value: 'save',
-				    		text: 'Save',
-					    },
-				    },
+			        showCancelButton: true,
+			        buttons: ["Cancel", "Save"]
 			    }).then((name) => {
 				    if (name && name.length > 0) {
 				        return this.$router.push('/edit?presentation_name=' + name)
@@ -165,7 +162,8 @@
 
 			const { BrowserWindow } = require('electron').remote;
 			const modalPath = process.env.NODE_ENV === 'development'
-				? 'http://localhost:9080/#/edit?play=' + presentation.id
+				// ? 'http://localhost:9080/#/edit?play=' + presentation.id
+				? 'http://localhost:9080/#/play?autoplay=' + presentation.id
 				: `file://${__dirname}/index.html#edit?play=` + presentation.id;
 
 			let win = new BrowserWindow({
@@ -234,6 +232,7 @@
 			});
 	  },
 	  editPresentation(presentation) {
+	    this.fetchPresentations()
 	  	this.$router.push('/edit?edit=' + presentation.id);
 	  },
 	  deletePresentation(presentation) {
@@ -312,12 +311,8 @@
 
 	        // Click moving through presentation events
 	      	let sliders = document.getElementsByClassName('mySwiper');
-
-		    console.log('SLIDERS', sliders);
 	      	for (let i = 0; i < sliders.length; i++) {
-	      		console.log('EEE', this.$refs)
 			      sliders[i].addEventListener('contextmenu', () => {
-			      	console.log(i, this.$refs['mySwiper' + i][0])
 				      if (this.$refs['mySwiper' + i][0].swiper) {
 					      this.$refs['mySwiper' + i][0].swiper.slidePrev(500, () => {
 						      console.log('SLIDE PREVIOUS');

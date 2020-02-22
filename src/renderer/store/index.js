@@ -15,7 +15,8 @@ export default new Vuex.Store({
 		route: state => state.route,
 		error: state => state.error,
 		loading: state => state.loading,
-		presentations: state => state.presentations
+		presentations: state => state.presentations,
+		activeSlide: state => state.activeSlide
 	},
 	actions: {
 		async fetchPresentations({state, commit}) {
@@ -44,18 +45,21 @@ export default new Vuex.Store({
 
 							// Slides
 							slides.forEach(slide => {
-								let allSlides = [];
+								let allSlides = [slide.rows, slide.columns];
 								Object.keys(slide).forEach(key => {
-									let keyValue = key.split('_');
-									const index = (parseInt(keyValue[1]) - 1);
-									if (!allSlides[index]) allSlides[index] = {};
-									allSlides[index][keyValue[0]] = slide[key];
+									if (key !== 'rows' && key !== 'columns') {
+										let keyValue = key.split('_');
+										const index = (parseInt(keyValue[1]) - 1) + 2;
+										if (!allSlides[index]) allSlides[index] = {};
+										allSlides[index][keyValue[0]] = slide[key];
+									}
 								});
 								presentations[presentations.length - 1].slides.push(allSlides);
 							});
 						});
 					}
-				commit('setPresentations', presentations)
+					commit('setPresentations', presentations);
+					return true;
 			} catch (e) {
 				console.log(e);
 				this._vm.$swal({
@@ -63,6 +67,7 @@ export default new Vuex.Store({
 					text: "Presentations not loaded due to error.",
 					icon: "warning",
 				});
+				return false;
 			}
 		},
 	},

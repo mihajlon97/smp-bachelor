@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view> </router-view>
+    <router-view v-if="initialized"> </router-view>
   </div>
 </template>
 
@@ -10,12 +10,14 @@
 	export default {
 	name: 'App',
 	data() {
-		return {}
+		return {
+		    initialized: false
+		}
 	},
 	methods: {
 		...mapActions(['fetchPresentations']),
 	},
-	mounted() {
+	async mounted() {
 		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
 		const fs = require('fs');
 
@@ -28,7 +30,8 @@
 			XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
 			XLSX.writeFile(book, path);
 		}
-	  this.fetchPresentations();
+	    let result = await this.fetchPresentations();
+		if (result) this.initialized = true;
 	}
 }
 </script>

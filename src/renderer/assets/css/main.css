@@ -300,3 +300,33 @@ button {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
+
+
+#layoutTable {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+#layoutTable td {
+    background-color: #dddddd;
+    border-radius: 20px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+#slideNumber {
+    text-align: center;
+    width:100%;
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    color: white;
+}
+.selectedLayout {
+    box-shadow: 0 0 3px #ff932b;
+    background-color: #bcbcbc;
+}
