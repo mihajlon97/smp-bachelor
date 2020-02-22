@@ -10,9 +10,6 @@
 					class="button button-play filter-button black round-btn">
 				Layout ˅
 			</button>
-			<button @click="$refs.editor.choose()"  class="button button-play filter-button black round-btn">
-				Insert Media
-			</button>
 
 			<table id="layoutTable" v-if="showLayout">
 				<tr>
