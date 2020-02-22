@@ -238,7 +238,7 @@ body {
     padding: 10%;
     left: 50%;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid white;
     top: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
