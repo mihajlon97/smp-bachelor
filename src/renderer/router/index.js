@@ -8,12 +8,12 @@ export default new Router({
 	  {
 		  path: '/',
 		  name: 'Play',
-		  component: () => import('../Pages/PlayNew.vue')
+		  component: () => import('../pages/Play.vue')
 	  },
 	  {
 		  path: '/edit',
 		  name: 'Edit',
-		  component: () => import('../pages/EditNew.vue')
+		  component: () => import('../pages/Edit.vue')
 	  },
     {
       path: '*',

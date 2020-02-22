@@ -69,12 +69,8 @@ body {
     border-radius: 20px;
 }
 
-.create .croppa-containerr   {
-    margin: 0!important;
-    float: left;
-    max-height: 90vh;
-    width: 45vw;
-    height: 80%;
+.create   {
+    background-color: #dddddd!important;
 }
 
 .play .croppa-containerr   {
@@ -162,7 +158,7 @@ body {
 }
 
 
-/** Media Holder **/
+/** Media Holder  1 2 3 4 5 6 **/
 .media-nr-1-1 {
     width: 100%;
     height: 100%;
@@ -190,13 +186,44 @@ body {
     height: 50%;
 }
 
+.row {
+    position: relative;
+    width: 100% !important;
+}
+.row-1 {
+    height: 100%;
+}
+.row-2 {
+    height: 50%;
+}
+.row-3 {
+    height: 33.33%;
+}
 
+.column {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    height: 100% !important;
+}
+.column-1 {
+    width: 100%;
+}
+.column-2 {
+    width: 50%;
+}
+.column-3 {
+    width: 33.33%;
+}
 
 
 .wrapper-parent{
     width: 100%;
-    height: 100%;
-    background-color: black;
+    background-color: #dddddd;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .media {
@@ -217,17 +244,27 @@ body {
     cursor: pointer;
 }
 
+
+
 .wrapper {
+    background-color: black;
+    margin: 0 auto;
     overflow: hidden;
     display: block;
-    width: 100%;
-    height: 100%;
+    align-items: center;
     position: relative;
+    transition: ease 1s;
 }
 
+
+.move video {
+    object-fit: contain;
+    display: table-row;
+}
 .move img {
-    cursor: pointer;
-    position: absolute;
+    object-fit: contain;
+    max-width: 100%;
+    display: table-row;
 }
 .move:hover {
     cursor: pointer;
@@ -236,18 +273,17 @@ body {
     cursor: move;
 }
 
-/*
-        position: absolute;
-    left: 0;
-    top: 0;
- */
 .move {
+    margin: 0;
     position: relative;
-    z-index: 10;
+    background: black no-repeat center;
+    background-clip: border-box;
+    transition: all 1s;
+
+    display: table;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
-    background: black no-repeat center;
-    transition: transform 1s;
 }
 .filter-button {
     padding: 10px 12px;
@@ -255,4 +291,41 @@ body {
 }
 button {
     cursor: pointer;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+
+#layoutTable {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+#layoutTable td {
+    background-color: #dddddd;
+    border-radius: 20px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+#slideNumber {
+    text-align: center;
+    width:100%;
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    color: white;
+}
+.selectedLayout {
+    box-shadow: 0 0 3px #ff932b;
+    background-color: #bcbcbc;
 }

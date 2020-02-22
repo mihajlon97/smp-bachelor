@@ -1,4 +1,4 @@
-# Smart Image Presenter
+# Smart Media Presenter
 ## Cross-platform Desktop Application written in Electron
 ### Bachelor Thesis | Mihajlo Nikodijević
 ### University of Vienna | WS2019
@@ -8,7 +8,7 @@
 
 ``` bash
 # clone repository
-git clone https://github.com/mihajlon97/sip-bachelor.git smart-image-presenter
+git clone https://github.com/mihajlon97/smp-bachelor.git smart-image-presenter
 
 # move to directory
 cd smart-image-presenter

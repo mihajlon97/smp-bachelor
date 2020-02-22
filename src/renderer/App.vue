@@ -9,13 +9,10 @@
 
 	export default {
 	name: 'App',
-	data() {
-		return {}
-	},
 	methods: {
 		...mapActions(['fetchPresentations']),
 	},
-	mounted() {
+	async mounted() {
 		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
 		const fs = require('fs');
 
@@ -28,7 +25,7 @@
 			XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
 			XLSX.writeFile(book, path);
 		}
-	  this.fetchPresentations();
+	    this.fetchPresentations();
 	}
 }
 </script>

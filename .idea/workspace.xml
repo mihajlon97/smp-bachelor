@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sip-bachelor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/smp-bachelor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/builder-effective-config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/builder-effective-config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/latest.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/latest.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/win-unpacked/resources/app-update.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/win-unpacked/resources/app-update.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +25,8 @@
     <session id="-2060221866">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -31,58 +36,72 @@
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="babelrc" value="1" />
-          <entry key="css" value="5" />
-          <entry key="ejs" value="3" />
-          <entry key="jpg" value="1" />
-          <entry key="js" value="40" />
-          <entry key="json" value="13" />
-          <entry key="md" value="1" />
-          <entry key="png" value="3" />
-          <entry key="ts" value="1" />
-          <entry key="vue" value="18" />
+          <entry key="css" value="8" />
+          <entry key="ejs" value="4" />
+          <entry key="jpg" value="2" />
+          <entry key="js" value="54" />
+          <entry key="json" value="14" />
+          <entry key="md" value="2" />
+          <entry key="png" value="4" />
+          <entry key="rnc" value="2" />
+          <entry key="ts" value="2" />
+          <entry key="vue" value="34" />
           <entry key="yml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="5" />
-          <entry key="EJS" value="3" />
-          <entry key="Image" value="4" />
-          <entry key="JSON" value="13" />
-          <entry key="JavaScript" value="40" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="TypeScript" value="1" />
-          <entry key="Vue.js" value="18" />
+          <entry key="CSS" value="8" />
+          <entry key="EJS" value="4" />
+          <entry key="Image" value="6" />
+          <entry key="JSON" value="14" />
+          <entry key="JavaScript" value="54" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="RNG Compact" value="2" />
+          <entry key="TypeScript" value="2" />
+          <entry key="Vue.js" value="34" />
           <entry key="YAML" value="3" />
           <entry key="tsconfig" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="476" />
-          <entry key="ejs" value="21" />
-          <entry key="js" value="2752" />
-          <entry key="json" value="719" />
+          <entry key="css" value="1181" />
+          <entry key="ejs" value="22" />
+          <entry key="js" value="2886" />
+          <entry key="json" value="720" />
           <entry key="md" value="310" />
-          <entry key="txt" value="1141" />
-          <entry key="vue" value="27177" />
+          <entry key="txt" value="2144" />
+          <entry key="vue" value="39722" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="476" />
-          <entry key="EJS" value="21" />
+          <entry key="CSS" value="1181" />
+          <entry key="EJS" value="22" />
           <entry key="HTML" value="1" />
-          <entry key="JSON" value="719" />
-          <entry key="JavaScript" value="2752" />
-          <entry key="PLAIN_TEXT" value="1451" />
-          <entry key="Vue.js" value="27176" />
+          <entry key="JSON" value="720" />
+          <entry key="JavaScript" value="2886" />
+          <entry key="PLAIN_TEXT" value="2454" />
+          <entry key="Vue.js" value="39721" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.create.new" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -92,8 +111,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+            <state relative-caret-position="306">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -101,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+            <state relative-caret-position="136">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -110,18 +138,56 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="6" column="113" lean-forward="true" selection-start-line="6" selection-start-column="113" selection-end-line="6" selection-end-column="113" />
+            <state relative-caret-position="178">
+              <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
               <folding>
-                <element signature="n#style#0;n#video#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#1705#1747#0" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/assets/256x256.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,58 +196,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/pages/PlayNew.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2829">
-              <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#router-link#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#src#0;n#img#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#router-link#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#1;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#2;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#swiper-slide#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#2865#2919#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/pages/EditNew.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="102">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -189,21 +205,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="175" column="15" lean-forward="true" selection-start-line="175" selection-start-column="15" selection-end-line="175" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Editor.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="284" column="18" selection-start-line="281" selection-start-column="16" selection-end-line="284" selection-end-column="18" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="126">
+              <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -221,36 +224,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>orientation_1</find>
-      <find>mounted</find>
-      <find>.image</find>
-      <find>image</find>
+      <find>abso</find>
+      <find>create</find>
+      <find>router</find>
       <find>playing</find>
-      <find>slide.forEach</find>
-      <find>importPresentation</find>
-      <find>this.$nextTick(this.init);</find>
-      <find>wrapper</find>
-      <find>move</find>
-      <find>media_count</find>
-      <find>wrappers</find>
-      <find>init</find>
-      <find>$forceUpdate</find>
-      <find>console.log</find>
-      <find>reset(1</find>
+      <find>fetch</find>
+      <find>presentations</find>
+      <find>mounted</find>
+      <find>table</find>
+      <find>Save</find>
+      <find>index</find>
+      <find>selected</find>
+      <find>menu_open</find>
+      <find>.selected</find>
+      <find>z_index</find>
+      <find>selected: false</find>
       <find>reset</find>
-      <find>buttons</find>
-      <find>button</find>
-      <find>media</find>
-      <find>path</find>
-      <find>pr_i</find>
+      <find>rotate</find>
+      <find>scaling</find>
       <find>save</find>
-      <find>cancel</find>
-      <find>edit</find>
-      <find>presentation_id</find>
-      <find>mySwiper</find>
-      <find>autoplay</find>
-      <find>previousSlide</find>
-      <find>media_cnt</find>
+      <find>MOUNTED</find>
+      <find>nextSlide</find>
+      <find>play</find>
+      <find>absol</find>
+      <find>layout</find>
+      <find>init</find>
+      <find>close</find>
+      <find>Smart Image</find>
+      <find>play?</find>
+      <find>id</find>
+      <find>sip-bachelor</find>
     </findStrings>
     <replaceStrings>
       <replace>openFullScreen</replace>
@@ -268,38 +271,55 @@
       <replace>rotate</replace>
       <replace>.path</replace>
       <replace>id-</replace>
-      <replace>presentation_id</replace>
       <replace>path</replace>
+      <replace>this.medias[index].dim_x</replace>
+      <replace>scale: 0.5,</replace>
       <replace>this.medias[index].y</replace>
+      <replace>presentation_id</replace>
+      <replace>anyMediaChosen</replace>
+      <replace>this.displays</replace>
+      <replace>(i+j)</replace>
+      <replace>((i-1)*columns)+j-1</replace>
+      <replace>(this.slides[this.activeSlide].length - 2) / 5</replace>
+      <replace>class=&quot;layoutBtn&quot;</replace>
+      <replace>Smart Media</replace>
+      <replace>smp-bachelor</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/index.ejs" />
         <option value="$PROJECT_DIR$/node_modules/vue-croppa/dist/vue-croppa.js" />
         <option value="$PROJECT_DIR$/src/renderer/storage/storage.json" />
         <option value="$PROJECT_DIR$/src/renderer/pages/Create.vue" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/renderer/mixins/global.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/Editor.vue" />
         <option value="$PROJECT_DIR$/node_modules/vue-croppa2/dist/vue-croppa.js" />
         <option value="$PROJECT_DIR$/node_modules/vue-croppa2/dist/vue-croppa.css" />
-        <option value="$PROJECT_DIR$/src/renderer/pages/Play.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/Edit.vue" />
-        <option value="$PROJECT_DIR$/src/renderer/App.vue" />
         <option value="$PROJECT_DIR$/src/renderer/router/index.js" />
-        <option value="$PROJECT_DIR$/src/main/index.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/index.ejs" />
         <option value="$PROJECT_DIR$/src/renderer/main.js" />
-        <option value="$PROJECT_DIR$/src/renderer/assets/css/main.css" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Layout.vue" />
         <option value="$PROJECT_DIR$/src/renderer/store/index.js" />
+        <option value="$PROJECT_DIR$/src/renderer/assets/css/main.css" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Media.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/App.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/PlayNew.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/EditNew.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/pages/Play.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" />
+        <option value="$PROJECT_DIR$/src/main/index.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -320,8 +340,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="15" />
-    <option name="y" value="30" />
+    <option name="x" value="312" />
+    <option name="y" value="-9" />
     <option name="width" value="1890" />
     <option name="height" value="930" />
   </component>
@@ -336,60 +356,80 @@
         <subPane>
           <expand>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderer" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderer" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="mixins" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sip-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
               <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smp-bachelor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sip-bachelor" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -399,12 +439,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CC/4 - Cloud Storage/cc-cloud-computing" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\miki9\Desktop\Notebook\Bachelor Informatik\Semester 6\Bachelor\sip-bachelor\node_modules\prettier" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -444,91 +485,10 @@
       <workItem from="1580072439668" duration="2071000" />
       <workItem from="1580820480781" duration="21534000" />
       <workItem from="1580941903788" duration="10758000" />
-      <workItem from="1581020016141" duration="98540000" />
-    </task>
-    <task id="LOCAL-00001" summary=" - storage example">
-      <created>1575237844625</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1575237844626</updated>
-    </task>
-    <task id="LOCAL-00002" summary=" - play presentation">
-      <created>1575344831473</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1575344831473</updated>
-    </task>
-    <task id="LOCAL-00003" summary=" - styling">
-      <created>1575496075785</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1575496075785</updated>
-    </task>
-    <task id="LOCAL-00004" summary=" - styling">
-      <created>1575517095340</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1575517095340</updated>
-    </task>
-    <task id="LOCAL-00005" summary=" - fixing css&#10; - debug events inside vue-croppa">
-      <created>1576605943687</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1576605943687</updated>
-    </task>
-    <task id="LOCAL-00006" summary=" - debug loader">
-      <created>1576676540837</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1576676540837</updated>
-    </task>
-    <task id="LOCAL-00007" summary=" - __dirname fix&#10; - loader fix">
-      <created>1576791238171</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1576791238171</updated>
-    </task>
-    <task id="LOCAL-00008" summary=" - load and play mode">
-      <created>1576806464943</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1576806464943</updated>
-    </task>
-    <task id="LOCAL-00009" summary=" - full window&#10; - empty storage&#10; - ready for testing">
-      <created>1576807719529</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1576807719529</updated>
-    </task>
-    <task id="LOCAL-00010" summary=" - npm package fix">
-      <created>1576875481803</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1576875481803</updated>
-    </task>
-    <task id="LOCAL-00011" summary=" - remove unused dependencies">
-      <created>1578763461830</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1578763461830</updated>
-    </task>
-    <task id="LOCAL-00012" summary=" - path.join&#10; - not working when built - TODO: storage">
-      <created>1578782462351</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1578782462351</updated>
+      <workItem from="1581020016141" duration="136640000" />
+      <workItem from="1581859335527" duration="2479000" />
+      <workItem from="1582146466554" duration="11349000" />
+      <workItem from="1582297754878" duration="42966000" />
     </task>
     <task id="LOCAL-00013" summary=" - photos">
       <created>1578992989257</created>
@@ -712,11 +672,172 @@
       <option name="project" value="LOCAL" />
       <updated>1581303020629</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary=" - video support enabled - autoplay">
+      <created>1581303772793</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1581303772794</updated>
+    </task>
+    <task id="LOCAL-00040" summary=" - all elements in one div">
+      <created>1581313803214</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1581313803215</updated>
+    </task>
+    <task id="LOCAL-00041" summary=" - drag and drop upload">
+      <created>1581365299462</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1581365299463</updated>
+    </task>
+    <task id="LOCAL-00042" summary=" - image and video in media component&#10; - drag and drop&#10; - moving debug&#10; - selection&#10; - context menu">
+      <created>1581390228816</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1581390228816</updated>
+    </task>
+    <task id="LOCAL-00043" summary=" - 16 / 9 aspect ratio multi media">
+      <created>1581562671577</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1581562671578</updated>
+    </task>
+    <task id="LOCAL-00044" summary=" - saving multiple medias&#10; - play bug">
+      <created>1581572694191</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1581572694191</updated>
+    </task>
+    <task id="LOCAL-00045" summary=" - edit multiple files">
+      <created>1581577117266</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1581577117267</updated>
+    </task>
+    <task id="LOCAL-00046" summary=" - row-column grid">
+      <created>1581904591395</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1581904591395</updated>
+    </task>
+    <task id="LOCAL-00047" summary=" - drag and drop click to choose media">
+      <created>1581980582078</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1581980582078</updated>
+    </task>
+    <task id="LOCAL-00048" summary=" - rows and colums i every slide">
+      <created>1581989540271</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1581989540271</updated>
+    </task>
+    <task id="LOCAL-00049" summary=" - drag and drop holder problem solved&#10; - css slide switching bug">
+      <created>1582072438202</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1582072438202</updated>
+    </task>
+    <task id="LOCAL-00050" summary=" - transition fix&#10; - layout picker">
+      <created>1582156163777</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1582156163778</updated>
+    </task>
+    <task id="LOCAL-00051" summary=" - play, edit, multiple layouts move">
+      <created>1582335270845</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1582335270847</updated>
+    </task>
+    <task id="LOCAL-00052" summary=" - removed selected and z_index">
+      <created>1582376470778</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1582376470779</updated>
+    </task>
+    <task id="LOCAL-00053" summary=" - range input scale and rotate">
+      <created>1582379405500</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1582379405500</updated>
+    </task>
+    <task id="LOCAL-00054" summary=" - save fix">
+      <created>1582383578008</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1582383578009</updated>
+    </task>
+    <task id="LOCAL-00055" summary=" - prevent next if not all media chosen">
+      <created>1582387264250</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1582387264250</updated>
+    </task>
+    <task id="LOCAL-00056" summary=" - remove insert media header button">
+      <created>1582387311357</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1582387311357</updated>
+    </task>
+    <task id="LOCAL-00057" summary=" - remove playing on edit page">
+      <created>1582387405614</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1582387405614</updated>
+    </task>
+    <task id="LOCAL-00058" summary=" - play fix&#10; - removed old pages&#10; - removed playing on edit page">
+      <created>1582390729244</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1582390729244</updated>
+    </task>
+    <task id="LOCAL-00059" summary=" - logo changed &#10; - Smart Image Presenter to Smart Media Presenter because of video support">
+      <created>1582393301821</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1582393301821</updated>
+    </task>
+    <task id="LOCAL-00060" summary=" - play in production url">
+      <created>1582393363736</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1582393363736</updated>
+    </task>
+    <task id="LOCAL-00061" summary=" - filter div size">
+      <created>1582395372914</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1582395372914</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="402967000" />
+    <option name="totallyTimeSpent" value="598374000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -726,9 +847,10 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3291815" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -736,7 +858,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.26512456" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.30960855" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -749,32 +871,32 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - path.join&#10; - not working when built - TODO: storage" />
-    <MESSAGE value=" - photos" />
-    <MESSAGE value=" - changing storage from json to excel file" />
-    <MESSAGE value=" - active slide number" />
-    <MESSAGE value=" - previous slide &#10; - moving through the slides" />
-    <MESSAGE value=" - debugging build mode" />
-    <MESSAGE value=" - Cleaning the code&#10; - Build icons&#10; - Readme update" />
-    <MESSAGE value=" - clean logs" />
-    <MESSAGE value=" - edit presentation mode" />
-    <MESSAGE value=" - edit presentation mode - removed" />
-    <MESSAGE value=" - removed unused dependencies" />
-    <MESSAGE value=" - loading fix&#10; - vue-croppa update" />
-    <MESSAGE value=" - new pure css and js approach" />
-    <MESSAGE value=" - rotating and scaling image done" />
-    <MESSAGE value=" - next &amp; previous new approach" />
-    <MESSAGE value=" - moving done" />
-    <MESSAGE value=" - playing done" />
-    <MESSAGE value=" - playing fix" />
-    <MESSAGE value=" - reset sliders on fullscreen exit" />
-    <MESSAGE value=" - main / external screen setup" />
-    <MESSAGE value=" - flexible number of media&#10; - reorganized code" />
-    <MESSAGE value=" - forceUpdate after init" />
-    <MESSAGE value=" - forceUpdate before init" />
-    <MESSAGE value=" - dynamic number od medias per slide done" />
     <MESSAGE value=" - dynamic number od medias per slide fix" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - dynamic number od medias per slide fix" />
+    <MESSAGE value=" - video support enabled - autoplay" />
+    <MESSAGE value=" - all elements in one div" />
+    <MESSAGE value=" - drag and drop upload" />
+    <MESSAGE value=" - image and video in media component&#10; - drag and drop&#10; - moving debug&#10; - selection&#10; - context menu" />
+    <MESSAGE value=" - 16 / 9 aspect ratio multi media" />
+    <MESSAGE value=" - saving multiple medias&#10; - play bug" />
+    <MESSAGE value=" - edit fixed" />
+    <MESSAGE value=" - edit multiple files" />
+    <MESSAGE value=" - row-column grid" />
+    <MESSAGE value=" - drag and drop click to choose media" />
+    <MESSAGE value=" - rows and colums i every slide" />
+    <MESSAGE value=" - drag and drop holder problem solved&#10; - css slide switching bug" />
+    <MESSAGE value=" - transition fix&#10; - layout picker" />
+    <MESSAGE value=" - play, edit, multiple layouts move" />
+    <MESSAGE value=" - removed selected and z_index" />
+    <MESSAGE value=" - range input scale and rotate" />
+    <MESSAGE value=" - save fix" />
+    <MESSAGE value=" - prevent next if not all media chosen" />
+    <MESSAGE value=" - remove insert media header button" />
+    <MESSAGE value=" - remove playing on edit page" />
+    <MESSAGE value=" - play fix&#10; - removed old pages&#10; - removed playing on edit page" />
+    <MESSAGE value=" - logo changed &#10; - Smart Image Presenter to Smart Media Presenter because of video support" />
+    <MESSAGE value=" - play in production url" />
+    <MESSAGE value=" - filter div size" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - filter div size" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -790,9 +912,6 @@
           <caret line="3251" column="4" selection-start-line="3251" selection-start-column="4" selection-end-line="3251" selection-end-column="4" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/assets/image.jpg">
-      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/vue-croppa/dist/vue-croppa.js" />
     <entry file="file://$PROJECT_DIR$/appveyor.yml">
@@ -825,27 +944,6 @@
         <state relative-caret-position="-408" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/index.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/vue-croppa2/dist/vue-croppa.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13957">
@@ -857,27 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2431">
           <caret line="143" column="13" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/mixins/global.mixin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" column="16" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="44" lean-forward="true" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -899,7 +976,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Editor.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
+        <state relative-caret-position="4828">
           <caret line="284" column="18" selection-start-line="281" selection-start-column="16" selection-end-line="284" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -931,20 +1008,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/devtron/vendor/bootstrap/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
@@ -952,10 +1015,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Layout.vue" />
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/tables.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        <state relative-caret-position="136">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/mixins/global.mixin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/index.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vuex/types/helpers.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -964,67 +1080,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="175" column="15" lean-forward="true" selection-start-line="175" selection-start-column="15" selection-end-line="175" selection-end-column="15" />
+        <state relative-caret-position="126">
+          <caret line="323" column="20" selection-start-line="323" selection-start-column="20" selection-end-line="323" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/store/index.js">
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
+        <state relative-caret-position="34">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/pages/PlayNew.vue">
+    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2829">
-          <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
+        <state relative-caret-position="102">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/web-forms.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="506" column="12" selection-start-line="506" selection-start-column="12" selection-end-line="506" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/pages/Edit.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#3209#3261#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/assets/image.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/assets/256x256.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/pages/Play.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="173" column="33" selection-start-line="173" selection-start-column="33" selection-end-line="173" selection-end-column="33" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#router-link#0;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#src#0;n#img#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#router-link#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#1;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#2;n#span#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#swiper-slide#0;n#swiper#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#2865#2919#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/pages/EditNew.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="113" lean-forward="true" selection-start-line="6" selection-start-column="113" selection-end-line="6" selection-end-column="113" />
+        <state relative-caret-position="178">
+          <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
           <folding>
-            <element signature="n#style#0;n#video#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1705#1747#0" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
         </state>
       </provider>
     </entry>

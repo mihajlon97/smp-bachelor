@@ -1,8 +1,8 @@
 {
-  "name": "sip-bachelor",
+  "name": "smp-bachelor",
   "version": "0.0.1",
   "author": "Mihajlo Nikodijevic <a01646292@unet.univie.ac.at>",
-  "description": "Smart Image Presenter - Bachelor",
+  "description": "Smart Media Presenter - Bachelor",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "Smart Image Presenter",
-    "appId": "com.sip-bachelor.mihajlon97",
+    "productName": "Smart Media Presenter",
+    "appId": "com.smp-bachelor.mihajlon97",
     "directories": {
       "output": "build"
     },
