@@ -406,7 +406,7 @@
 			    // Column format
 			    let maxMedias = 0;
 			    this.slides.forEach(slide => {
-			        if (slide.length / 7 > maxMedias) maxMedias = slide.length / 7;
+			        if ((slide.length  - 2)/ 5 > maxMedias) maxMedias = (slide.length  - 2) / 5;
 			    });
 			    for (let i = 0; i < maxMedias; i++) {
 				    columnNames.push(

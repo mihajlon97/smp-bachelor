@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view v-if="initialized"> </router-view>
+    <router-view> </router-view>
   </div>
 </template>
 
@@ -9,11 +9,6 @@
 
 	export default {
 	name: 'App',
-	data() {
-		return {
-		    initialized: false
-		}
-	},
 	methods: {
 		...mapActions(['fetchPresentations']),
 	},
@@ -30,8 +25,7 @@
 			XLSX.utils.book_append_sheet(book, sheet1, 'sheet1');
 			XLSX.writeFile(book, path);
 		}
-	    let result = await this.fetchPresentations();
-		if (result) this.initialized = true;
+	    this.fetchPresentations();
 	}
 }
 </script>
