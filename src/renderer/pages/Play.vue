@@ -124,7 +124,7 @@
 
 			this.displays = require('electron').remote.screen.getAllDisplays();
 			console.log(this.displays);
-			let chosenScreen;
+			let chosenScreen = 'main';
 
 			let external = {};
 			for (let i in this.displays) {
@@ -154,7 +154,7 @@
 
 			let externalDisplay = null;
 			for (let i in this.displays) {
-				if ((this.displays[i].bounds.x !== 0 || this.displays[i].bounds.y !== 0) && this.displays[i].id === chosenScreen) {
+				if ((this.displays[i] && this.displays[i].bounds.x !== 0 || this.displays[i].bounds.y !== 0) && this.displays[i].id === chosenScreen) {
 					externalDisplay = this.displays[i];
 					break;
 				}
