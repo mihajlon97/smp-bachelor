@@ -44,7 +44,6 @@
 						            :playing="true"
 							        :prop_rows="slide[0]"
 							        :prop_columns="slide[1]"
-							        :media_count="slide.length"
 							/>
 						</swiper-slide>
 					</swiper>

@@ -564,7 +564,7 @@
 				dialog.showOpenDialog({
 					properties: ['openFile'],
 					filters: [
-						{ name: 'Image/Video', extensions: ['jpg', 'png', 'gif', 'mp4'] },
+						{ name: 'Image/Video', extensions: ['jpeg', 'jpg', 'png', 'gif', 'mp4'] },
 					]
 				}, (files) => {
 					if (files) {
