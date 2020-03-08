@@ -50,39 +50,21 @@
 
 <script>
 	import { mapActions, mapGetters } from 'vuex';
-	import 'swiper/dist/css/swiper.css'
-	import {swiper, swiperSlide} from 'vue-awesome-swiper'
 	import MediaHolder from "../components/MediaHolder";
 	import Info from '../components/Info';
 	import AlertMixin from '../mixins/alert.mixin';
+	import SliderMixin from '../mixins/slider.mixin';
 
 	export default {
 	name: "PlayNew",
-	mixins: [AlertMixin],
+	mixins: [AlertMixin, SliderMixin],
 	components: {
 	    Info,
 		MediaHolder,
-		swiper,
-		swiperSlide,
 	},
     data () {
 		return {
 		    displays: [],
-
-		    // Default Presentation Slider Props
-			swiperOption: {
-				speed: 500,
-				slidesPerView: 1,
-				spaceBetween: 0,
-				effect: 'fade',
-				autoHeight: true,
-				pagination: {
-					el: '.swiper-pagination'
-				},
-				keyboard: {
-					enabled: true,
-				}
-			},
 		}
     },
     computed: {
@@ -239,64 +221,7 @@
 		        }
 	        });
 	  },
-	},
-    mounted(){
-	    setTimeout(() => {
-			// Fullscreen exit - Slide to beginning of each presentation
-	        const exitHandler = () => {
-			    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
-				    for (let i = 0; i < sliders.length; i++) {
-					    if (this.$refs['mySwiper' + i][0].swiper) {
-						    this.$refs['mySwiper' + i][0].swiper.slideTo(0, 500);
-					    }
-				    }
-			    }
-		    };
-
-	        if (this.$route.query.autoplay) {
-		        document.onkeydown = (evt) => {
-			        evt = evt || window.event;
-			        let isEscape = false;
-			        if ("key" in evt) {
-				        isEscape = (evt.key === "Escape" || evt.key === "Esc");
-			        } else {
-				        isEscape = (evt.keyCode === 27);
-			        }
-			        if (isEscape) {
-			          require('electron').remote.getCurrentWindow().close();
-			        }
-		        };
-	        }
-
-		    if (document.addEventListener) {
-			    document.addEventListener('fullscreenchange', exitHandler, false);
-			    document.addEventListener('mozfullscreenchange', exitHandler, false);
-			    document.addEventListener('MSFullscreenChange', exitHandler, false);
-			    document.addEventListener('webkitfullscreenchange', exitHandler, false);
-		    }
-
-
-	        // Click moving through presentation events
-	      	let sliders = document.getElementsByClassName('mySwiper');
-	      	for (let i = 0; i < sliders.length; i++) {
-			      sliders[i].addEventListener('contextmenu', () => {
-				      if (this.$refs['mySwiper' + i][0].swiper) {
-					      this.$refs['mySwiper' + i][0].swiper.slidePrev(500, () => {
-						      console.log('SLIDE PREVIOUS');
-					      });
-				      }
-			      });
-			      sliders[i].addEventListener('click', () => {
-			          if (this.$refs['mySwiper' + i][0].swiper) {
-				          this.$refs['mySwiper' + i][0].swiper.slideNext(500, () => {
-					          console.log('SLIDE NEXT');
-				          });
-			          }
-			      })
-	        }
-
-	    }, 2000);
-    }
+	}
 }
 </script>
 
