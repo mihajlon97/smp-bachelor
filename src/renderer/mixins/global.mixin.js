@@ -1,4 +1,9 @@
 export default {
+	computed: {
+		storagePath() {
+			return require('electron').remote.app.getPath('userData');
+		}
+	},
 	methods: {
 		setCookie(name, value, days) {
 			let expires = "";

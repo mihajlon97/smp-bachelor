@@ -2,16 +2,7 @@
 	<div class="play page" :style="((!$route.query.autoplay) ? 'overflow-y: scroll!important;' : '')">
 
 		<!-- Info Div -->
-		<div v-if="!$route.query.autoplay" style="position: absolute; left: 20px; right: 50px;">
-			<button v-if="!toggleInfo" @click="toggleInfo = true" class="button button-play round-btn black small-btn"> Show info </button>
-			<button v-else @click="toggleInfo = false" class="button button-play round-btn small-btn" style="border: 2px solid #df706d; color: red;"> Close Info </button>
-			<div v-if="toggleInfo"
-			     style="width: 30%; height: 25%; background-color: white; border-radius: 10px; padding: 20px;">
-				Storage path:
-				{{storagePath}}<br><br>
-				Version: 1.0.23
-			</div>
-		</div>
+		<Info />
 
 		<!-- Play Centered Div -->
 		<div style="width: 100%; margin: 0 auto; text-align: center;">
@@ -59,10 +50,12 @@
 	import {swiper, swiperSlide} from 'vue-awesome-swiper'
 	import Editor from '../components/Editor';
 	import MediaHolder from "../components/MediaHolder";
+		import Info from "../components/Info";
 
 	export default {
 	name: "PlayNew",
 	components: {
+			Info,
 		MediaHolder,
 		swiper,
 		swiperSlide,
@@ -70,7 +63,6 @@
 	},
     data () {
 		return {
-		    toggleInfo: false,
 		    displays: [],
 			swiperOption: {
 				speed: 500,
@@ -88,10 +80,7 @@
 		}
     },
     computed: {
-      ...mapGetters(['presentations']),
-      storagePath() {
-	      return require('electron').remote.app.getPath('userData');
-      }
+      ...mapGetters(['presentations'])
     },
 	methods: {
 	  ...mapActions(['fetchPresentations']),

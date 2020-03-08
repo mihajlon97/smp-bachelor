@@ -111,7 +111,6 @@
 			}
 	    },
 	    mounted() {
-			console.log("MOUNTED", this.media);
 	        this.init();
 	    },
 		computed: {
