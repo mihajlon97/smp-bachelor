@@ -55,7 +55,7 @@
 	export default {
 	name: "PlayNew",
 	components: {
-			Info,
+	    Info,
 		MediaHolder,
 		swiper,
 		swiperSlide,
