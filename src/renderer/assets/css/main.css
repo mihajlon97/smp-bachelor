@@ -7,6 +7,7 @@
 body {
     overflow-y: hidden;
     overflow-x: hidden;
+    margin: 0!important;
 }
 .swiper-container, .swiper-wrapper, .swiper-slide {
     background-color: #000000;

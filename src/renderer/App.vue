@@ -5,20 +5,18 @@
 </template>
 
 <script>
-	import {mapActions} from 'vuex'
-
+	import { mapActions } from 'vuex'
 	export default {
 	name: 'App',
 	methods: {
 		...mapActions(['fetchPresentations']),
 	},
-	async mounted() {
+	mounted() {
 		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
-		const fs = require('fs');
-
-		console.log(require('electron').remote.app.getPath('userData'));
-
-		if (!fs.existsSync(path)) {
+		/**
+		 * If presentations excel file is not found in the electron's userData folder, create new empty file
+		 */
+		if (!require('fs').existsSync(path)) {
 			const XLSX = require('xlsx');
 			const book = XLSX.utils.book_new();
 			const sheet1 = XLSX.utils.aoa_to_sheet([['id', 'name', 'file']]);
@@ -29,9 +27,4 @@
 	}
 }
 </script>
-
-<style>
-  body {
-	  margin: 0!important;
-  }
-</style>
+<style> </style>

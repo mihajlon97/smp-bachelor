@@ -73,10 +73,6 @@
 	        showLayout: false,
 	        totalSlides: 0,
 	        mode: 'create',
-	        loading: {
-	        	rotate1: false,
-	        	rotate2: false,
-	        }
 	      }
 	    },
 		async mounted() {

@@ -88,7 +88,6 @@
 		}
     },
     computed: {
-      ...mapState(['storageFile']),
       ...mapGetters(['presentations']),
       storagePath() {
 	      return require('electron').remote.app.getPath('userData');

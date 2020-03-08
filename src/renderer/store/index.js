@@ -5,16 +5,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	strict: false,
 	state: {
-		error: {},
-		loading: false,
 		presentations: [],
 		activeSlide: 0,
-		storageFile: '\\presentations.xlsx'
 	},
 	getters: {
-		route: state => state.route,
-		error: state => state.error,
-		loading: state => state.loading,
 		presentations: state => state.presentations,
 		activeSlide: state => state.activeSlide
 	},
@@ -24,7 +18,7 @@ export default new Vuex.Store({
 			try {
 					let presentations = [];
 					const XLSX = require('xlsx');
-					const workbook = XLSX.readFile(require('path').join(require('electron').remote.app.getPath('userData'), state.storageFile));
+					const workbook = XLSX.readFile(require('path').join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx'));
 					const sheet_name_list = workbook.SheetNames;
 					const _presentations = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
@@ -61,7 +55,6 @@ export default new Vuex.Store({
 					commit('setPresentations', presentations);
 					return true;
 			} catch (e) {
-				console.log(e);
 				this._vm.$swal({
 					title: "Error",
 					text: "Presentations not loaded due to error.",
@@ -72,11 +65,8 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
-		setLoading (state, loading) {
-			state.loading = loading
-		},
 		setPresentations(state, data) {
-			console.log(data);
+			console.log(data)
 			state.presentations = data;
 		}
 	}
