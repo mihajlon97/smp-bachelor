@@ -91,7 +91,7 @@
 				type: Number,
 				default: 2
 			},
-		    media_prop: {
+		    slide_prop: {
 		        type: Array,
 		        default: () =>  []
 		    }
@@ -103,7 +103,7 @@
 			    width: 1600,
 			    height: 1200,
 			    menu_opened: false,
-			    media: this.media_prop.splice(2),
+			    media: this.slide_prop.splice(2),
 			    medias: [],
 			    wrappers: [],
 			    slides: [],

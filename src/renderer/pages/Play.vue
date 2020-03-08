@@ -17,21 +17,25 @@
 				</button>
 			</div>
 
+			<!-- Presentation List -->
 			<div v-for="(presentation, presentation_id) in presentations" :key="presentation_id" :id="'presentation' + presentation.id" :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''" v-show="!$route.query.autoplay || $route.query.autoplay === presentation.id">
+
+				<!-- Presentation name and Controls (Play, Edit and Delete) -->
 				<span v-if="!$route.query.autoplay">
 					<span style="font-size: 25px; font-weight: bold;"> {{presentation.name}} </span>
 					<button @click="playPresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #318b34; color: green;"> ▶</button>
 					<button @click="editPresentation(presentation)" class="button button-play round-btn" style="color: black;">✎</button>
 					<button @click="deletePresentation(presentation)" class="button button-play round-btn" style="border: 2px solid #df706d; color: red;">✖</button>
-					<!--  position: absolute; z-index: -200; -->
 				</span>
 
+				<!-- Played presentation rendered to the DOM, but shown only while playing -->
 				<div v-if="$route.query.autoplay === presentation.id || true" :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
 					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100vh;'">
+							<!-- Media Holder in every slide displaying all medias in that slide -->
 							<MediaHolder
 							        :id="'id-' + presentation_id + '-' + i"
-									:media_prop="slide"
+									:slide_prop="slide"
 						            :playing="true"
 							        :prop_rows="slide[0]"
 							        :prop_columns="slide[1]"
@@ -45,25 +49,27 @@
 </template>
 
 <script>
-	import {mapActions, mapGetters, mapState} from 'vuex';
+	import { mapActions, mapGetters } from 'vuex';
 	import 'swiper/dist/css/swiper.css'
 	import {swiper, swiperSlide} from 'vue-awesome-swiper'
-	import Editor from '../components/Editor';
 	import MediaHolder from "../components/MediaHolder";
-		import Info from "../components/Info";
+	import Info from '../components/Info';
+	import AlertMixin from '../mixins/alert.mixin';
 
 	export default {
 	name: "PlayNew",
+	mixins: [AlertMixin],
 	components: {
 	    Info,
 		MediaHolder,
 		swiper,
 		swiperSlide,
-	    Editor
 	},
     data () {
 		return {
 		    displays: [],
+
+		    // Default Presentation Slider Props
 			swiperOption: {
 				speed: 500,
 				slidesPerView: 1,
@@ -85,31 +91,12 @@
 	methods: {
 	  ...mapActions(['fetchPresentations']),
 	  async createPresentation() {
-		  const action = await this.$swal({
-			  title: "New Presentation",
-			  text: "Create a new presentation manually or import existing one.",
-			  // icon: "info",
-			  buttons: {
-				  cancel: "Cancel",
-				  import:{
-					  text: "Import existing",
-					  value: "import",
-				  },
-				  create: {
-					  text: "Create new",
-					  value: "create"
-				  }
-			  },
-		  });
-		  console.log(action);
+		  const action = await this.newPresentationAlert();
+
 		  switch (action) {
 		    case 'create' : {
-			    this.$swal({
-				    title: "Name your presentation",
-				    content: "input",
-			        showCancelButton: true,
-			        buttons: ["Cancel", "Create"]
-			    }).then((name) => {
+		        this.namePresentationAlert()
+			    .then((name) => {
 				    if (name && name.length > 0) {
 				        return this.$router.push('/edit?presentation_name=' + name)
 				    }
@@ -128,7 +115,7 @@
 	  async playPresentation(presentation) {
 
 			this.displays = require('electron').remote.screen.getAllDisplays();
-			console.log(this.displays);
+
 			let chosenScreen = 'main';
 
 			let external = {};
@@ -143,18 +130,7 @@
 			}
 
 			if (this.displays.length > 1) {
-				chosenScreen = await this.$swal({
-					title: "Select the screen",
-					text: "Pick a screen on which the presentation should be played.",
-					icon: "info",
-					buttons: {
-					    ...external,
-						main: {
-							text: "Main screen",
-							value: "main"
-						}
-					},
-				});
+				chosenScreen = await this.selectTheScreenAlert(external)
 			}
 
 			let externalDisplay = null;
@@ -167,11 +143,10 @@
 
 			const { BrowserWindow } = require('electron').remote;
 			const modalPath = process.env.NODE_ENV === 'development'
-				// ? 'http://localhost:9080/#/edit?play=' + presentation.id
 				? 'http://localhost:9080/#/play?autoplay=' + presentation.id
 				: `file://${__dirname}/index.html#play?autoplay=` + presentation.id;
 
-			let win = new BrowserWindow({
+			let newWindow = new BrowserWindow({
 				x: (chosenScreen !== 'main') ? externalDisplay.bounds.x + 50 : 0,
 				y: (chosenScreen !== 'main') ? externalDisplay.bounds.y + 50 : 0,
 				frame: false,
@@ -182,12 +157,12 @@
 			});
 
 
-			win.on('close', function () { return false; });
-			win.webContents.on("devtools-opened", () => {
-			   win.webContents.closeDevTools();
+			newWindow.on('close', function () { return false; });
+			newWindow.webContents.on("devtools-opened", () => {
+			    newWindow.webContents.closeDevTools();
 			});
-			win.maximize();
-			win.loadURL(modalPath);
+			newWindow.maximize();
+			newWindow.loadURL(modalPath);
 	  },
 	  importPresentation() {
 	        const { dialog } = require('electron').remote;
@@ -198,41 +173,37 @@
 			  ]
 		    }, (files) => {
 	          if (files) {
-	            console.log(files);
 	            const XLSX = require('xlsx');
 	            const workbook = XLSX.readFile(require('path').join(files[0]));
 				const sheet_name_list = workbook.SheetNames;
 				const sheet = workbook.Sheets[sheet_name_list[0]];
 				const slides = XLSX.utils.sheet_to_json(sheet);
-				console.log(slides);
 
-				this.$swal("Name your presentation", {
-				  content: "input",
-				  buttons: ["Save"],
-				}).then((name) => {
-				  if (name && name.length > 0) {
-					  const XLSX = require('xlsx');
-					  const path = require('path');
-					  const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
-					  const workbook = XLSX.readFile(path.join(storageDir));
-					  const sheet_name_list = workbook.SheetNames;
-					  const sheet = workbook.Sheets[sheet_name_list[0]];
-					  const presentations = XLSX.utils.sheet_to_json(sheet);
-				      console.log('PRESENTATIONS', presentations);
+				this.namePresentationAlert()
+				  .then((name) => {
+					  if (name && name.length > 0) {
+						  const XLSX = require('xlsx');
+						  const path = require('path');
+						  const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+						  const workbook = XLSX.readFile(path.join(storageDir));
+						  const sheet_name_list = workbook.SheetNames;
+						  const sheet = workbook.Sheets[sheet_name_list[0]];
+						  const presentations = XLSX.utils.sheet_to_json(sheet);
+					      console.log('PRESENTATIONS', presentations);
 
-				      const presentation = {
-						  id: this.uuidv4(),
-						  name: name,
-						  file: files[0]
-					  };
-					  console.log('PRESENTATION', presentation);
-					  presentations.push(presentation);
+					      const presentation = {
+							  id: this.uuidv4(),
+							  name: name,
+							  file: files[0]
+						  };
 
-					  workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
-					  XLSX.writeFile(workbook, storageDir);
-				      this.fetchPresentations();
-				  }
-				});
+						  presentations.push(presentation);
+
+						  workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
+						  XLSX.writeFile(workbook, storageDir);
+					      this.fetchPresentations();
+					  }
+				  });
 	          }
 			});
 	  },
@@ -241,41 +212,32 @@
 	  	this.$router.push('/edit?edit=' + presentation.id);
 	  },
 	  deletePresentation(presentation) {
-	      this.$swal({
-	        title: "Are you sure?",
-	        text:"Presentation will be permanently removed.",
-	        icon: "warning",
-	        buttons: true,
-	        dangerMode: true,
-	      }).then((value) => {
-	        if (value) {
-              try {
-	              const XLSX = require('xlsx');
-	              const storageDir = require('path').join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
-	              const workbook = XLSX.readFile(require('path').join(storageDir));
-	              const sheet_name_list = workbook.SheetNames;
-	              const sheet = workbook.Sheets[sheet_name_list[0]];
-	              const presentations = XLSX.utils.sheet_to_json(sheet);
-	              for(let i = presentations.length - 1; i > -1; i--){
-		              if (presentations[i].id === presentation.id){
-			              require('fs').unlinkSync(presentations[i].file)
-			              presentations.splice(i, 1);
+	      this.deletePresentationAlert()
+	        .then((value) => {
+		        if (value) {
+	              try {
+		              const XLSX = require('xlsx');
+		              const storageDir = require('path').join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+		              const workbook = XLSX.readFile(require('path').join(storageDir));
+		              const sheet_name_list = workbook.SheetNames;
+		              const sheet = workbook.Sheets[sheet_name_list[0]];
+		              const presentations = XLSX.utils.sheet_to_json(sheet);
+		              for(let i = presentations.length - 1; i > -1; i--){
+			              if (presentations[i].id === presentation.id){
+				              require('fs').unlinkSync(presentations[i].file)
+				              presentations.splice(i, 1);
+			              }
 		              }
-	              }
-	              workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
-	              XLSX.writeFile(workbook, storageDir);
+		              workbook.Sheets[sheet_name_list[0]] = XLSX.utils.json_to_sheet(presentations);
+		              XLSX.writeFile(workbook, storageDir);
 
-	              // Re-fetch presentations
-	              this.fetchPresentations();
-	          } catch (e) {
-	              this.$swal({
-		              title: "Error",
-		              text: "Presentation was not removed due to error.",
-		              icon: "warning",
-	              });
-	          }
-	        }
-	      });
+		              // Re-fetch presentations
+		              this.fetchPresentations();
+		          } catch (e) {
+		              this.presentationNotRemovedAlert()
+		          }
+		        }
+	        });
 	  },
 	},
     mounted(){
