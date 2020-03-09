@@ -20,8 +20,7 @@
 								:style="
 								   `top:${media[((i-1)*columns)+j-1].startY};
 									left:${media[((i-1)*columns)+j-1].startX};
-									transform: scale(${media[((i-1)*columns)+j-1].scale})
-									rotate(${media[((i-1)*columns)+j-1].rotate}deg);};`
+									transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg);};`
 								"
 								:path="media[((i-1)*columns)+j-1].path"
 								:index="((i-1)*columns)+j-1"
