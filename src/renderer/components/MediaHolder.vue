@@ -270,7 +270,6 @@
 			        for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
 				        this.media[i] = {
 				            ...this.media[i],
-					        // path: this.slides[this.activeSlide][(5 * i) + 2],
 					        startX: this.slides[this.activeSlide][1 + 5 * i + 2],
 					        startY: this.slides[this.activeSlide][2 + 5 * i + 2],
 					        scale: this.slides[this.activeSlide][3 + 5 * i + 2],
@@ -318,7 +317,6 @@
 				    	if (this.media[i].path)
 						    this.media[i] = {
 						        ...this.media[i],
-							    // path: this.slides[this.activeSlide][(5 * i) + 2],
 							    startX: this.slides[this.activeSlide][1 + 5 * i + 2],
 							    startY: this.slides[this.activeSlide][2 + 5 * i + 2],
 							    scale: this.slides[this.activeSlide][3 + 5 * i + 2],
@@ -409,7 +407,6 @@
 			initialize() {
 		    	this.$forceUpdate();
 			    let container = this.playing ? document.querySelector('#' + this.id) : document;
-			    // let container = document;
 				this.wrappers = [...container.querySelectorAll('.column')];
 			    this.movingDivs = [...container.querySelectorAll('.move')];
 
