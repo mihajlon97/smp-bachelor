@@ -18,7 +18,10 @@
 			</div>
 
 			<!-- Presentation List -->
-			<div v-for="(presentation, presentation_id) in presentations" :key="presentation_id" :id="'presentation' + presentation.id" :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''" v-show="!$route.query.autoplay || $route.query.autoplay === presentation.id">
+			<div v-for="(presentation, presentation_id) in presentations"
+			     :key="presentation_id" :id="'presentation' + presentation.id"
+			     :style="(!$route.query.autoplay) ? 'margin-bottom: 15px' : ''"
+			     v-show="!$route.query.autoplay || $route.query.autoplay === presentation.id">
 
 				<!-- Presentation name and Controls (Play, Edit and Delete) -->
 				<span v-if="!$route.query.autoplay">
@@ -29,16 +32,14 @@
 				</span>
 
 				<!-- Played presentation rendered to the DOM, but shown only while playing -->
-				<div v-if="$route.query.autoplay === presentation.id || true" :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
-					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id" class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
+				<div v-if="$route.query.autoplay === presentation.id"
+				     :style="'width: 100%; height: 100vh;' + ((!$route.query.autoplay) ? 'position: absolute; z-index: -200;' : '')">
+					<swiper :id="'presentation-' + presentation.id" :ref="'mySwiper' + presentation_id"
+					        class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100vh;'">
 							<!-- Media Holder in every slide displaying all medias in that slide -->
-							<MediaHolder
-							        :id="'id-' + presentation_id + '-' + i"
-									:slide_prop="slide"
-						            :playing="true"
-							        :prop_rows="slide[0]"
-							        :prop_columns="slide[1]"
+							<MediaHolder :id="'id-' + presentation_id + '-' + i" :slide_prop="slide"
+						            :playing="true" :prop_rows="slide[0]" :prop_columns="slide[1]"
 							/>
 						</swiper-slide>
 					</swiper>
@@ -171,7 +172,6 @@
 						  const sheet_name_list = workbook.SheetNames;
 						  const sheet = workbook.Sheets[sheet_name_list[0]];
 						  const presentations = XLSX.utils.sheet_to_json(sheet);
-					      console.log('PRESENTATIONS', presentations);
 
 					      const presentation = {
 							  id: this.uuidv4(),

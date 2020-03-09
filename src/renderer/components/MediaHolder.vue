@@ -3,9 +3,9 @@
 		<!-- Context Menu -->
 		<div v-show="menu_opened && !playing" ref="menu" @click="menu_opened = false" class="context-menu">
 			<ul>
-				<li @click="rotate(selected)">Rotate 90°</li>
-				<li @click="reset(selected, false)">Reset</li>
-				<li class="remove-option" @click="reset(selected, true)"> Remove</li>
+				<li @click="rotate(selectedIndex)">Rotate 90°</li>
+				<li @click="reset(selectedIndex, false)">Reset</li>
+				<li class="remove-option" @click="reset(selectedIndex, true)"> Remove</li>
 			</ul>
 		</div>
 
@@ -13,9 +13,13 @@
 			<div v-for="i in rows" :key="i" :class="'row row-' + rows">
 				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
 					<transition name="fade">
-						<Media
-								:style="`top:${media[((i-1)*columns)+j-1].startY}; left:${media[((i-1)*columns)+j-1].startX}; transform: scale(${media[((i-1)*columns)+j-1].scale}) rotate(${media[((i-1)*columns)+j-1].rotate}deg);};`"
-								v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
+						<Media v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
+								:style="
+								   `top:${media[((i-1)*columns)+j-1].startY};
+									left:${media[((i-1)*columns)+j-1].startX};
+									transform: scale(${media[((i-1)*columns)+j-1].scale})
+									rotate(${media[((i-1)*columns)+j-1].rotate}deg);};`
+								"
 								:path="media[((i-1)*columns)+j-1].path"
 								:index="((i-1)*columns)+j-1"
 								@remove="reset(((i-1)*columns)+j-1, true)"
@@ -35,25 +39,25 @@
 			</div>
 
 			<!-- Filter Section -->
-			<span v-if="selected !== null && !playing">
+			<span v-if="selectedIndex !== null && !playing">
 				<div v-if="media.length === 2" style="position: absolute; bottom: 10px; left: 50%; z-index: 15;">
 					<button @click="switchMedia(0, 1)" class="filter-button button-play black round-btn button-control">⇄</button>
 				</div>
 				<div style="position: absolute; bottom: 10px; right: 50px; z-index: 15;">
-					<button @click="reset(selected, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
-					<button @click="reset(selected, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
+					<button @click="reset(selectedIndex, false)" class="filter-button button-play black round-btn button-control"> Reset </button>
+					<button @click="reset(selectedIndex, true)"  class="filter-button button-play black round-btn button-control"> Remove </button>
 				</div>
 				<div style="position: absolute; bottom: 10px; left: 50px; z-index: 15; width: 45%;">
 					<div style="margin-right: 50px; float: left;">
 						<p style="color: white; font-size: 25px; margin-bottom: 10px;"> Rotate </p>
-						<button @click="rotate(selected)" class="filter-button button-play black round-btn button-control">⟳</button>
-						<input type="range" :value="media[selected].rotate" @input="rotating($event)" min="0" max="360">
+						<button @click="rotate(selectedIndex)" class="filter-button button-play black round-btn button-control">⟳</button>
+						<input type="range" :value="media[selectedIndex].rotate" @input="rotating($event)" min="0" max="360">
 					</div>
 					<div style="float: left;">
 						<p style="color: white; font-size: 25px; margin-bottom: 10px;"> Resize </p>
-						<button @click="scale(selected, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
-						<input type="range" :value="media[selected].scale" @input="scaling($event)" step="0.01" min="0" max="2">
-						<button @click="scale(selected, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
+						<button @click="scale(selectedIndex, -0.1)" class="filter-button button-play black round-btn button-control">－</button>
+						<input type="range" :value="media[selectedIndex].scale" @input="scaling($event)" step="0.01" min="0" max="2">
+						<button @click="scale(selectedIndex, 0.1)" class="filter-button button-play black round-btn button-control">＋</button>
 					</div>
 				</div>
 			</span>
@@ -62,8 +66,6 @@
 </template>
 
 <script>
-	import RangeSlider from 'vue-range-slider'
-	import 'vue-range-slider/dist/vue-range-slider.css'
 	import { mapState } from 'vuex';
 	import Media from "./Media";
 	const { dialog } = require('electron').remote;
@@ -72,7 +74,6 @@
 		name: "MediaHolder",
 		components: {
 			Media,
-			RangeSlider,
 		},
 		props: {
 		    id: {
@@ -102,12 +103,12 @@
 			    columns: this.prop_columns,
 			    width: 1600,
 			    height: 1200,
-			    menu_opened: false,
 			    media: this.slide_prop.splice(2),
-			    medias: [],
+			    movingDivs: [],
 			    wrappers: [],
 			    slides: [],
-			    selected: null,
+			    selectedIndex: null,
+			    menu_opened: false,
 			}
 	    },
 	    mounted() {
@@ -132,11 +133,11 @@
 			    this.$nextTick(this.init);
 		    },
 		    rotating(event) {
-				this.media[this.selected].rotate = event.target.value;
+				this.media[this.selectedIndex].rotate = event.target.value;
 		        this.$forceUpdate();
 		    },
 		    scaling(event) {
-			    this.media[this.selected].scale = event.target.value;
+			    this.media[this.selectedIndex].scale = event.target.value;
 			    this.$forceUpdate();
 		    },
 		    rotate(index) {
@@ -164,8 +165,8 @@
 					    scale: 1,
 					    rotate: 0,
 				    };
-			        this.medias[index].style.left = '0%';
-			        this.medias[index].style.top = '0%';
+			        this.movingDivs[index].style.left = '0%';
+			        this.movingDivs[index].style.top = '0%';
 			    }
 		        this.$forceUpdate();
 		        this.$nextTick(this.init);
@@ -173,10 +174,8 @@
 
 
 		    nextSlide () {
-		        console.log('MEDIA', this.media, "SLIDES", this.slides);
 			    // If next slide exist
 			    if (this.activeSlide + 1 < this.slides.length && this.slides.length > 0) {
-					console.log('NEXT EXISTS');
 				    // Save current slide modification
 				    let slide = [this.rows, this.columns];
 				    for (let i = 0, size = this.media.length; i < size; i++) {
@@ -218,7 +217,6 @@
 				    if (this.media.length === 0 && (this.activeSlide === this.slides.length && this.slides.length > 0) ||
 				       (this.media.length === 0 && this.slides.length === 0) || this.countChosenMedia() < this.rows * this.columns) return false;
 
-				    console.log('NEXT EMPTY', this.media, this.slides);
 				    // Save current slide modification
 				    let slide = [this.rows, this.columns];
 				    for (let i = 0, size = this.media.length; i < size; i++) {
@@ -234,12 +232,10 @@
 			        this.$nextTick(this.init);
 			    }
 
-		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A: " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
 		    },
 		    previousSlide () {
-		        console.log('PR MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
 		        // If no slides prevent going back
 			    if (this.slides.length === 0 || this.activeSlide === 0) return false;
 
@@ -256,7 +252,6 @@
 				        this.reset(i, true);
 			        }
 		            if (slide.length > 0 && slide[2]) {
-		            	console.log('SLIDE');
 		            	this.slides[this.activeSlide] = slide;
 		            }
 		        }
@@ -266,7 +261,6 @@
 					    path: this.slides[this.activeSlide - 1][(5 * i) + 2],
 				    }
 			    }
-		        console.log('BI MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
 		        this.$forceUpdate();
 		        this.$nextTick(() => {
 		        	this.init();
@@ -285,7 +279,6 @@
 		        });
 				this.rows = this.slides[this.activeSlide - 1][0];
 		        this.columns = this.slides[this.activeSlide - 1][1];
-		        console.log('MEDIA', this.media, "SLIDES", this.slides, 'ACTIVE ' + this.activeSlide);
 
 		        this.$emit('updateTotalSlides', this.slides.length);
 		        return true;
@@ -293,7 +286,6 @@
 
 
 		    edit (presentation) {
-		    	console.log('EDIT', presentation);
 			    presentation.slides.forEach(slide => {
 				    let slideToAdd = [slide[0], slide[1]];
 				    slide.shift();
@@ -333,11 +325,9 @@
 				    }
 			        this.$forceUpdate();
 			    });
-		        console.log('MEDIA', this.media, "SLIDES", this.slides, "A " + this.activeSlide);
 		        this.$emit('updateTotalSlides', this.slides.length);
 		    },
 		    play (presentation) {
-		    	console.log(presentation.slides);
 			    presentation.slides.forEach(slide => {
 				    let slideToAdd = [slide[0], slide[1]];
 				    slide.shift();
@@ -361,7 +351,6 @@
 				    this.init();
 
 				    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
-				    	console.log(this.media);
 					    if (this.media[i].path)
 						    this.media[i] = {
 							    ...this.media[i],
@@ -460,7 +449,7 @@
 			    let container = this.playing ? document.querySelector('#' + this.id) : document;
 			    // let container = document;
 				this.wrappers = [...container.querySelectorAll('.column')];
-			    this.medias = [...container.querySelectorAll('.move')];
+			    this.movingDivs = [...container.querySelectorAll('.move')];
 
 				// Drag & Drop
 				let holders = [...document.querySelectorAll('.column')];
@@ -493,56 +482,53 @@
 			    for(let index = 0; index < this.media.length; index++) {
 					let div = this.wrappers[index];
 
-					if (this.medias.length === 0 || !div) return;
+					if (this.movingDivs.length === 0 || !div) return;
 
-					if (this.medias[index]) {
+					if (this.movingDivs[index]) {
 						// Calculate x and y in %
-						this.medias[index].style.left = this.media[index] ? this.media[index].startX : this.medias[index].style.left;
-						this.medias[index].style.top = this.media[index]  ? this.media[index].startY : this.medias[index].style.top;
-
-						console.log(index + ' ' + this.medias[index].style.left);
-						console.log(index + ' ' + this.medias[index].style.top);
+						this.movingDivs[index].style.left = this.media[index] ? this.media[index].startX : this.movingDivs[index].style.left;
+						this.movingDivs[index].style.top = this.media[index]  ? this.media[index].startY : this.movingDivs[index].style.top;
 
 						// Mousedown when mouse leave
-						this.medias[index].addEventListener('mouseleave', (e) => {
-							this.medias[index].mousedown = false;
-						    this.medias[index].style.transition = 'all 1s';
+						this.movingDivs[index].addEventListener('mouseleave', (e) => {
+							this.movingDivs[index].mousedown = false;
+						    this.movingDivs[index].style.transition = 'all 1s';
 						});
 
-						this.medias[index].addEventListener('mousedown', (e) => {
-						    this.medias[index].style.transition = 'transform 1s';
+						this.movingDivs[index].addEventListener('mousedown', (e) => {
+						    this.movingDivs[index].style.transition = 'transform 1s';
 
 							// mouse state set to true
-						    this.medias[index].mousedown = true;
-						    this.selected = index;
+						    this.movingDivs[index].mousedown = true;
+						    this.selectedIndex = index;
 
 						    // Subtract offset
-							this.medias[index].dim_x = this.medias[index].offsetLeft - e.clientX;
-							this.medias[index].dim_y = this.medias[index].offsetTop - e.clientY;
+							this.movingDivs[index].dim_x = this.movingDivs[index].offsetLeft - e.clientX;
+							this.movingDivs[index].dim_y = this.movingDivs[index].offsetTop - e.clientY;
 
 						    this.$forceUpdate();
 						}, true);
 
 						// div event mouseup
-						this.medias[index].addEventListener('mouseup', (e) => {
+						this.movingDivs[index].addEventListener('mouseup', (e) => {
 							// mouse state set to false
-						    this.medias[index].mousedown = false;
+						    this.movingDivs[index].mousedown = false;
 						}, true);
 					}
 
 					// Element mousemove to stop
 					div.addEventListener('mousemove', (e) => {
 					    // Is mouse pressed
-						if (this.medias[index] && this.medias[index].mousedown) {
-						    this.selected = index;
+						if (this.movingDivs[index] && this.movingDivs[index].mousedown) {
+						    this.selectedIndex = index;
 						    this.$forceUpdate();
 
 							// Calculate x and y in %
-						    this.medias[index].style.left = (((e.clientX + this.medias[index].dim_x) / div.offsetWidth) * 100) + '%';
-							this.medias[index].style.top = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100) + '%';
+						    this.movingDivs[index].style.left = (((e.clientX + this.movingDivs[index].dim_x) / div.offsetWidth) * 100) + '%';
+							this.movingDivs[index].style.top = (((e.clientY + this.movingDivs[index].dim_y) / div.offsetHeight) * 100) + '%';
 
-						    this.media[index].startX = (((e.clientX + this.medias[index].dim_x) / div.offsetWidth) * 100) + '%';
-						    this.media[index].startY = (((e.clientY + this.medias[index].dim_y) / div.offsetHeight) * 100) + '%';
+						    this.media[index].startX = (((e.clientX + this.movingDivs[index].dim_x) / div.offsetWidth) * 100) + '%';
+						    this.media[index].startY = (((e.clientY + this.movingDivs[index].dim_y) / div.offsetHeight) * 100) + '%';
 						}
 					}, true);
 			    }

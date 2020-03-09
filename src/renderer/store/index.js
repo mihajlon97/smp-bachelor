@@ -66,7 +66,6 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		setPresentations(state, data) {
-			console.log(data)
 			state.presentations = data;
 		}
 	}

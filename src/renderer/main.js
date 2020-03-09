@@ -5,21 +5,8 @@ import router from './router'
 import store from './store'
 import GlobalMixin from './mixins/global.mixin'
 
-import 'v8-compile-cache';
-
-import VueDraggable from 'vue-draggable'
-Vue.use(VueDraggable)
-
 import VueSwal from 'vue-swal';
 Vue.use(VueSwal)
-
-import VueZoomer from 'vue-zoomer'
-Vue.use(VueZoomer)
-
-
-import Croppa from 'vue-croppa2';
-Vue.use(Croppa);
-import 'vue-croppa2/dist/vue-croppa.css';
 
 import './assets/css/main.css';
 
