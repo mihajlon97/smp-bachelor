@@ -114,7 +114,7 @@
 			}
 	    },
 	    mounted() {
-	        this.init();
+	        this.initialize();
 	    },
 		computed: {
 			...mapState(['activeSlide'])
@@ -132,7 +132,7 @@
 			    this.media[indexFirst] = {...this.media[indexFirst], path: this.media[indexSecond].path};
 			    this.media[indexSecond] = {...help};
 			    this.$forceUpdate();
-			    this.$nextTick(this.init);
+			    this.$nextTick(this.initialize);
 		    },
 		    rotating(event) {
 				this.media[this.selectedIndex].rotate = event.target.value;
@@ -171,7 +171,7 @@
 			        this.movingDivs[index].style.top = '0%';
 			    }
 		        this.$forceUpdate();
-		        this.$nextTick(this.init);
+		        this.$nextTick(this.initialize);
 		    },
 
 
@@ -197,7 +197,7 @@
 
 				    // Apply next one
 				    this.$nextTick(() => {
-					    this.init();
+					    this.initialize();
 
 					    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
 					    	if (this.slides[this.activeSlide][(5 * i) + 2])
@@ -231,7 +231,7 @@
 			        this.columns = this.slides[this.activeSlide][1];
 
 				    this.$forceUpdate();
-			        this.$nextTick(this.init);
+			        this.$nextTick(this.initialize);
 			    }
 
 		        this.$emit('updateTotalSlides', this.slides.length);
@@ -265,7 +265,7 @@
 			    }
 		        this.$forceUpdate();
 		        this.$nextTick(() => {
-		        	this.init();
+		        	this.initialize();
 
 			        for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
 				        this.media[i] = {
@@ -312,7 +312,7 @@
 			    this.$forceUpdate();
 
 			    this.$nextTick(() => {
-				    this.init();
+				    this.initialize();
 
 				    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
 				    	if (this.media[i].path)
@@ -406,7 +406,7 @@
 				}
 				this.$forceUpdate()
 			},
-			init() {
+			initialize() {
 		    	this.$forceUpdate();
 			    let container = this.playing ? document.querySelector('#' + this.id) : document;
 			    // let container = document;
@@ -432,7 +432,7 @@
 								rotate: 0,
 							};
 							this.$forceUpdate();
-							this.$nextTick(this.init);
+							this.$nextTick(this.initialize);
 							this.$forceUpdate();
 							if (this.countChosenMedia() < this.rows * this.columns) i++;
 						}
@@ -505,7 +505,7 @@
 			changeLayout(rows, columns) {
 			    this.rows = rows;
 			    this.columns = columns;
-			    this.$nextTick(this.init);
+			    this.$nextTick(this.initialize);
 			},
 			chooseFromFileSystem(index = null) {
 				dialog.showOpenDialog({
@@ -523,7 +523,7 @@
 							rotate: 0,
 						};
 					    this.$forceUpdate();
-						this.$nextTick(this.init);
+						this.$nextTick(this.initialize);
 					}
 				});
 			},

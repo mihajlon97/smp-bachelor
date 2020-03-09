@@ -4,7 +4,6 @@
     <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/pages/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/Play.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -112,7 +111,7 @@
           <entry key="ejs" value="1" />
           <entry key="icns" value="1" />
           <entry key="ico" value="1" />
-          <entry key="js" value="11" />
+          <entry key="js" value="12" />
           <entry key="json" value="2" />
           <entry key="md" value="1" />
           <entry key="png" value="1" />
@@ -125,7 +124,7 @@
           <entry key="EJS" value="1" />
           <entry key="Image" value="3" />
           <entry key="JSON" value="2" />
-          <entry key="JavaScript" value="11" />
+          <entry key="JavaScript" value="12" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Vue.js" value="10" />
         </counts>
@@ -135,7 +134,7 @@
           <entry key="css" value="280" />
           <entry key="js" value="211" />
           <entry key="json" value="3" />
-          <entry key="txt" value="428" />
+          <entry key="txt" value="504" />
           <entry key="vue" value="1537" />
         </counts>
       </usages-collector>
@@ -144,7 +143,7 @@
           <entry key="CSS" value="280" />
           <entry key="JSON" value="3" />
           <entry key="JavaScript" value="211" />
-          <entry key="PLAIN_TEXT" value="428" />
+          <entry key="PLAIN_TEXT" value="504" />
           <entry key="Vue.js" value="1537" />
         </counts>
       </usages-collector>
@@ -161,22 +160,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/pages/Play.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#router-link#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#swiper#0;n#div#0;n#div#1;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#16517#16563#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/mixins/slider.mixin.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -210,15 +193,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+            <state relative-caret-position="85">
+              <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/mixins/global.mixin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -266,11 +258,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1948">
-              <caret line="397" column="24" selection-start-line="397" selection-start-column="12" selection-end-line="397" selection-end-column="24" />
+            <state relative-caret-position="212">
+              <caret line="314" column="29" selection-start-line="314" selection-start-column="25" selection-end-line="314" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -298,7 +290,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>presentations.xlsx</find>
       <find>storageFile</find>
       <find>route</find>
       <find>loading</find>
@@ -328,9 +319,9 @@
       <find>1.77</find>
       <find>slide_prop</find>
       <find>prop_rows</find>
+      <find>init</find>
     </findStrings>
     <replaceStrings>
-      <replace>mapGetters</replace>
       <replace>require('path').join</replace>
       <replace>slide</replace>
       <replace>...mapState(['activeSlide'])</replace>
@@ -360,6 +351,7 @@
       <replace>selectedIndex</replace>
       <replace>movingDivs</replace>
       <replace>chooseFromFileSystem</replace>
+      <replace>initialize</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -389,7 +381,6 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/main/index.js" />
         <option value="$PROJECT_DIR$/src/renderer/store/index.js" />
-        <option value="$PROJECT_DIR$/src/renderer/mixins/global.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/Info.vue" />
         <option value="$PROJECT_DIR$/src/renderer/mixins/alert.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/mixins/slider.mixin.js" />
@@ -399,6 +390,7 @@
         <option value="$PROJECT_DIR$/src/renderer/pages/Edit.vue" />
         <option value="$PROJECT_DIR$/src/renderer/App.vue" />
         <option value="$PROJECT_DIR$/src/renderer/assets/css/main.css" />
+        <option value="$PROJECT_DIR$/src/renderer/mixins/global.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" />
       </list>
     </option>
@@ -562,14 +554,7 @@
       <workItem from="1582665845912" duration="2606000" />
       <workItem from="1583167806025" duration="569000" />
       <workItem from="1583259983263" duration="5477000" />
-      <workItem from="1583428348684" duration="28866000" />
-    </task>
-    <task id="LOCAL-00026" summary=" - next &amp; previous new approach">
-      <created>1581035662309</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1581035662309</updated>
+      <workItem from="1583428348684" duration="29788000" />
     </task>
     <task id="LOCAL-00027" summary=" - moving done">
       <created>1581084670159</created>
@@ -907,11 +892,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583716348303</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary=" - formatting media holder&#10; - removed unused functions from global mixin">
+      <created>1583719340170</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1583719340171</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="641385000" />
+    <option name="totallyTimeSpent" value="642307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -945,7 +937,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - rows and colums i every slide" />
     <MESSAGE value=" - drag and drop holder problem solved&#10; - css slide switching bug" />
     <MESSAGE value=" - transition fix&#10; - layout picker" />
     <MESSAGE value=" - play, edit, multiple layouts move" />
@@ -970,7 +961,8 @@
     <MESSAGE value=" - slider mixin" />
     <MESSAGE value=" - removed unused libraries&#10; - Layout Picker Component" />
     <MESSAGE value=" - css formatting&#10; - removed unused play function inside MediaHolder&#10; - fixed little white border when playing" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - css formatting&#10; - removed unused play function inside MediaHolder&#10; - fixed little white border when playing" />
+    <MESSAGE value=" - formatting media holder&#10; - removed unused functions from global mixin" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - formatting media holder&#10; - removed unused functions from global mixin" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -1135,13 +1127,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/mixins/global.mixin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="33" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/mixins/alert.mixin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1232,10 +1217,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/mixins/global.mixin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1948">
-          <caret line="397" column="24" selection-start-line="397" selection-start-column="12" selection-end-line="397" selection-end-column="24" />
+        <state relative-caret-position="212">
+          <caret line="314" column="29" selection-start-line="314" selection-start-column="25" selection-end-line="314" selection-end-column="35" />
           <folding>
             <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1244,17 +1247,6 @@
             <element signature="n#style#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#3184#3216#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Media.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#video#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
