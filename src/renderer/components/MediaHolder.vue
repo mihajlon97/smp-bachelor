@@ -333,8 +333,8 @@
 			    const presentationId = !edit ? this.uuidv4() : id;
 			    const XLSX = require('xlsx');
 			    const path = require('path');
-			    const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
-			    const presentationDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentation-' + presentationId + '.xlsx');
+			    const storageDir = path.join(require('electron').remote.app.getPath('userData'), 'presentations.xlsx');
+			    const presentationDir = path.join(require('electron').remote.app.getPath('userData'), 'presentation-' + presentationId + '.xlsx');
 			    const workbook = XLSX.readFile(path.join(storageDir));
 			    const sheet_name_list = workbook.SheetNames;
 			    const sheet = workbook.Sheets[sheet_name_list[0]];

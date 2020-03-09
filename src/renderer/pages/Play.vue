@@ -167,7 +167,7 @@
 					  if (name && name.length > 0) {
 						  const XLSX = require('xlsx');
 						  const path = require('path');
-						  const storageDir = path.join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+						  const storageDir = path.join(require('electron').remote.app.getPath('userData'), 'presentations.xlsx');
 						  const workbook = XLSX.readFile(path.join(storageDir));
 						  const sheet_name_list = workbook.SheetNames;
 						  const sheet = workbook.Sheets[sheet_name_list[0]];
@@ -199,7 +199,7 @@
 		        if (value) {
 	              try {
 		              const XLSX = require('xlsx');
-		              const storageDir = require('path').join(require('electron').remote.app.getPath('userData'), '\\presentations.xlsx');
+		              const storageDir = require('path').join(require('electron').remote.app.getPath('userData'), 'presentations.xlsx');
 		              const workbook = XLSX.readFile(require('path').join(storageDir));
 		              const sheet_name_list = workbook.SheetNames;
 		              const sheet = workbook.Sheets[sheet_name_list[0]];
