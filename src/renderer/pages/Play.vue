@@ -38,7 +38,7 @@
 					        class="mySwiper" :options="swiperOption" style="text-align: center; background-color: #000000;">
 						<swiper-slide v-for="(slide, i) in presentation.slides" :key="'slide-' + i" :id="'id-' + presentation_id + '-' + i" :style="'width: 80vw; height: 100vh;'">
 							<!-- Media Holder in every slide displaying all medias in that slide -->
-							<MediaHolder :id="'id-' + presentation_id + '-' + i" :slide_prop="slide"
+							<MediaHolder :id="'id-' + presentation_id + '-' + i" :prop_slide="slide"
 						            :playing="true" :prop_rows="slide[0]" :prop_columns="slide[1]"
 							/>
 						</swiper-slide>

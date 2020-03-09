@@ -9,8 +9,11 @@
 			</ul>
 		</div>
 
+		<!-- All Media Wrapper -->
 		<div class="wrapper" :style="`width: ${width}px; height: ${height}px;`">
+			<!-- Row -->
 			<div v-for="i in rows" :key="i" :class="'row row-' + rows">
+				<!-- Column -->
 				<div v-for="j in columns" :key="j" :class="'column column-' + columns">
 					<transition name="fade">
 						<Media v-if="media[((i-1)*columns)+j-1] && media[((i-1)*columns)+j-1].path"
@@ -27,7 +30,6 @@
 								@click.native="menu_opened = false"
 								ondragstart="return false;"
 						/>
-
 						<!-- Drag & Drop -->
 						<div v-else-if="!playing" class="chooseText" @click="chooseFromFileSystem(((i-1)*columns)+j)">
 							<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
@@ -92,7 +94,7 @@
 				type: Number,
 				default: 2
 			},
-		    slide_prop: {
+		    prop_slide: {
 		        type: Array,
 		        default: () =>  []
 		    }
@@ -103,7 +105,7 @@
 			    columns: this.prop_columns,
 			    width: 1600,
 			    height: 900,
-			    media: this.slide_prop.splice(2),
+			    media: this.prop_slide.splice(2),
 			    movingDivs: [],
 			    wrappers: [],
 			    slides: [],
