@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment="">
+    <list default="true" id="7bdfba88-d5c8-4f41-a6de-fb1ededbc126" name="Default Changelist" comment=" - renamed init to initialize">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/App.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -134,8 +134,8 @@
           <entry key="css" value="280" />
           <entry key="js" value="211" />
           <entry key="json" value="3" />
-          <entry key="txt" value="504" />
-          <entry key="vue" value="1537" />
+          <entry key="txt" value="535" />
+          <entry key="vue" value="1556" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -143,8 +143,8 @@
           <entry key="CSS" value="280" />
           <entry key="JSON" value="3" />
           <entry key="JavaScript" value="211" />
-          <entry key="PLAIN_TEXT" value="504" />
-          <entry key="Vue.js" value="1537" />
+          <entry key="PLAIN_TEXT" value="535" />
+          <entry key="Vue.js" value="1556" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -240,11 +240,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            <state relative-caret-position="79">
+              <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -258,11 +258,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="314" column="29" selection-start-line="314" selection-start-column="25" selection-end-line="314" selection-end-column="35" />
+            <state relative-caret-position="-1318">
+              <caret line="406" column="12" selection-start-line="406" selection-start-column="12" selection-end-line="406" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -290,9 +290,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>storageFile</find>
-      <find>route</find>
-      <find>loading</find>
       <find>media_prop</find>
       <find>toggleInfo</find>
       <find>this.$swal</find>
@@ -320,6 +317,9 @@
       <find>slide_prop</find>
       <find>prop_rows</find>
       <find>init</find>
+      <find>//</find>
+      <find>rotate</find>
+      <find>countChosenMedia</find>
     </findStrings>
     <replaceStrings>
       <replace>require('path').join</replace>
@@ -388,10 +388,10 @@
         <option value="$PROJECT_DIR$/src/renderer/main.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/LayoutPicker.vue" />
         <option value="$PROJECT_DIR$/src/renderer/pages/Edit.vue" />
-        <option value="$PROJECT_DIR$/src/renderer/App.vue" />
         <option value="$PROJECT_DIR$/src/renderer/assets/css/main.css" />
         <option value="$PROJECT_DIR$/src/renderer/mixins/global.mixin.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/MediaHolder.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/App.vue" />
       </list>
     </option>
   </component>
@@ -554,21 +554,7 @@
       <workItem from="1582665845912" duration="2606000" />
       <workItem from="1583167806025" duration="569000" />
       <workItem from="1583259983263" duration="5477000" />
-      <workItem from="1583428348684" duration="29788000" />
-    </task>
-    <task id="LOCAL-00027" summary=" - moving done">
-      <created>1581084670159</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1581084670159</updated>
-    </task>
-    <task id="LOCAL-00028" summary=" - playing done">
-      <created>1581107428855</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1581107428855</updated>
+      <workItem from="1583428348684" duration="31839000" />
     </task>
     <task id="LOCAL-00029" summary=" - playing done">
       <created>1581130263990</created>
@@ -899,17 +885,31 @@
       <option name="project" value="LOCAL" />
       <updated>1583719340171</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary=" - renamed init to initialize">
+      <created>1583771029063</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1583771029064</updated>
+    </task>
+    <task id="LOCAL-00077" summary=" - renamed init to initialize">
+      <created>1583776636922</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1583776636922</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="642307000" />
+    <option name="totallyTimeSpent" value="644358000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17249602" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17249602" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -923,7 +923,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3291815" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.30960855" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30960855" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -937,7 +937,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=" - drag and drop holder problem solved&#10; - css slide switching bug" />
     <MESSAGE value=" - transition fix&#10; - layout picker" />
     <MESSAGE value=" - play, edit, multiple layouts move" />
     <MESSAGE value=" - removed selected and z_index" />
@@ -962,7 +961,8 @@
     <MESSAGE value=" - removed unused libraries&#10; - Layout Picker Component" />
     <MESSAGE value=" - css formatting&#10; - removed unused play function inside MediaHolder&#10; - fixed little white border when playing" />
     <MESSAGE value=" - formatting media holder&#10; - removed unused functions from global mixin" />
-    <option name="LAST_COMMIT_MESSAGE" value=" - formatting media holder&#10; - removed unused functions from global mixin" />
+    <MESSAGE value=" - renamed init to initialize" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - renamed init to initialize" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png" />
@@ -1203,13 +1203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1237,8 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/MediaHolder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="314" column="29" selection-start-line="314" selection-start-column="25" selection-end-line="314" selection-end-column="35" />
+        <state relative-caret-position="-1318">
+          <caret line="406" column="12" selection-start-line="406" selection-start-column="12" selection-end-line="406" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#div#0;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1248,6 +1241,13 @@
             <element signature="n#style#0;n#p#0;n#div#1;n#div#2;n#span#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#3184#3216#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
         </state>
       </provider>
     </entry>

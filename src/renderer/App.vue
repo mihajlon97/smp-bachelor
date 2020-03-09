@@ -14,7 +14,7 @@
 		...mapActions(['fetchPresentations']),
 	},
 	mounted() {
-		const path = require('electron').remote.app.getPath('userData') + '\\presentations.xlsx';
+		const path =  require('path').join(require('electron').remote.app.getPath('userData'), 'presentations.xlsx');
 		/**
 		 * If presentations excel file is not found in the electron's userData folder, create new empty file
 		 */
