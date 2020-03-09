@@ -1,20 +1,21 @@
 <template>
 	<div class="create page" style="padding-top: 0;">
-		<!-- Previous & Next Slide Buttons -->
+		<!-- Navigation Controls -->
 		<span>
+			<!-- Previous & Next Slide Buttons -->
 			<div style="position: absolute; left:65px; top: 5px; z-index: 400;">
-			<button v-show="activeSlide > 0" @click="previousSlide()" class="button button-play black round-btn"> Previous Slide </button>
-			<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
-		</div>
+				<button v-show="activeSlide > 0" @click="previousSlide()" class="button button-play black round-btn"> Previous Slide </button>
+				<button @click="nextSlide()" class="button button-play black round-btn"> Next Slide </button>
+			</div>
 
-		<!-- Layout Picker -->
-		<LayoutPicker @changeLayout="changeLayout" />
+			<!-- Layout Picker -->
+			<LayoutPicker @changeLayout="changeLayout" />
 
-		<!-- Save & Cancel Buttons -->
-		<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
-			<button @click="save" class="button button-play black round-btn"> Save </button>
-			<button @click="cancel"  class="button button-play black round-btn"> Cancel </button>
-		</div>
+			<!-- Save & Cancel Buttons -->
+			<div style="position: absolute; right:65px; top: 5px; z-index: 400;">
+				<button @click="save" class="button button-play black round-btn"> Save </button>
+				<button @click="cancel"  class="button button-play black round-btn"> Cancel </button>
+			</div>
 		</span>
 
 		<!-- Media Editor Component -->
@@ -84,7 +85,6 @@
 		  	if (this.mode === 'create') {
 			  this.$refs.editor.save(this.$route.query.presentation_name);
 			  this.fetchPresentations();
-
 		    } else if (this.mode === 'edit') {
 		  	  const presentationToEdit = (this.presentations.filter(presentation => presentation.id === this.$route.query.edit)[0]);
 			  this.$refs.editor.save(presentationToEdit.name, true, presentationToEdit.id);

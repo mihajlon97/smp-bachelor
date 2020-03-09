@@ -29,7 +29,7 @@
 						/>
 
 						<!-- Drag & Drop -->
-						<div v-else-if="!playing" class="chooseText" @click="choose(((i-1)*columns)+j)">
+						<div v-else-if="!playing" class="chooseText" @click="chooseFromFileSystem(((i-1)*columns)+j)">
 							<h1 style="text-align: center; color: white; width: 100%; top: 45%; position: relative;">
 								Drag & Drop Media Here
 							</h1>
@@ -102,7 +102,7 @@
 			    rows: this.prop_rows,
 			    columns: this.prop_columns,
 			    width: 1600,
-			    height: 1200,
+			    height: 900,
 			    media: this.slide_prop.splice(2),
 			    movingDivs: [],
 			    wrappers: [],
@@ -327,46 +327,6 @@
 			    });
 		        this.$emit('updateTotalSlides', this.slides.length);
 		    },
-		    play (presentation) {
-			    presentation.slides.forEach(slide => {
-				    let slideToAdd = [slide[0], slide[1]];
-				    slide.shift();
-				    slide.shift();
-				    slide.forEach(media => {
-					    slideToAdd.push(media.path, media.startX, media.startY, media.scale, media.rotate);
-				    });
-				    if (slideToAdd.length > 0) this.slides.push(slideToAdd);
-			    });
-
-			    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
-				    if (this.slides[this.activeSlide][(5 * i) + 2])
-					    this.media[i] = {
-						    path: this.slides[this.activeSlide][(5 * i) + 2],
-					    }
-			    }
-
-			    this.$forceUpdate();
-
-			    this.$nextTick(() => {
-				    this.init();
-
-				    for (let i = 0; i < (this.slides[this.activeSlide].length - 2) / 5; i++) {
-					    if (this.media[i].path)
-						    this.media[i] = {
-							    ...this.media[i],
-							    // path: this.slides[this.activeSlide][(5 * i) + 2],
-							    startX: this.slides[this.activeSlide][1 + 5 * i],
-							    startY: this.slides[this.activeSlide][2 + 5 * i],
-							    scale: this.slides[this.activeSlide][3 + 5 * i],
-							    rotate: this.slides[this.activeSlide][4 + 5 * i],
-						    }
-				    }
-				    this.$forceUpdate();
-			    });
-
-			    this.$emit('updateTotalSlides', this.slides.length);
-		    },
-
 
 		    async save (name, edit = false, id = '') {
 			    // Write to storage
@@ -435,12 +395,12 @@
 		    },
 			adaptWrapper() {
 				const windowRatio = window.innerWidth / window.innerHeight;
-				if (windowRatio >= 1.77) {
+				if (windowRatio >= 1.77777777778) {
 					this.height = window.innerHeight;
-					this.width = this.height * 1.77;
+					this.width = this.height * 1.77777777778;
 				} else {
 					this.width = window.innerWidth;
-					this.height = this.width / 1.77;
+					this.height = this.width / 1.77777777778;
 				}
 				this.$forceUpdate()
 			},
@@ -545,7 +505,7 @@
 			    this.columns = columns;
 			    this.$nextTick(this.init);
 			},
-			choose(index = null) {
+			chooseFromFileSystem(index = null) {
 				dialog.showOpenDialog({
 					properties: ['openFile'],
 					filters: [
@@ -570,43 +530,4 @@
 
 </script>
 
-<style>
-	.context-menu {
-		border-radius: 10px;
-		position: absolute;
-		z-index: 15;
-	}
-
-	.context-menu ul {
-		border-radius: 10px;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		width: 300px!important;
-		background-color: #f1f1f1;
-	}
-
-	.context-menu li {
-		border-radius: 10px;
-		display: block;
-		color: #000;
-		padding: 16px 32px;
-		text-decoration: none;
-		font-size: 24px;
-	}
-
-	/* Change the link color on hover */
-	.context-menu li:hover {
-		background-color: #555;
-		color: white;
-	}
-
-	.context-menu .remove-option {
-		background-color: rgba(255, 0, 0, 0.69);
-		color: white;
-	}
-	.context-menu .remove-option:hover {
-		background-color: rgba(172, 0, 0, 0.79);
-		color: white;
-	}
-</style>
+<style> </style>
