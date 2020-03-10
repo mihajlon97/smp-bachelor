@@ -11,7 +11,6 @@ Vue.use(VueSwal)
 import './assets/css/main.css';
 
 Vue.mixin(GlobalMixin);
-Vue.use(require('vue-moment'));
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false

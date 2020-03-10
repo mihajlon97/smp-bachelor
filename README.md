@@ -8,10 +8,10 @@
 
 ``` bash
 # clone repository
-git clone https://github.com/mihajlon97/smp-bachelor.git smart-image-presenter
+git clone https://github.com/mihajlon97/smp-bachelor.git smart-media-presenter
 
 # move to directory
-cd smart-image-presenter
+cd smart-media-presenter
 
 # install dependencies
 npm install
