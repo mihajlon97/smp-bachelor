@@ -135,14 +135,17 @@
 				frame: false,
 			    fullscreen: true,
 				webPreferences: {
-					webSecurity: false
+					webSecurity: false,
+				    nodeIntegration: true
 				}
 			});
 
 
 			newWindow.on('close', function () { return false; });
 			newWindow.webContents.on("devtools-opened", () => {
-			    newWindow.webContents.closeDevTools();
+				if (process.env.NODE_ENV !== 'development') {
+				    newWindow.webContents.closeDevTools();
+				}
 			});
 			newWindow.maximize();
 			newWindow.loadURL(modalPath);

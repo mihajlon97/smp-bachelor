@@ -18,6 +18,9 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
+	  webPreferences: {
+		  nodeIntegration: true
+	  },
     height: 900,
     useContentSize: true,
     width: 1600
@@ -32,7 +35,9 @@ function createWindow () {
   });
 
 	mainWindow.webContents.on("devtools-opened", () => {
-		  // mainWindow.webContents.closeDevTools();
+		if (process.env.NODE_ENV !== 'development') {
+			mainWindow.webContents.closeDevTools();
+		}
 	});
 
 	let oldSize;
